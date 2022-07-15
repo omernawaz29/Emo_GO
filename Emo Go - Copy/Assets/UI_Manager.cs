@@ -24,20 +24,9 @@ public class UI_Manager : MonoBehaviour
     private float rescuable_data;
 
 
-    // Timer
-    public Slider Fire_Slider;
-
-    public float Start_Time;
-
-    private float Current_Time;
-
-    public bool Start_Timer;
-
     // Start is called before the first frame update
     void Start()
     {
-        Current_Time = Start_Time;
-        Fire_Slider.maxValue = Start_Time;
 
         Win_Check.GetComponent<Win_Checker>().rescuable = Win_Check.GetComponent<Win_Checker>().rescued_max;
         rescuable_data = Win_Check.GetComponent<Win_Checker>().rescuable;
@@ -47,19 +36,6 @@ public class UI_Manager : MonoBehaviour
     void Update()
     {
         Rescued_Emos_Counts.SetText(Win_Check.GetComponent<Win_Checker>().rescued_num.ToString());
-
-        if (Start_Timer)
-        {
-            Current_Time -= Time.deltaTime;
-
-            if (Current_Time < 0)
-            {
-                Timer();
-            }
-
-            Fire_Slider.value = (Start_Time - Current_Time);
-
-        }
 
         if (Win_Check.GetComponent<Win_Checker>().rescued_num >= Win_Check.GetComponent<Win_Checker>().rescued_max)
         {
@@ -93,11 +69,5 @@ public class UI_Manager : MonoBehaviour
         Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-    // Timer Lose and Point Calc
-    void Timer()
-    {
-        Current_Time = 0;
-        Start_Timer = false;
-        Win_Check.GetComponent<Win_Checker>().rescued_max -= 1;
-    }
+
 }
