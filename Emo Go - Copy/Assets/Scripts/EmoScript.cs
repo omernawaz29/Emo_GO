@@ -7,8 +7,12 @@ public class EmoScript : MonoBehaviour
     public float max_hit_force;
     public ParticleSystem pr;
 
-    public GameObject win_check;
-    // Start is called before the first frame update
+    private GameManagerScript _gameManager;
+    private void Awake()
+    {
+        _gameManager = FindObjectOfType<GameManagerScript>();
+        _gameManager.AddEmo();
+    }
     void Start()
     {
         
@@ -25,12 +29,23 @@ public class EmoScript : MonoBehaviour
         if (collision.gameObject.tag == "Object")
         {
             // To check it object hit hard enough for code to execute
-            if (collision.relativeVelocity.x >= max_hit_force || collision.relativeVelocity.y >= max_hit_force || collision.relativeVelocity.z >= max_hit_force)
+            if (collision.relativeVelocity.magnitude >= max_hit_force)
             {
                 Instantiate(pr, gameObject.transform.position, Quaternion.identity);
-                win_check.GetComponent<Win_Checker>().rescued_max -= 1;
+                _gameManager.KillEmo();
                 Destroy(gameObject);
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Object")
+        {
+            Instantiate(pr, gameObject.transform.position, Quaternion.identity);
+
+            _gameManager.KillEmo();
+            Destroy(gameObject);
         }
     }
 }
