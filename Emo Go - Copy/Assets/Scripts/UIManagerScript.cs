@@ -9,16 +9,19 @@ public class UIManagerScript : MonoBehaviour
 {
     // UI Screens
 
-    [SerializeField] private GameObject loseScreen;
-    [SerializeField] private GameObject winScreen;
-    
+    [SerializeField] private GameObject endScreen;
 
     // UI Variables
 
     [SerializeField] private TextMeshProUGUI rescuedEmoCountText;
     [SerializeField] private TextMeshProUGUI starCountText;
+    [SerializeField] private TextMeshProUGUI endButtonText;
+    [SerializeField] private TextMeshProUGUI endScreenTitle;
+    [SerializeField] private GameObject[] stars;
 
 
+    private float _totalEmos = 0;
+    private float _rescuedEmos = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,27 +37,53 @@ public class UIManagerScript : MonoBehaviour
     void Win()
     {
         Time.timeScale = 0.2f;
-        winScreen.SetActive(true);
+        endButtonText.text = "Next";
+        endScreenTitle.text = "You Won!";
+        endScreen.SetActive(true);
+        SetEndStars();
+
     }
     void Lose()
     {
         Time.timeScale = 0.2f;
-        loseScreen.SetActive(true);
+        endButtonText.text = "Fired Up!";
+        endScreenTitle.text = "You Almost Won!";
+        endScreen.SetActive(true);
+        SetEndStars();
+
     }
 
-    public void Next_Level()
+    private void SetEndStars()
+    {
+        float endPercentage = (_rescuedEmos * 100) / _totalEmos;
+
+        if (endPercentage >= 33)
+            stars[0].SetActive(true);
+        if (endPercentage >= 66)
+            stars[1].SetActive(true);
+        if (endPercentage == 100)
+            stars[2].SetActive(true);
+    }
+
+    public void ClickEndButton()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        if(endButtonText.text == "Next")
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        else
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
     }
-    public void Retry()
+
+    public void SetTotalEmos(int count)
     {
-        Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        _totalEmos = count; 
     }
+
 
     public void SetRescuedEmoCount(int count)
     {
         rescuedEmoCountText.text = count.ToString();
+        _rescuedEmos = count;
     }
 }

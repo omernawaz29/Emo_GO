@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class GameManagerScript : MonoBehaviour
 {
+    public static int finalScore = 0;
 
     private int _emosAlive = 0;
     private int _emosRescued = 0;
+    private int _totalEmos = 0;
     private UIManagerScript _uiManager;
-
 
     [SerializeField] private GameObject[] FireZones;
     [SerializeField] private float fireZoneDelay = 1.5f;
@@ -35,11 +36,13 @@ public class GameManagerScript : MonoBehaviour
     public void AddEmo()
     {
         _emosAlive++;
+        _totalEmos++;
     }
 
     public void KillEmo()
     {
         _emosAlive--;
+        _uiManager.SetTotalEmos(_totalEmos);
         if (_emosAlive == 0)
             _uiManager.Invoke("Lose", 0.2f);
         else if (_emosRescued == _emosAlive)
@@ -50,6 +53,7 @@ public class GameManagerScript : MonoBehaviour
     {
         _emosRescued++;
         _uiManager.SetRescuedEmoCount(_emosRescued);
+        _uiManager.SetTotalEmos(_totalEmos);
         if (_emosRescued == _emosAlive)
             _uiManager.Invoke("Win", 0.2f);
     }
@@ -58,6 +62,7 @@ public class GameManagerScript : MonoBehaviour
     {
         _emosRescued--;
         _uiManager.SetRescuedEmoCount(_emosRescued);
+
     }
 
     IEnumerator EnableFireZones()

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EmoScript : MonoBehaviour
 {
-    public float max_hit_force;
-    public ParticleSystem pr;
+    public float maxHitForce;
+    public ParticleSystem emoDieEffect;
 
     private GameManagerScript _gameManager;
     private void Awake()
@@ -29,9 +29,9 @@ public class EmoScript : MonoBehaviour
         if (collision.gameObject.tag == "Object")
         {
             // To check it object hit hard enough for code to execute
-            if (collision.relativeVelocity.magnitude >= max_hit_force)
+            if (collision.relativeVelocity.magnitude >= maxHitForce)
             {
-                Instantiate(pr, gameObject.transform.position, Quaternion.identity);
+                Instantiate(emoDieEffect, gameObject.transform.position, Quaternion.identity);
                 _gameManager.KillEmo();
                 Destroy(gameObject);
             }
@@ -42,7 +42,7 @@ public class EmoScript : MonoBehaviour
     {
         if(other.tag == "Object")
         {
-            Instantiate(pr, gameObject.transform.position, Quaternion.identity);
+            Instantiate(emoDieEffect, gameObject.transform.position, Quaternion.identity);
 
             _gameManager.KillEmo();
             Destroy(gameObject);
