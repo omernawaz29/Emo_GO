@@ -113,6 +113,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 6648454190353814879, guid: 7ab460dc9d34f7b4fa8cd690f17ed761, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ab460dc9d34f7b4fa8cd690f17ed761, type: 3}
 --- !u!4 &5852612229885200539 stripped

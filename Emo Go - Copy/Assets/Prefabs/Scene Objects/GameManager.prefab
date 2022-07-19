@@ -44,11 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 181c57eaaa1b26d42b74df872b23528a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FireZones:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  FireZones: []
   fireZoneDelay: 2.5

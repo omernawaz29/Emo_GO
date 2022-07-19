@@ -47,5 +47,10 @@ public class EmoScript : MonoBehaviour
             _gameManager.KillEmo();
             Destroy(gameObject);
         }
+        if(other.tag == "Burger")
+        {
+            gameObject.tag = "AngryEmo";
+            Destroy(other.gameObject);
+        }
     }
 }
