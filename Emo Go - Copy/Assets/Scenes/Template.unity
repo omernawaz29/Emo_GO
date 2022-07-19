@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.451298, g: 0.50095445, b: 0.5732175, a: 1}
+  m_IndirectSpecularColor: {r: 0.18380252, g: 0.22911675, b: 0.30413246, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -190,6 +190,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 6648454190353814879, guid: 7ab460dc9d34f7b4fa8cd690f17ed761, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ab460dc9d34f7b4fa8cd690f17ed761, type: 3}
 --- !u!4 &45126101 stripped
@@ -325,6 +329,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 6648454190353814879, guid: 7ab460dc9d34f7b4fa8cd690f17ed761, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ab460dc9d34f7b4fa8cd690f17ed761, type: 3}
 --- !u!4 &257724477 stripped
@@ -460,6 +468,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 6648454190353814879, guid: 7ab460dc9d34f7b4fa8cd690f17ed761, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ab460dc9d34f7b4fa8cd690f17ed761, type: 3}
 --- !u!4 &303666190 stripped
@@ -478,6 +490,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8699397305564059622, guid: 669ee3ddacd249f49b0050f4a4d8c0e3, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 8699397305571335341, guid: 669ee3ddacd249f49b0050f4a4d8c0e3, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.5010513
@@ -1091,6 +1107,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 6648454190353814879, guid: 7ab460dc9d34f7b4fa8cd690f17ed761, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ab460dc9d34f7b4fa8cd690f17ed761, type: 3}
 --- !u!1 &1285811411
@@ -1206,6 +1226,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 6648454190353814879, guid: 7ab460dc9d34f7b4fa8cd690f17ed761, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ab460dc9d34f7b4fa8cd690f17ed761, type: 3}
 --- !u!4 &1305498002 stripped
@@ -1393,6 +1417,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 6648454190353814879, guid: 7ab460dc9d34f7b4fa8cd690f17ed761, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ab460dc9d34f7b4fa8cd690f17ed761, type: 3}
 --- !u!4 &1530005331 stripped
@@ -1467,6 +1495,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 6648454190353814879, guid: 7ab460dc9d34f7b4fa8cd690f17ed761, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ab460dc9d34f7b4fa8cd690f17ed761, type: 3}
 --- !u!4 &1569325831 stripped

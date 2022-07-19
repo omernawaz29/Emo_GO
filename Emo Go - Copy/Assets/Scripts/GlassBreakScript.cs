@@ -7,6 +7,8 @@ public class GlassBreakScript : MonoBehaviour
 
     [SerializeField] private ParticleSystem glassBreakParticles;
     [SerializeField] private Material brokenGlassMaterial;
+    [SerializeField] private float breakForce = 1;
+    [SerializeField] bool normalEmoBreak = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,11 +29,11 @@ public class GlassBreakScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        gameObject.GetComponent<MeshRenderer>().material = brokenGlassMaterial; 
-        Destroy(gameObject,0.15f);
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        Destroy(gameObject);
+        if (collision.gameObject.tag == "AngryEmo" || (collision.gameObject.tag == "Emo" && normalEmoBreak) && collision.relativeVelocity.magnitude >= breakForce)
+        {
+            gameObject.GetComponent<MeshRenderer>().material = brokenGlassMaterial;
+            Destroy(gameObject, 0.15f);
+        }
+        
     }
 }

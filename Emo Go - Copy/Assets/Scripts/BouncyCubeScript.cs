@@ -5,29 +5,16 @@ using UnityEngine;
 public class BouncyCubeScript : MonoBehaviour
 {
 
-    [SerializeField] float BounceForce = 10;
+    [SerializeField] float bounceForce = 10;
+    [SerializeField] GameObject bounceDirectionHelper;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnCollisionEnter(Collision collision)
     {
+        var newDirection = bounceDirectionHelper.transform.position - transform.position;
 
-        var rb = collision.rigidbody;
-        var lastVelocity = rb.velocity;
-
-        var newDirection = Vector3.Reflect(lastVelocity.normalized, collision.contacts[0].normal);
-
-        rb.velocity = newDirection * BounceForce;
+        collision.rigidbody.velocity = Vector3.zero;
+        collision.rigidbody.velocity = newDirection * bounceForce;
 
     }
 }

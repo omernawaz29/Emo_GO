@@ -67,7 +67,7 @@ public class GameManagerScript : MonoBehaviour
 
     IEnumerator EnableFireZones()
     {
-        while(true)
+        while(true && FireZones.Length != 0)
         {
             FireZones[nextFireZoneIndex].SetActive(true);
             yield return new WaitForSeconds(fireZoneDelay);

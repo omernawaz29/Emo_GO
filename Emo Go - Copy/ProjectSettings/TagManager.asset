@@ -6,7 +6,9 @@ TagManager:
   tags:
   - Object
   - Emo
-  - PowerUp
+  - Key
+  - Burger
+  - AngryEmo
   layers:
   - Default
   - TransparentFX

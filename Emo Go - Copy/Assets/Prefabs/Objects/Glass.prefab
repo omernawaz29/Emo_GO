@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 753904359435290783}
   - component: {fileID: 4456790737397040954}
   - component: {fileID: 1890743121371575280}
+  - component: {fileID: 1502249207440721999}
+  - component: {fileID: 3876608141288045802}
   m_Layer: 0
   m_Name: Glass
   m_TagString: Untagged
@@ -83,3 +85,30 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1502249207440721999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89430607237616165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff83139902b75d04680e199631e5257d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  glassBreakParticles: {fileID: 7412145957398498349, guid: 20f885bb926d47e40af0cee3953b82da, type: 3}
+  brokenGlassMaterial: {fileID: 2100000, guid: c2cd4da38db416941943dada7c39a04b, type: 2}
+--- !u!65 &3876608141288045802
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89430607237616165}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 4, z: 0.20000005}
+  m_Center: {x: 0, y: 0, z: 0}

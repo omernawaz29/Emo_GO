@@ -14,14 +14,14 @@ public class WinChamberScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Emo")
+        if(other.tag == "Emo" || other.tag == "AngryEmo")
         {
             _gameManager.RescueEmo();
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Emo")
+        if (other.tag == "Emo" || other.tag == "AngryEmo")
         {
             _gameManager.UnRescueEmo();
         }

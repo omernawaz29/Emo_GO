@@ -251,11 +251,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e2d3119231b7c64da823f3872e183e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Win_Check: {fileID: 0}
-  Lose_Screen: {fileID: 4138608159990749388}
-  Win_Screen: {fileID: 2182747800716945086}
-  Rescued_Emos_Counts: {fileID: 2182747800424595480}
-  delay_time: 1
+  endScreen: {fileID: 0}
+  rescuedEmoCountText: {fileID: 0}
+  starCountText: {fileID: 0}
+  endButtonText: {fileID: 0}
+  endScreenTitle: {fileID: 0}
+  stars: []
 --- !u!1 &2182747800424595478
 GameObject:
   m_ObjectHideFlags: 0
