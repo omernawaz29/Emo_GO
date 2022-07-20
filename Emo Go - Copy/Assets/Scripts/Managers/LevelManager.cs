@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManagerScript : MonoBehaviour
+public class LevelManager : MonoBehaviour
 {
     public static int finalScore = 0;
+
 
     private int _emosAlive = 0;
     private int _emosRescued = 0;
@@ -18,8 +19,11 @@ public class GameManagerScript : MonoBehaviour
 
     private int nextFireZoneIndex = 0;
     // Start is called before the first frame update
+
+
     void Start()
     {
+
         _uiManager = FindObjectOfType<UIManagerScript>();
         _audioManager = FindObjectOfType<AudioManager>();
         nextFireZoneIndex = 0;
@@ -48,7 +52,12 @@ public class GameManagerScript : MonoBehaviour
         if (_emosAlive == 0)
             _uiManager.Invoke("Lose", 1f);
         else if (_emosRescued == _emosAlive)
+        {
             _uiManager.Invoke("Win", 1f);
+            GameManagerScript.instance.currentLevel++;
+            if (SaveManager.instance.state.levelsCompleted < GameManagerScript.instance.currentLevel)
+                SaveManager.instance.state.levelsCompleted = GameManagerScript.instance.currentLevel;
+        }
     }
 
     public void RescueEmo()
@@ -58,7 +67,12 @@ public class GameManagerScript : MonoBehaviour
         _audioManager.Play("EmojiYay");
         _uiManager.SetTotalEmos(_totalEmos);
         if (_emosRescued == _emosAlive)
+        {
             _uiManager.Invoke("Win", 1f);
+            GameManagerScript.instance.currentLevel++;
+            if(SaveManager.instance.state.levelsCompleted < GameManagerScript.instance.currentLevel)
+                SaveManager.instance.state.levelsCompleted = GameManagerScript.instance.currentLevel;
+        }
     }
 
     public void UnRescueEmo()
