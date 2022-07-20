@@ -28,8 +28,9 @@ public class PlatformControllerAlt : MonoBehaviour
 
             if(_touch.phase == TouchPhase.Moved)
             {
-                _xRotation += _touch.deltaPosition.y * Time.deltaTime * _movementMultiplier;
-                _zRotation -= _touch.deltaPosition.x * Time.deltaTime * _movementMultiplier;
+                _xRotation = Mathf.Lerp(_xRotation, _xRotation + _touch.deltaPosition.y, Time.deltaTime * _movementMultiplier);
+                _zRotation = Mathf.Lerp(_zRotation, _zRotation - _touch.deltaPosition.x, Time.deltaTime * _movementMultiplier);
+
             }
 
         }

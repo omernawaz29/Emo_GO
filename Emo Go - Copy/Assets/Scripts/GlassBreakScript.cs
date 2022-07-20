@@ -11,9 +11,11 @@ public class GlassBreakScript : MonoBehaviour
     [SerializeField] private float breakForce = 1;
     [SerializeField] bool normalEmoBreak = false;
     // Start is called before the first frame update
+
+    AudioManager _audioManager;
     void Start()
     {
-        
+        _audioManager = FindObjectOfType<AudioManager>();
     }
 
     // Update is called once per frame
@@ -34,6 +36,7 @@ public class GlassBreakScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "AngryEmo" || (collision.gameObject.tag == "Emo" && normalEmoBreak) && collision.relativeVelocity.magnitude >= breakForce)
         {
+            _audioManager.Play("GlassBreak");
             gameObject.GetComponent<MeshRenderer>().material = brokenGlassMaterial;
             Destroy(gameObject, 0.15f);
         }

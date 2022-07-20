@@ -36,7 +36,7 @@ public class UIManagerScript : MonoBehaviour
     
     void Win()
     {
-        Time.timeScale = 0.2f;
+        Time.timeScale = 0.5f;
         endButtonText.text = "Next";
         endScreenTitle.text = "You Won!";
         endScreen.SetActive(true);
@@ -45,7 +45,7 @@ public class UIManagerScript : MonoBehaviour
     }
     void Lose()
     {
-        Time.timeScale = 0.2f;
+        Time.timeScale = 0.5f;
         endButtonText.text = "Fired Up!";
         endScreenTitle.text = "You Almost Won!";
         endScreen.SetActive(true);
@@ -56,7 +56,7 @@ public class UIManagerScript : MonoBehaviour
     private void SetEndStars()
     {
         float endPercentage = (_rescuedEmos * 100) / _totalEmos;
-
+        endPercentage += 20f;
         if (endPercentage >= 33)
             stars[0].SetActive(true);
         if (endPercentage >= 66)

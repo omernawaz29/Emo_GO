@@ -13,9 +13,13 @@ public class BouncyCubeScript : MonoBehaviour
 
     private float _uses;
 
+    AudioManager _audioManager;
+
     private void Start()
     {
         _uses = 0;
+        _audioManager = FindObjectOfType<AudioManager>();
+
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -23,6 +27,9 @@ public class BouncyCubeScript : MonoBehaviour
 
         collision.rigidbody.velocity = Vector3.zero;
         collision.rigidbody.velocity = newDirection * bounceForce;
+
+
+        _audioManager.Play("Bounce");
 
         if(++_uses == useAmount)
         {
