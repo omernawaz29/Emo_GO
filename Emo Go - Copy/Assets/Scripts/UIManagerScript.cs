@@ -69,7 +69,7 @@ public class UIManagerScript : MonoBehaviour
     {
         Time.timeScale = 1;
         if(endButtonText.text == "Next")
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         else
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 

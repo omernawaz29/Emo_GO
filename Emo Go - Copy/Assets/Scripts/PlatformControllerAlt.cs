@@ -7,6 +7,7 @@ public class PlatformControllerAlt : MonoBehaviour
 
     private float _xRotation;
     private float _zRotation;
+    private float _movementMultiplier = 10f;
 
     private Touch _touch;
 
@@ -27,8 +28,8 @@ public class PlatformControllerAlt : MonoBehaviour
 
             if(_touch.phase == TouchPhase.Moved)
             {
-                _xRotation += _touch.deltaPosition.y * Time.deltaTime;
-                _zRotation -= _touch.deltaPosition.x * Time.deltaTime;
+                _xRotation += _touch.deltaPosition.y * Time.deltaTime * _movementMultiplier;
+                _zRotation -= _touch.deltaPosition.x * Time.deltaTime * _movementMultiplier;
             }
 
         }

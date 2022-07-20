@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class EmoScript : MonoBehaviour
 {
+
+    [SerializeField] private Material redEmoMat;
+    [SerializeField] private GameObject angryEmoEffect;
     public float maxHitForce;
     public ParticleSystem emoDieEffect;
 
     private GameManagerScript _gameManager;
+
     private void Awake()
     {
         _gameManager = FindObjectOfType<GameManagerScript>();
@@ -50,6 +54,8 @@ public class EmoScript : MonoBehaviour
         if(other.tag == "Burger")
         {
             gameObject.tag = "AngryEmo";
+            angryEmoEffect.SetActive(true);
+            GetComponent<MeshRenderer>().material = redEmoMat;
             Destroy(other.gameObject);
         }
     }
