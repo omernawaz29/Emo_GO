@@ -58,6 +58,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4054139500215634b887bcaad230b284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rescued_num: 0
-  rescued_max: 2
-  rescuable: 0
+  winEffect: {fileID: 19800000, guid: 1bc4a709f24528b40984e62f32e398a0, type: 3}
