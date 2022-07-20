@@ -112,7 +112,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceForce: 10
+  useAmount: 3
   bounceDirectionHelper: {fileID: 7938215012614109091}
+  destroyEffect: {fileID: 19800000, guid: 3156817f64ec68948ad6bb26569b9ef5, type: 3}
 --- !u!1 &7938215012614109091
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ public class GlassBreakScript : MonoBehaviour
 {
 
     [SerializeField] private ParticleSystem glassBreakParticles;
+    [SerializeField] private ParticleSystem hitEffectParticles;
     [SerializeField] private Material brokenGlassMaterial;
     [SerializeField] private float breakForce = 1;
     [SerializeField] bool normalEmoBreak = false;
@@ -25,6 +26,8 @@ public class GlassBreakScript : MonoBehaviour
     private void OnDestroy()
     {
         Instantiate(glassBreakParticles, transform.position, Quaternion.identity);
+        Instantiate(hitEffectParticles, transform.position, Quaternion.identity);
+
     }
 
     private void OnCollisionEnter(Collision collision)
