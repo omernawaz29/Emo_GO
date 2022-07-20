@@ -12,13 +12,13 @@ public class EmoScript : MonoBehaviour
     public float maxHitForce;
     public ParticleSystem emoDieEffect;
 
-    private GameManagerScript _gameManager;
+    private LevelManager _levelManager;
     private AudioManager _audioManager;
     private void Awake()
     {
-        _gameManager = FindObjectOfType<GameManagerScript>();
+        _levelManager = FindObjectOfType<LevelManager>();
         _audioManager = FindObjectOfType<AudioManager>();
-        _gameManager.AddEmo();
+        _levelManager.AddEmo();
     }
     void Start()
     {
@@ -41,7 +41,7 @@ public class EmoScript : MonoBehaviour
             {
                 Handheld.Vibrate();
                 Instantiate(emoDieEffect, gameObject.transform.position, Quaternion.identity);
-                _gameManager.KillEmo();
+                _levelManager.KillEmo();
                 Destroy(gameObject);
             }
         }
@@ -68,7 +68,7 @@ public class EmoScript : MonoBehaviour
             Instantiate(emoDieEffect, gameObject.transform.position, Quaternion.identity);
 
             Handheld.Vibrate();
-            _gameManager.KillEmo();
+            _levelManager.KillEmo();
             Destroy(gameObject);
         }
         if(other.tag == "Burger")

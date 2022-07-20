@@ -14,9 +14,10 @@ public class UIManagerScript : MonoBehaviour
     // UI Variables
 
     [SerializeField] private TextMeshProUGUI rescuedEmoCountText;
-    [SerializeField] private TextMeshProUGUI starCountText;
+    [SerializeField] private TextMeshProUGUI currentLevelText;
     [SerializeField] private TextMeshProUGUI endButtonText;
     [SerializeField] private TextMeshProUGUI endScreenTitle;
+    [SerializeField] private TextMeshProUGUI coinText;
     [SerializeField] private GameObject[] stars;
 
 
@@ -26,6 +27,7 @@ public class UIManagerScript : MonoBehaviour
     void Start()
     {
         rescuedEmoCountText.text = "0";
+        currentLevelText.text = (GameManagerScript.instance.currentLevel + 1).ToString();
     }
 
     // Update is called once per frame
@@ -56,7 +58,15 @@ public class UIManagerScript : MonoBehaviour
     private void SetEndStars()
     {
         float endPercentage = (_rescuedEmos * 100) / _totalEmos;
-        endPercentage += 20f;
+
+        if(endPercentage < 66)
+            endPercentage += 20f;
+
+        int coins = Mathf.CeilToInt(endPercentage * 10);
+
+        coinText.text = coins.ToString();
+        SaveManager.instance.state.coins += coins;
+
         if (endPercentage >= 33)
             stars[0].SetActive(true);
         if (endPercentage >= 66)
@@ -73,6 +83,12 @@ public class UIManagerScript : MonoBehaviour
         else
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
+    }
+
+    public void ClickHomeButton()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void SetTotalEmos(int count)

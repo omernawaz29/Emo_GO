@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class WinChamberScript : MonoBehaviour
 {
-    private GameManagerScript _gameManager;
+    private LevelManager _levelManager;
     [SerializeField] ParticleSystem winEffect;
     
 
     private void Awake()
     {
-        _gameManager = FindObjectOfType<GameManagerScript>();
+        _levelManager = FindObjectOfType<LevelManager>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -19,14 +19,14 @@ public class WinChamberScript : MonoBehaviour
         {
             Vector3 effectPos = new Vector3(other.transform.position.x, other.transform.position.y + 1, other.transform.position.z);
             Instantiate(winEffect, effectPos, Quaternion.Euler(90, 0, 0));
-            _gameManager.RescueEmo();
+            _levelManager.RescueEmo();
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Emo" || other.tag == "AngryEmo")
         {
-            _gameManager.UnRescueEmo();
+            _levelManager.UnRescueEmo();
         }
     }
 }
