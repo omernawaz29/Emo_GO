@@ -7,10 +7,13 @@ public class KeyScript : MonoBehaviour
 
 
     [SerializeField] GameObject Door;
+    [SerializeField] ParticleSystem poofEffect;
+
+    AudioManager _audioManager;
     // Start is called before the first frame update
     void Start()
     {
-        
+        _audioManager = FindObjectOfType<AudioManager>();
     }
 
     // Update is called once per frame
@@ -25,6 +28,9 @@ public class KeyScript : MonoBehaviour
         if(other.tag == "Emo")
         {
             Destroy(gameObject);
+
+            Instantiate(poofEffect, Door.transform.position, Quaternion.identity);
+            _audioManager.Play("KeyPowerUp");
             Destroy(Door);
         }
     }

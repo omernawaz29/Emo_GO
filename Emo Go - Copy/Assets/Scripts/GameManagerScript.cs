@@ -10,6 +10,7 @@ public class GameManagerScript : MonoBehaviour
     private int _emosRescued = 0;
     private int _totalEmos = 0;
     private UIManagerScript _uiManager;
+    private AudioManager _audioManager;
 
     [SerializeField] private GameObject[] FireZones;
     [SerializeField] private float fireZoneDelay = 1.5f;
@@ -20,7 +21,7 @@ public class GameManagerScript : MonoBehaviour
     void Start()
     {
         _uiManager = FindObjectOfType<UIManagerScript>();
-
+        _audioManager = FindObjectOfType<AudioManager>();
         nextFireZoneIndex = 0;
         StartCoroutine(EnableFireZones());
 
@@ -42,20 +43,22 @@ public class GameManagerScript : MonoBehaviour
     public void KillEmo()
     {
         _emosAlive--;
+        _audioManager.Play("EmojiPop");
         _uiManager.SetTotalEmos(_totalEmos);
         if (_emosAlive == 0)
-            _uiManager.Invoke("Lose", 0.2f);
+            _uiManager.Invoke("Lose", 1f);
         else if (_emosRescued == _emosAlive)
-            _uiManager.Invoke("Win", 0.2f);
+            _uiManager.Invoke("Win", 1f);
     }
 
     public void RescueEmo()
     {
         _emosRescued++;
         _uiManager.SetRescuedEmoCount(_emosRescued);
+        _audioManager.Play("EmojiYay");
         _uiManager.SetTotalEmos(_totalEmos);
         if (_emosRescued == _emosAlive)
-            _uiManager.Invoke("Win", 0.2f);
+            _uiManager.Invoke("Win", 1f);
     }
 
     public void UnRescueEmo()

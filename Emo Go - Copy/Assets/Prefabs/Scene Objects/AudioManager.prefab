@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5240651542663252641
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5240651542663252640}
+  - component: {fileID: 5240651542663252647}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5240651542663252640
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5240651542663252641}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.38632092, y: 0.11829136, z: 4.799131}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5240651542663252647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5240651542663252641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7abac93658b922c4783fd3da6630f4de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixerGroup: {fileID: 0}
+  sounds:
+  - name: EmojiPop
+    clip: {fileID: 8300000, guid: c7a931e48751f7c478c91a81e2723345, type: 3}
+    volume: 1
+    volumeVariance: 0.176
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: EmojiYay
+    clip: {fileID: 8300000, guid: 086e32eeba081df4c9b77c0dfcbb1c04, type: 3}
+    volume: 1
+    volumeVariance: 0.176
+    pitch: 1
+    pitchVariance: 1
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: BurgerPowerUp
+    clip: {fileID: 8300000, guid: 8316689e3199719488f9dcd901adb512, type: 3}
+    volume: 0.103
+    volumeVariance: 0.176
+    pitch: 0.43
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: KeyPowerUp
+    clip: {fileID: 8300000, guid: ff594d8120af086419a92169709e519b, type: 3}
+    volume: 0.085
+    volumeVariance: 0
+    pitch: 1.02
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: GlassBreak
+    clip: {fileID: 8300000, guid: b490ab6b0e744ac419eeb3ecf6586168, type: 3}
+    volume: 0.1
+    volumeVariance: 0
+    pitch: 1.02
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: TeleportEffect
+    clip: {fileID: 8300000, guid: c1c1765d738fb4a4ea6d217c4f7c5936, type: 3}
+    volume: 0.1
+    volumeVariance: 0
+    pitch: 1.02
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Bounce
+    clip: {fileID: 8300000, guid: 6c868b4827b11ca4ea9d29b7bc16195f, type: 3}
+    volume: 0.1
+    volumeVariance: 0
+    pitch: 1.02
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
