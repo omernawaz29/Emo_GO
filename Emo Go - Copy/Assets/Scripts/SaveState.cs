@@ -6,4 +6,6 @@ public class SaveState
 
     public int colorOwned = 0;
     public int emojiOwned = 0;
+
+    public int activeEmo = 0;
 }

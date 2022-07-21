@@ -40,7 +40,7 @@ public class UIManagerScript : MonoBehaviour
     {
         Time.timeScale = 0.5f;
         endButtonText.text = "Next";
-        endScreenTitle.text = "You Won!";
+        endScreenTitle.text = "You're Safe!";
         endScreen.SetActive(true);
         SetEndStars();
 
@@ -49,7 +49,7 @@ public class UIManagerScript : MonoBehaviour
     {
         Time.timeScale = 0.5f;
         endButtonText.text = "Fired Up!";
-        endScreenTitle.text = "You Almost Won!";
+        endScreenTitle.text = "Couldn't Escape!";
         endScreen.SetActive(true);
         SetEndStars();
 

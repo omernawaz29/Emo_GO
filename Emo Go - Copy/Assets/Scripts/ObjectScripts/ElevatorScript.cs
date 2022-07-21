@@ -7,8 +7,8 @@ public class ElevatorScript : MonoBehaviour
 
     [SerializeField] private Transform anchorPoint;
     [SerializeField] private Transform downPoint;
-    [SerializeField] private float _moveSpeed = 0.5f;
-
+    [SerializeField] private float moveSpeed = 0.5f;
+    [SerializeField] private float emojisRequired = 2;
     private int _emojisOn = 0;
     private Vector3 _newPos;
     // Start is called before the first frame update
@@ -20,10 +20,10 @@ public class ElevatorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(_emojisOn >= 2)
-            _newPos = Vector3.Lerp(transform.position, downPoint.position, _moveSpeed * Time.deltaTime);
+        if(_emojisOn >= emojisRequired)
+            _newPos = Vector3.Lerp(transform.position, downPoint.position, moveSpeed * Time.deltaTime);
         else
-            _newPos = Vector3.Lerp(transform.position, anchorPoint.position, _moveSpeed * Time.deltaTime);
+            _newPos = Vector3.Lerp(transform.position, anchorPoint.position, moveSpeed * Time.deltaTime);
 
         transform.position = _newPos;
     }

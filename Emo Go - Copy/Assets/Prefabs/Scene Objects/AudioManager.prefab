@@ -109,3 +109,12 @@ MonoBehaviour:
     loop: 0
     mixerGroup: {fileID: 0}
     source: {fileID: 0}
+  - name: menu
+    clip: {fileID: 8300000, guid: 04dd3982ef5eafd4886717d06094a10e, type: 3}
+    volume: 0.082
+    volumeVariance: 0
+    pitch: 1.02
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}

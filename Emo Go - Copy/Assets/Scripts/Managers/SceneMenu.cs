@@ -40,12 +40,16 @@ public class SceneMenu : MonoBehaviour
     private int activeEmojiIndex;
 
 
+    [SerializeField] GameObject[] Faces;
+
+
     Vector3 desiredMenuPos;
     int currentMenu;
     void Start()
     {
 
         UpdateCoinText();
+        UpdateFaces();
 
         fade = FindObjectOfType<CanvasGroup>();
         fade.alpha = 1.0f;
@@ -59,10 +63,7 @@ public class SceneMenu : MonoBehaviour
         InitLevel();
         InitShop();
 
-        GameManagerScript.instance.currentLevel = SaveManager.instance.state.levelsCompleted - 1;
-        if (GameManagerScript.instance.currentLevel < 0)
-            GameManagerScript.instance.currentLevel = 0;
-
+        GameManagerScript.instance.currentLevel = SaveManager.instance.state.levelsCompleted;
     }
 
     void Update()
@@ -117,9 +118,11 @@ public class SceneMenu : MonoBehaviour
             if (i <= SaveManager.instance.state.levelsCompleted)
             {
                 if (i == SaveManager.instance.state.levelsCompleted)
-                    img.color = blue;
+                {
+                    img.color = Color.yellow;
+                }
                 else
-                    img.color = green;
+                    img.color = Color.green;
             }
             else
             {
@@ -182,6 +185,7 @@ public class SceneMenu : MonoBehaviour
     void SetEmoji(int index)
     {
         activeEmojiIndex = index;
+        SaveManager.instance.state.activeEmo = index;
         emojiBuySetText.text = "Current";
     }
 
@@ -205,7 +209,7 @@ public class SceneMenu : MonoBehaviour
     {
         selectedEmojiIndex = current;
 
-        if (SaveManager.instance.IsColorOwned(current))
+        if (SaveManager.instance.IsEmojiOwned(current))
         {
             emojiBuySetText.text = "Select";
         }
@@ -274,12 +278,15 @@ public class SceneMenu : MonoBehaviour
         if (SaveManager.instance.IsEmojiOwned(selectedEmojiIndex))
         {
             SetEmoji(selectedEmojiIndex);
+            UpdateFaces();
+
         }
         else
         {
             if (SaveManager.instance.BuyEmoji(selectedEmojiIndex, emojiCost[selectedEmojiIndex]))
             {
                 SetEmoji(selectedEmojiIndex);
+                UpdateFaces();
                 UpdateCoinText();
             }
             else
@@ -292,5 +299,14 @@ public class SceneMenu : MonoBehaviour
     private void UpdateCoinText()
     {
         coinsText.text = SaveManager.instance.state.coins.ToString();
+    }
+
+    void UpdateFaces()
+    {
+        foreach (GameObject t in Faces)
+        {
+            t.SetActive(false);
+        }
+        Faces[SaveManager.instance.state.activeEmo].SetActive(true);
     }
 }

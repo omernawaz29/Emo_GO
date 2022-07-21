@@ -9,6 +9,9 @@ public class EmoScript : MonoBehaviour
     [SerializeField] private GameObject NormalEmo;
     [SerializeField] private ParticleSystem emoPoofEffect;
     [SerializeField] private GameObject angryEmoEffect;
+    [SerializeField] private float angryUses = 1;
+
+    [SerializeField] GameObject[] Faces;
     public float maxHitForce;
     public ParticleSystem emoDieEffect;
 
@@ -22,6 +25,17 @@ public class EmoScript : MonoBehaviour
     }
     void Start()
     {
+        UpdateFaces();
+    }
+
+    void UpdateFaces()
+    {
+        foreach (GameObject t in Faces)
+        {
+            t.SetActive(false);
+        }
+        Faces[SaveManager.instance.state.activeEmo].SetActive(true);
+
         AngryEmo.SetActive(false);
         NormalEmo.SetActive(true);
     }
@@ -49,14 +63,18 @@ public class EmoScript : MonoBehaviour
         {
             if(gameObject.tag == "AngryEmo")
             {
+                angryUses--;
                 _audioManager.Play("GlassBreak");
                 Handheld.Vibrate();
 
-                Instantiate(emoPoofEffect, gameObject.transform.position, Quaternion.identity);
+                if(angryUses == 0)
+                {
+                    Instantiate(emoPoofEffect, gameObject.transform.position, Quaternion.identity);
 
-                angryEmoEffect.SetActive(false);
-                AngryEmo.SetActive(false);
-                NormalEmo.SetActive(true);
+                    angryEmoEffect.SetActive(false);
+                    AngryEmo.SetActive(false);
+                    NormalEmo.SetActive(true);
+                }
             }
         }
     }

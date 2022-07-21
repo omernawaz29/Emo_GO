@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18380234, g: 0.22911644, b: 0.30413204, a: 1}
+  m_IndirectSpecularColor: {r: 0.18380252, g: 0.22911675, b: 0.30413246, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1380,15 +1380,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2432421705274540384, guid: c32a82b4afe64cb49b817cbf240b298d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.92
+      value: -0.31
       objectReference: {fileID: 0}
     - target: {fileID: 2432421705274540384, guid: c32a82b4afe64cb49b817cbf240b298d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 31.2
+      value: 37.9
       objectReference: {fileID: 0}
     - target: {fileID: 2432421705274540384, guid: c32a82b4afe64cb49b817cbf240b298d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7439228951247486254, guid: c32a82b4afe64cb49b817cbf240b298d, type: 3}
       propertyPath: bounceForce
@@ -1672,6 +1672,10 @@ PrefabInstance:
       propertyPath: pr
       value: 
       objectReference: {fileID: 2761880709920627954, guid: b3f40a12cdef8a142a0c7f27109e1fc4, type: 3}
+    - target: {fileID: -2254852864651093429, guid: 0215b5739b5469a45976d00f214d397d, type: 3}
+      propertyPath: angryUses
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: -2254852864651093429, guid: 0215b5739b5469a45976d00f214d397d, type: 3}
       propertyPath: win_check
       value: 

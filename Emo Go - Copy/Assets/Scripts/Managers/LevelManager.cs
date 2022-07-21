@@ -15,6 +15,8 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] private GameObject[] FireZones;
     [SerializeField] private float fireZoneDelay = 1.5f;
+    [SerializeField] private float minAliveEmo = 1;
+
 
 
     private int nextFireZoneIndex = 0;
@@ -49,14 +51,17 @@ public class LevelManager : MonoBehaviour
         _emosAlive--;
         _audioManager.Play("EmojiPop");
         _uiManager.SetTotalEmos(_totalEmos);
-        if (_emosAlive == 0)
+        if (_emosAlive < minAliveEmo)
             _uiManager.Invoke("Lose", 1f);
         else if (_emosRescued == _emosAlive)
         {
             _uiManager.Invoke("Win", 1f);
             GameManagerScript.instance.currentLevel++;
             if (SaveManager.instance.state.levelsCompleted < GameManagerScript.instance.currentLevel)
+            {
                 SaveManager.instance.state.levelsCompleted = GameManagerScript.instance.currentLevel;
+                SaveManager.instance.Save();
+            }
         }
     }
 
@@ -71,7 +76,10 @@ public class LevelManager : MonoBehaviour
             _uiManager.Invoke("Win", 1f);
             GameManagerScript.instance.currentLevel++;
             if(SaveManager.instance.state.levelsCompleted < GameManagerScript.instance.currentLevel)
+            {
                 SaveManager.instance.state.levelsCompleted = GameManagerScript.instance.currentLevel;
+                SaveManager.instance.Save();
+            }
         }
     }
 
