@@ -11,6 +11,9 @@ TagManager:
   - AngryEmo
   - FxTemporaire
   - Glass
+  - Water
+  - ReflectionStatic
+  - WaterChamber
   layers:
   - Default
   - TransparentFX

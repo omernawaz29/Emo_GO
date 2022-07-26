@@ -14,22 +14,30 @@ public class BouncyCubeScript : MonoBehaviour
     private float _uses;
 
     AudioManager _audioManager;
-
+    Animator _anim;
+    Collider _col;
     private void Start()
     {
         _uses = 0;
         _audioManager = FindObjectOfType<AudioManager>();
+        _anim = GetComponent<Animator>();
+        _col = GetComponent<Collider>();
 
     }
     private void OnCollisionEnter(Collision collision)
     {
+        _col.enabled = false;
+        StartCoroutine(DelayJumpSpam());
+
+
         var newDirection = bounceDirectionHelper.transform.position - transform.position;
 
         collision.rigidbody.velocity = Vector3.zero;
-        collision.rigidbody.velocity = newDirection * bounceForce;
+        collision.rigidbody.velocity = newDirection.normalized * bounceForce;
 
-
+        _anim.Play("JumpPadAnimation");
         _audioManager.Play("Bounce");
+        
 
         if(++_uses == useAmount)
         {
@@ -37,5 +45,12 @@ public class BouncyCubeScript : MonoBehaviour
             Instantiate(destroyEffect, gameObject.transform.position, Quaternion.identity);
         }
 
+    }
+
+    IEnumerator DelayJumpSpam()
+    {
+        Debug.Log("Bounce Called");
+        yield return new WaitForSeconds(1f);
+        _col.enabled = true;
     }
 }

@@ -52,10 +52,13 @@ public class LevelManager : MonoBehaviour
         _audioManager.Play("EmojiPop");
         _uiManager.SetTotalEmos(_totalEmos);
         if (_emosAlive < minAliveEmo)
-            _uiManager.Invoke("Lose", 1f);
+        {
+            Handheld.Vibrate();
+            _uiManager.Invoke("Lose", 2f);
+        }
         else if (_emosRescued == _emosAlive)
         {
-            _uiManager.Invoke("Win", 1f);
+            _uiManager.Invoke("Win", 2f);
             GameManagerScript.instance.currentLevel++;
             if (SaveManager.instance.state.levelsCompleted < GameManagerScript.instance.currentLevel)
             {
@@ -73,10 +76,11 @@ public class LevelManager : MonoBehaviour
         _uiManager.SetTotalEmos(_totalEmos);
         if (_emosRescued == _emosAlive)
         {
-            _uiManager.Invoke("Win", 1f);
+            _uiManager.Invoke("Win", 2f);
             GameManagerScript.instance.currentLevel++;
             if(SaveManager.instance.state.levelsCompleted < GameManagerScript.instance.currentLevel)
             {
+                Handheld.Vibrate();
                 SaveManager.instance.state.levelsCompleted = GameManagerScript.instance.currentLevel;
                 SaveManager.instance.Save();
             }

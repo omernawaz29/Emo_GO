@@ -54,6 +54,7 @@ public class EmoScript : MonoBehaviour
             if (collision.relativeVelocity.magnitude >= maxHitForce)
             {
                 Handheld.Vibrate();
+                CameraController.instance.StartShake(0.3f, 0.25f);
                 Instantiate(emoDieEffect, gameObject.transform.position, Quaternion.identity);
                 _levelManager.KillEmo();
                 Destroy(gameObject);
@@ -63,11 +64,10 @@ public class EmoScript : MonoBehaviour
         {
             if(gameObject.tag == "AngryEmo")
             {
-                angryUses--;
                 _audioManager.Play("GlassBreak");
                 Handheld.Vibrate();
 
-                if(angryUses == 0)
+                if(--angryUses == 0)
                 {
                     Instantiate(emoPoofEffect, gameObject.transform.position, Quaternion.identity);
 
@@ -87,6 +87,7 @@ public class EmoScript : MonoBehaviour
 
             Handheld.Vibrate();
             _levelManager.KillEmo();
+            CameraController.instance.StartShake(0.3f, 0.25f);
             Destroy(gameObject);
         }
         if(other.tag == "Burger")
@@ -103,6 +104,11 @@ public class EmoScript : MonoBehaviour
             NormalEmo.SetActive(false);
 
             Destroy(other.gameObject);
+        }
+        if(other.tag == "WaterChamber")
+        {
+            var rb = GetComponent<Rigidbody>();
+            rb.drag = 7.5f;
         }
     }
 }

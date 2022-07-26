@@ -253,9 +253,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   endScreen: {fileID: 0}
   rescuedEmoCountText: {fileID: 0}
-  starCountText: {fileID: 0}
+  currentLevelText: {fileID: 0}
   endButtonText: {fileID: 0}
   endScreenTitle: {fileID: 0}
+  coinText: {fileID: 0}
   stars: []
 --- !u!1 &2182747800424595478
 GameObject:

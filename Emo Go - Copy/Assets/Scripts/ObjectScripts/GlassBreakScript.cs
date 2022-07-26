@@ -25,19 +25,18 @@ public class GlassBreakScript : MonoBehaviour
         //    Destroy(gameObject);
     }
 
-    private void OnDestroy()
-    {
-        Instantiate(glassBreakParticles, transform.position, Quaternion.identity);
-        Instantiate(hitEffectParticles, transform.position, Quaternion.identity);
-
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "AngryEmo" || (collision.gameObject.tag == "Emo" && normalEmoBreak) && collision.relativeVelocity.magnitude >= breakForce)
         {
             _audioManager.Play("GlassBreak");
             gameObject.GetComponent<MeshRenderer>().material = brokenGlassMaterial;
+
+            CameraController.instance.StartShake(0.2f, 0.15f);
+            Handheld.Vibrate();
+            Instantiate(glassBreakParticles, transform.position, Quaternion.identity);
+            Instantiate(hitEffectParticles, transform.position, Quaternion.identity);
+
             Destroy(gameObject, 0.15f);
         }
         
