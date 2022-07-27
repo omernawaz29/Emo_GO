@@ -19,8 +19,8 @@ public class SceneMenu : MonoBehaviour
 
     [SerializeField] Material playerMat;
 
-    [SerializeField] Color blue = Color.blue;
-    [SerializeField] Color green = Color.green;
+    [SerializeField] Color currentLevelColor = Color.blue;
+    [SerializeField] Color completedLevelColor = Color.green;
 
 
     [SerializeField] TextMeshProUGUI colorBuySetText;
@@ -32,7 +32,7 @@ public class SceneMenu : MonoBehaviour
     private int[] colorCost = new int[] { 0, 500, 500, 500, 1000, 1000, 1000, 1500, 1500 };
     private int[] emojiCost = new int[] { 0, 1000, 1000, 1000, 1500, 1500, 1500, 2000, 2000 };
 
-    private Color[] colors = new Color[] { Color.blue, Color.green, Color.yellow, Color.red, Color.cyan, Color.magenta, Color.gray, Color.black, Color.white };
+    private Color[] colors = new Color[] { Color.yellow, Color.green, Color.blue, Color.red, Color.cyan, Color.magenta, Color.gray, Color.black, Color.white };
 
     private int selectedColorIndex;
     private int selectedEmojiIndex;
@@ -54,8 +54,9 @@ public class SceneMenu : MonoBehaviour
         fade = FindObjectOfType<CanvasGroup>();
         fade.alpha = 1.0f;
 
+        SaveManager.instance.state.levelsCompleted = 18;
 
-        SetCameraTo(0);
+        SetCameraTo(GameManagerScript.instance.menuFocus);
         AudioManager.instance.StopAll();
         AudioManager.instance.Play("menu");
 
@@ -69,7 +70,6 @@ public class SceneMenu : MonoBehaviour
     void Update()
     {
         fade.alpha = 1 - Time.timeSinceLevelLoad * fadeSpeed;
-
         menuContainer.anchoredPosition3D = Vector3.Lerp(menuContainer.anchoredPosition3D, desiredMenuPos, 0.1f);
     }
 
@@ -119,10 +119,10 @@ public class SceneMenu : MonoBehaviour
             {
                 if (i == SaveManager.instance.state.levelsCompleted)
                 {
-                    img.color = Color.yellow;
+                    img.color = currentLevelColor;
                 }
                 else
-                    img.color = Color.green;
+                    img.color = completedLevelColor;
             }
             else
             {
@@ -201,7 +201,7 @@ public class SceneMenu : MonoBehaviour
         }
         else
         {
-            colorBuySetText.text = "Buy: " + colorCost[current].ToString();
+            colorBuySetText.text = "$" + colorCost[current].ToString();
         }
     }
 
@@ -215,7 +215,7 @@ public class SceneMenu : MonoBehaviour
         }
         else
         {
-            emojiBuySetText.text = "Buy: " + emojiCost[current].ToString();
+            emojiBuySetText.text = "$" + emojiCost[current].ToString();
         }
     }
 
@@ -233,7 +233,14 @@ public class SceneMenu : MonoBehaviour
 
     public void OnPlayClick()
     {
-        SceneManager.LoadScene(GameManagerScript.instance.currentLevel + 2);
+        var newSceneIndex = GameManagerScript.instance.currentLevel + 2;
+
+        if (newSceneIndex >= SceneManager.sceneCountInBuildSettings)
+        {
+            Navigate(2);
+        }
+        else
+            SceneManager.LoadScene(newSceneIndex);
     }
 
     public void OnLevelClick()
@@ -298,7 +305,7 @@ public class SceneMenu : MonoBehaviour
 
     private void UpdateCoinText()
     {
-        coinsText.text = SaveManager.instance.state.coins.ToString();
+        coinsText.text = "$" + SaveManager.instance.state.coins.ToString();
     }
 
     void UpdateFaces()
