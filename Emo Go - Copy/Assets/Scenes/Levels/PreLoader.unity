@@ -559,6 +559,10 @@ PrefabInstance:
       value: AudioManager
       objectReference: {fileID: 0}
     - target: {fileID: 5240651542663252647, guid: 436dd34a8987d694282ee21426c7c010, type: 3}
+      propertyPath: sounds.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240651542663252647, guid: 436dd34a8987d694282ee21426c7c010, type: 3}
       propertyPath: sounds.Array.data[1].clip
       value: 
       objectReference: {fileID: 8300000, guid: efad1816a1dc01e468cb1cb46dfe90ff, type: 3}
@@ -567,12 +571,32 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5240651542663252647, guid: 436dd34a8987d694282ee21426c7c010, type: 3}
+      propertyPath: sounds.Array.data[8].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 0094ce287af8f9943aa9b42f6c850961, type: 3}
+    - target: {fileID: 5240651542663252647, guid: 436dd34a8987d694282ee21426c7c010, type: 3}
+      propertyPath: sounds.Array.data[8].loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240651542663252647, guid: 436dd34a8987d694282ee21426c7c010, type: 3}
+      propertyPath: sounds.Array.data[8].name
+      value: Elevator
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240651542663252647, guid: 436dd34a8987d694282ee21426c7c010, type: 3}
+      propertyPath: sounds.Array.data[8].pitch
+      value: 1.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240651542663252647, guid: 436dd34a8987d694282ee21426c7c010, type: 3}
       propertyPath: sounds.Array.data[1].volume
       value: 0.389
       objectReference: {fileID: 0}
     - target: {fileID: 5240651542663252647, guid: 436dd34a8987d694282ee21426c7c010, type: 3}
       propertyPath: sounds.Array.data[7].volume
       value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240651542663252647, guid: 436dd34a8987d694282ee21426c7c010, type: 3}
+      propertyPath: sounds.Array.data[8].volume
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5240651542663252647, guid: 436dd34a8987d694282ee21426c7c010, type: 3}
       propertyPath: sounds.Array.data[1].pitchVariance

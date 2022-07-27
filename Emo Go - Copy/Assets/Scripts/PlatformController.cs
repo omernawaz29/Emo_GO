@@ -7,7 +7,7 @@ public class PlatformController : MonoBehaviour
 
     private float _xRotation;
     private float _zRotation;
-    private float _movementMultiplier = 7f;
+    private float _movementMultiplier = 5f;
 
     private Touch _touch;
 

@@ -15,6 +15,7 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] private GameObject[] FireZones;
     [SerializeField] private float fireZoneDelay = 1.5f;
+    [SerializeField] private float firstFireZoneDelay = 0f;
     [SerializeField] private float minAliveEmo = 1;
 
 
@@ -96,13 +97,14 @@ public class LevelManager : MonoBehaviour
 
     IEnumerator EnableFireZones()
     {
+        yield return new WaitForSeconds(firstFireZoneDelay);
         while(true && FireZones.Length != 0)
         {
             FireZones[nextFireZoneIndex].SetActive(true);
             yield return new WaitForSeconds(fireZoneDelay);
 
-            if (++nextFireZoneIndex < FireZones.Length) { }
-            else break;
+            if (++nextFireZoneIndex >= FireZones.Length)
+                break;
         }
     }
 }
