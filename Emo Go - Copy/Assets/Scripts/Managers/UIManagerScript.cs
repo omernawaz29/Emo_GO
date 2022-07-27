@@ -15,10 +15,19 @@ public class UIManagerScript : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI rescuedEmoCountText;
     [SerializeField] private TextMeshProUGUI currentLevelText;
-    [SerializeField] private TextMeshProUGUI endButtonText;
-    [SerializeField] private TextMeshProUGUI endScreenTitle;
+    //[SerializeField] private TextMeshProUGUI endButtonText;
+    //[SerializeField] private TextMeshProUGUI endScreenTitle;
     [SerializeField] private TextMeshProUGUI coinText;
     [SerializeField] private GameObject[] stars;
+
+    //Win Screen Objects
+    [SerializeField] private GameObject NextLevelButton;
+    [SerializeField] private GameObject GlassesEmo;
+
+
+    //Lose Screen Objects
+    [SerializeField] private GameObject RestartLevelButton;
+    [SerializeField] private GameObject SadEmo;
 
 
     private float _totalEmos = 0;
@@ -39,18 +48,18 @@ public class UIManagerScript : MonoBehaviour
     void Win()
     {
         Time.timeScale = 0.5f;
-        endButtonText.text = "Next";
-        endScreenTitle.text = "You're Safe!";
         endScreen.SetActive(true);
+        NextLevelButton.SetActive(true);
+        GlassesEmo.SetActive(true);
         SetEndStars();
 
     }
     void Lose()
     {
         Time.timeScale = 0.5f;
-        endButtonText.text = "Fired Up!";
-        endScreenTitle.text = "Couldn't Escape!";
         endScreen.SetActive(true);
+        RestartLevelButton.SetActive(true);
+        SadEmo.SetActive(true);
         SetEndStars();
 
     }
@@ -59,12 +68,12 @@ public class UIManagerScript : MonoBehaviour
     {
         float endPercentage = (_rescuedEmos * 100) / _totalEmos;
 
-        if(endPercentage < 66)
+        if(endPercentage < 66 && endPercentage > 0)
             endPercentage += 20f;
 
         int coins = Mathf.CeilToInt(endPercentage * 10);
 
-        coinText.text = coins.ToString();
+        coinText.text = "$" + coins.ToString();
         SaveManager.instance.state.coins += coins;
 
         if (endPercentage >= 33)
@@ -75,20 +84,34 @@ public class UIManagerScript : MonoBehaviour
             stars[2].SetActive(true);
     }
 
-    public void ClickEndButton()
+    
+
+    public void ClickNextButton()
     {
         Time.timeScale = 1;
-        if(endButtonText.text == "Next")
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        else
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
+        var newSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+
+        if (newSceneIndex > SceneManager.sceneCountInBuildSettings)
+        {
+            GameManagerScript.instance.menuFocus = 2;
+            SceneManager.LoadScene("MainMenu");
+        }
+        else
+            SceneManager.LoadScene(newSceneIndex);
+    }
+
+    public void ClickRedoButton()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void ClickHomeButton()
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
+        GameManagerScript.instance.menuFocus = 0;
     }
 
     public void SetTotalEmos(int count)

@@ -6,6 +6,7 @@ public class GameManagerScript : MonoBehaviour
 {
     public static GameManagerScript instance;
     [HideInInspector]public int currentLevel;
+    [HideInInspector] public int menuFocus;
 
     void Start()
     {
@@ -18,6 +19,7 @@ public class GameManagerScript : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
+        menuFocus = 0;
     }
 
     // Update is called once per frame
