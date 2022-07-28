@@ -6,7 +6,6 @@ public class WinChamberScript : MonoBehaviour
 {
     private LevelManager _levelManager;
     [SerializeField] ParticleSystem winEffect;
-    [SerializeField] ParticleSystem splashEffect;
     
 
     private void Awake()
@@ -20,7 +19,6 @@ public class WinChamberScript : MonoBehaviour
         {
             Vector3 effectPos = new Vector3(other.transform.position.x, other.transform.position.y + 1, other.transform.position.z);
             Instantiate(winEffect, effectPos, Quaternion.Euler(90, 0, 0));
-            Instantiate(splashEffect, effectPos, Quaternion.Euler(90, 0, 0));
             _levelManager.RescueEmo();
         }
     }
