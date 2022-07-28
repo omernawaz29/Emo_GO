@@ -36,7 +36,7 @@ public class UIManagerScript : MonoBehaviour
     void Start()
     {
         rescuedEmoCountText.text = "0";
-        currentLevelText.text = (GameManagerScript.instance.currentLevel + 1).ToString();
+        currentLevelText.text = (SceneManager.GetActiveScene().buildIndex - 1).ToString();
     }
 
     // Update is called once per frame

@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManagerScript : MonoBehaviour
 {
     public static GameManagerScript instance;
-    [HideInInspector]public int currentLevel;
+    [HideInInspector] public int currentLevel;
     [HideInInspector] public int menuFocus;
 
     void Start()
