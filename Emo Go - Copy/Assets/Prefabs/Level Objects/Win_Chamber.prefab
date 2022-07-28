@@ -61,6 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   winEffect: {fileID: 19800000, guid: 1bc4a709f24528b40984e62f32e398a0, type: 3}
+  splashEffect: {fileID: 198405478074982118, guid: 4adffb0018aeda44e9263f901167af1f, type: 3}
 --- !u!1001 &2351544190447712825
 PrefabInstance:
   m_ObjectHideFlags: 0

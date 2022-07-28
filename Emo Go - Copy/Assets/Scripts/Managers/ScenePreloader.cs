@@ -38,9 +38,19 @@ public class ScenePreloader : MonoBehaviour
         if(Time.time >=minLoadTime && loadTime != 0)
         {
             fade.alpha = Time.time - minLoadTime;
-            if(fade.alpha >= 1)
+            if (fade.alpha >= 1)
             {
-                SceneManager.LoadScene(SaveManager.instance.state.levelsCompleted + 2);
+                var newSceneIndex = SaveManager.instance.state.levelsCompleted + 2;
+
+                if (newSceneIndex >= SceneManager.sceneCountInBuildSettings)
+                {
+                    SceneManager.LoadScene("MainMenu");
+                }
+                else
+                {
+                    SceneManager.LoadScene(newSceneIndex);
+                    AudioManager.instance.Play("menu");
+                }
             }
         }
     }
