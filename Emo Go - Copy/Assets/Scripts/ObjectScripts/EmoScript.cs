@@ -74,6 +74,7 @@ public class EmoScript : MonoBehaviour
                     angryEmoEffect.SetActive(false);
                     AngryEmo.SetActive(false);
                     NormalEmo.SetActive(true);
+                    gameObject.tag = "Emo";
                 }
             }
         }
