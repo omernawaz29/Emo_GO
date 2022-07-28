@@ -5,13 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class ScenePreloader : MonoBehaviour
 {
+    [SerializeField] private bool debugMode = false;
+
     CanvasGroup fade;
     float loadTime;
     float minLoadTime = 2.0f;
 
-
     private void Start()
     {
+        if (debugMode)
+            SceneManager.LoadScene("MainMenu");
+
         fade = FindObjectOfType<CanvasGroup>();
         fade.alpha = 1.0f;
 
