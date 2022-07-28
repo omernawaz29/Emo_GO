@@ -79,7 +79,7 @@ public class LevelManager : MonoBehaviour
         {
             _uiManager.Invoke("Win", 2f);
             GameManagerScript.instance.currentLevel++;
-            if(SaveManager.instance.state.levelsCompleted < GameManagerScript.instance.currentLevel)
+            if (SaveManager.instance.state.levelsCompleted < GameManagerScript.instance.currentLevel)
             {
                 Handheld.Vibrate();
                 SaveManager.instance.state.levelsCompleted = GameManagerScript.instance.currentLevel;

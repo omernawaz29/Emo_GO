@@ -47,14 +47,12 @@ public class SceneMenu : MonoBehaviour
     int currentMenu;
     void Start()
     {
-
+        
         UpdateCoinText();
         UpdateFaces();
 
         fade = FindObjectOfType<CanvasGroup>();
         fade.alpha = 1.0f;
-
-        SaveManager.instance.state.levelsCompleted = 18;
 
         SetCameraTo(GameManagerScript.instance.menuFocus);
         AudioManager.instance.StopAll();
