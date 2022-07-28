@@ -145,9 +145,6 @@ public class SceneMenu : MonoBehaviour
         if (colorPanel == null || emojiPanel == null)
             Debug.Log("Did not assign color/emoji panel in the inspector");
 
-
-
-
         int i = 0;
         foreach(Transform t in colorPanel)
         {
