@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 1b02704461af04bbb9596647946b57a5, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 891883c35b421704b9afbd5a1eb0e570, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -1442,34 +1442,6 @@ PrefabInstance:
     - target: {fileID: 6814010271287117003, guid: 859f586d245e91544b83245dacf8949b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6814010271577330945, guid: 859f586d245e91544b83245dacf8949b, type: 3}
-      propertyPath: orthographic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6814010271577330945, guid: 859f586d245e91544b83245dacf8949b, type: 3}
-      propertyPath: field of view
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 6814010271577330945, guid: 859f586d245e91544b83245dacf8949b, type: 3}
-      propertyPath: m_FOVAxisMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6814010271577330945, guid: 859f586d245e91544b83245dacf8949b, type: 3}
-      propertyPath: m_FocalLength
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 6814010271577330945, guid: 859f586d245e91544b83245dacf8949b, type: 3}
-      propertyPath: far clip plane
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 6814010271577330945, guid: 859f586d245e91544b83245dacf8949b, type: 3}
-      propertyPath: orthographic size
-      value: 13.49
-      objectReference: {fileID: 0}
-    - target: {fileID: 6814010271577330945, guid: 859f586d245e91544b83245dacf8949b, type: 3}
-      propertyPath: m_projectionMatrixMode
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 859f586d245e91544b83245dacf8949b, type: 3}
