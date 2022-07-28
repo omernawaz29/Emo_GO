@@ -21,7 +21,7 @@ public class UIManagerScript : MonoBehaviour
     [SerializeField] private GameObject[] stars;
 
     // Tutorial Text
-    [SerializeField] private GameObject tutorialHolder;
+    [SerializeField] private TextMeshProUGUI tutorialText;
 
     //Win Screen Objects
     [SerializeField] private GameObject NextLevelButton;
@@ -41,7 +41,7 @@ public class UIManagerScript : MonoBehaviour
         rescuedEmoCountText.text = "0";
         currentLevelText.text = (SceneManager.GetActiveScene().buildIndex - 1).ToString();
 
-        tutorialHolder.SetActive(true);
+        tutorialText.enabled = true;
     }
 
     // Update is called once per frame
@@ -133,7 +133,6 @@ public class UIManagerScript : MonoBehaviour
 
     public void DisableTutorial()
     {
-        tutorialHolder.SetActive(false);
-
+        tutorialText.enabled = false;
     }
 }
