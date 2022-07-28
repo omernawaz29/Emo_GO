@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 1b02704461af04bbb9596647946b57a5, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 891883c35b421704b9afbd5a1eb0e570, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -435,82 +435,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1060262986135450827, guid: 9a667956f57d6054d842d648242254de, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 875594057}
-    - target: {fileID: 1060262986135450827, guid: 9a667956f57d6054d842d648242254de, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ClickRedoButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 1060262986135450827, guid: 9a667956f57d6054d842d648242254de, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UIManagerScript, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1060262986135450827, guid: 9a667956f57d6054d842d648242254de, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1984446493076933567, guid: 9a667956f57d6054d842d648242254de, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 875594057}
-    - target: {fileID: 1984446493076933567, guid: 9a667956f57d6054d842d648242254de, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ClickRedoButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 1984446493076933567, guid: 9a667956f57d6054d842d648242254de, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UIManagerScript, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1984446493076933567, guid: 9a667956f57d6054d842d648242254de, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 3262448232866369169, guid: 9a667956f57d6054d842d648242254de, type: 3}
-      propertyPath: priority
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3386593125092006745, guid: 9a667956f57d6054d842d648242254de, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3386593125421755659, guid: 9a667956f57d6054d842d648242254de, type: 3}
-      propertyPath: m_text
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5040270551657855412, guid: 9a667956f57d6054d842d648242254de, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 875594057}
-    - target: {fileID: 5040270551657855412, guid: 9a667956f57d6054d842d648242254de, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ClickHomeButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 5040270551657855412, guid: 9a667956f57d6054d842d648242254de, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UIManagerScript, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 5040270551657855412, guid: 9a667956f57d6054d842d648242254de, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 6489826161065561588, guid: 9a667956f57d6054d842d648242254de, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 875594057}
-    - target: {fileID: 6489826161065561588, guid: 9a667956f57d6054d842d648242254de, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ClickNextButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 6489826161065561588, guid: 9a667956f57d6054d842d648242254de, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UIManagerScript, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 6489826161065561588, guid: 9a667956f57d6054d842d648242254de, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 7211943355015298265, guid: 9a667956f57d6054d842d648242254de, type: 3}
       propertyPath: m_Name
       value: CanvasWorkingUI
@@ -599,24 +523,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8662863558957880356, guid: 9a667956f57d6054d842d648242254de, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3386593125092006745, guid: 9a667956f57d6054d842d648242254de, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a667956f57d6054d842d648242254de, type: 3}
---- !u!114 &875594057 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7211943355015298268, guid: 9a667956f57d6054d842d648242254de, type: 3}
-  m_PrefabInstance: {fileID: 875594056}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e2d3119231b7c64da823f3872e183e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &934952624
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1534,34 +1442,6 @@ PrefabInstance:
     - target: {fileID: 6814010271287117003, guid: 859f586d245e91544b83245dacf8949b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6814010271577330945, guid: 859f586d245e91544b83245dacf8949b, type: 3}
-      propertyPath: orthographic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6814010271577330945, guid: 859f586d245e91544b83245dacf8949b, type: 3}
-      propertyPath: field of view
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 6814010271577330945, guid: 859f586d245e91544b83245dacf8949b, type: 3}
-      propertyPath: m_FOVAxisMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6814010271577330945, guid: 859f586d245e91544b83245dacf8949b, type: 3}
-      propertyPath: m_FocalLength
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 6814010271577330945, guid: 859f586d245e91544b83245dacf8949b, type: 3}
-      propertyPath: far clip plane
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 6814010271577330945, guid: 859f586d245e91544b83245dacf8949b, type: 3}
-      propertyPath: orthographic size
-      value: 13.49
-      objectReference: {fileID: 0}
-    - target: {fileID: 6814010271577330945, guid: 859f586d245e91544b83245dacf8949b, type: 3}
-      propertyPath: m_projectionMatrixMode
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 859f586d245e91544b83245dacf8949b, type: 3}
