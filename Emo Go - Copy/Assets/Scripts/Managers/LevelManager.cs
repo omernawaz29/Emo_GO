@@ -23,6 +23,15 @@ public class LevelManager : MonoBehaviour
     private int nextFireZoneIndex = 0;
     // Start is called before the first frame update
 
+    private void OnEnable()
+    {
+        PlatformController.OnFirstTouched += EnableFireZonesWrapper;
+    }
+
+    private void OnDisable()
+    {
+        PlatformController.OnFirstTouched -= EnableFireZonesWrapper;
+    }
 
     void Start()
     {
@@ -30,7 +39,7 @@ public class LevelManager : MonoBehaviour
         _uiManager = FindObjectOfType<UIManagerScript>();
         _audioManager = FindObjectOfType<AudioManager>();
         nextFireZoneIndex = 0;
-        StartCoroutine(EnableFireZones());
+        // StartCoroutine(EnableFireZones());
 
     }
 
@@ -93,6 +102,14 @@ public class LevelManager : MonoBehaviour
         _emosRescued--;
         _uiManager.SetRescuedEmoCount(_emosRescued);
 
+    }
+
+    void EnableFireZonesWrapper()
+    {
+        Debug.Log("Enabling firezones");
+        _uiManager.DisableTutorial();
+
+        StartCoroutine(EnableFireZones());
     }
 
     IEnumerator EnableFireZones()
