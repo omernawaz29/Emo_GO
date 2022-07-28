@@ -75,9 +75,9 @@ Material:
     - _QueueControl: 1
     - _QueueOffset: 0
     - _RefractionStrength: 0.017
-    - _RippleDensity: 10
-    - _RippleSlimness: 5
-    - _RippleSpeed: 1
+    - _RippleDensity: 20
+    - _RippleSlimness: 10
+    - _RippleSpeed: 2
     - _ShoreBlend: 0
     - _ShoreDepth: 0
     - _ShoreFade: 0
@@ -95,14 +95,14 @@ Material:
     - _WaterColorHorizonDistance: 20
     - _WaveSpeed: 0.05
     m_Colors:
-    - _Base_Color: {r: 0, g: 0.34275147, b: 1, a: 1}
+    - _Base_Color: {r: 0, g: 0.021628141, b: 1, a: 1}
     - _IntersectionFoamColor: {r: 1, g: 1, b: 1, a: 1}
     - _IntersectionFoamMovement: {r: 0, g: 0, b: 0, a: 0}
     - _IntersectionFoamSampling: {r: 1, g: 0, b: 0, a: 0}
     - _LightingDiffuseColor: {r: 0, g: 0, b: 0, a: 0}
     - _LightingSpecularColor: {r: 1, g: 1, b: 1, a: 0}
     - _NormalsMovement: {r: 0.04, g: 0.36, b: 0, a: 0}
-    - _RippleColor: {r: 0, g: 1.788235, b: 2, a: 0.3333333}
+    - _RippleColor: {r: 0.07336351, g: 0, b: 2.670157, a: 0.3333333}
     - _ShoreColor: {r: 0, g: 0.98039216, b: 0.3019593, a: 0}
     - _SurfaceFoamColor1: {r: 1, g: 1, b: 1, a: 0.3215686}
     - _SurfaceFoamColor2: {r: 1, g: 1, b: 1, a: 0.7294118}
