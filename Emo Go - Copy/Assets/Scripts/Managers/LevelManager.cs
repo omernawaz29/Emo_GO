@@ -20,7 +20,7 @@ public class LevelManager : MonoBehaviour
 
 
     // 
-    private int _trapObjects = 0;
+    private int _trappingObjects = 0;
 
     private int nextFireZoneIndex = 0;
     // Start is called before the first frame update
@@ -37,10 +37,10 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-
         _uiManager = FindObjectOfType<UIManagerScript>();
         _audioManager = FindObjectOfType<AudioManager>();
         nextFireZoneIndex = 0;
+        _trappingObjects = 0;
         // StartCoroutine(EnableFireZones());
 
     }
@@ -63,7 +63,9 @@ public class LevelManager : MonoBehaviour
         _emosAlive--;
         _audioManager.Play("EmojiPop");
         _uiManager.SetTotalEmos(_totalEmos);
-        if (_emosAlive < minAliveEmo)
+
+
+        if (_emosAlive < minAliveEmo || (_emosAlive == 1 && _trappingObjects > 0) )
         {
             Handheld.Vibrate();
             _uiManager.Invoke("Lose", 2f);
@@ -87,6 +89,7 @@ public class LevelManager : MonoBehaviour
         _uiManager.SetRescuedEmoCount(_emosRescued);
         _audioManager.Play("EmojiYay");
         _uiManager.SetTotalEmos(_totalEmos);
+
         if (_emosRescued == _emosAlive)
         {
             fireZoneDelay = 0;
@@ -125,5 +128,15 @@ public class LevelManager : MonoBehaviour
             if (++nextFireZoneIndex >= FireZones.Length)
                 break;
         }
+    }
+
+    public void AddTrappingObject()
+    {
+        _trappingObjects++;
+    }
+
+    public void RemoveTrappingObject()
+    {
+        _trappingObjects--;
     }
 }
