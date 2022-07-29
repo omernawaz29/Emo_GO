@@ -32,6 +32,10 @@ public class UIManagerScript : MonoBehaviour
     [SerializeField] private GameObject RestartLevelButton;
     [SerializeField] private GameObject SadEmo;
 
+    [Space]
+    [SerializeField] private float starsAnimationSpeed = 2.0f;
+    [SerializeField] private float starsDelayOffset = 0.1f;
+
 
     private float _totalEmos = 0;
     private float _rescuedEmos = 0;
@@ -81,15 +85,36 @@ public class UIManagerScript : MonoBehaviour
         coinText.text = "$" + coins.ToString();
         SaveManager.instance.state.coins += coins;
 
+        int starsShowCount = 0;
+        if (endPercentage == 100)
+            starsShowCount = 3;
+        else if (endPercentage >= 66)
+            starsShowCount = 2;
+        else if (endPercentage >= 33)
+            starsShowCount = 1;
+
+        StartCoroutine(SetEndStarsJuice(starsShowCount));
+        /*
         if (endPercentage >= 33)
             stars[0].SetActive(true);
         if (endPercentage >= 66)
             stars[1].SetActive(true);
         if (endPercentage == 100)
             stars[2].SetActive(true);
+        */
     }
 
-    
+    IEnumerator SetEndStarsJuice(int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            stars[i].SetActive(true);
+            Animator animator = stars[i].GetComponent<Animator>();
+            animator.speed = starsAnimationSpeed;
+
+            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length - starsDelayOffset);
+        }
+    }
 
     public void ClickNextButton()
     {

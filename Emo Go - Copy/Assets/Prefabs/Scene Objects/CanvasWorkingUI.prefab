@@ -2787,6 +2787,8 @@ MonoBehaviour:
   GlassesEmo: {fileID: 1974021987216224604}
   RestartLevelButton: {fileID: 7115057266052405023}
   SadEmo: {fileID: 5284776231830218577}
+  starsAnimationSpeed: 3
+  starsDelayOffset: 0.4
 --- !u!1 &7430908908695724811
 GameObject:
   m_ObjectHideFlags: 0
