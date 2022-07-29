@@ -19,6 +19,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private float minAliveEmo = 1;
 
 
+    // 
+    private int _trapObjects = 0;
 
     private int nextFireZoneIndex = 0;
     // Start is called before the first frame update
@@ -68,6 +70,7 @@ public class LevelManager : MonoBehaviour
         }
         else if (_emosRescued == _emosAlive)
         {
+            fireZoneDelay = 0;
             _uiManager.Invoke("Win", 2f);
             GameManagerScript.instance.currentLevel++;
             if (SaveManager.instance.state.levelsCompleted < GameManagerScript.instance.currentLevel)
@@ -86,6 +89,7 @@ public class LevelManager : MonoBehaviour
         _uiManager.SetTotalEmos(_totalEmos);
         if (_emosRescued == _emosAlive)
         {
+            fireZoneDelay = 0;
             _uiManager.Invoke("Win", 2f);
             GameManagerScript.instance.currentLevel++;
             if (SaveManager.instance.state.levelsCompleted < GameManagerScript.instance.currentLevel)
@@ -96,14 +100,12 @@ public class LevelManager : MonoBehaviour
             }
         }
     }
-
     public void UnRescueEmo()
     {
         _emosRescued--;
         _uiManager.SetRescuedEmoCount(_emosRescued);
 
     }
-
     void EnableFireZonesWrapper()
     {
         Debug.Log("Enabling firezones");
