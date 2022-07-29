@@ -124,9 +124,13 @@ public class SceneMenu : MonoBehaviour
             b.onClick.AddListener(() => OnLevelSelect(currentIndex));
 
             Image img = t.GetComponent<Image>();
+            // getting the lock image in UI
+            GameObject lockImgObj = t.GetChild(1).GetComponent<Image>().gameObject;
 
             if (i <= SaveManager.instance.state.levelsCompleted)
             {
+                lockImgObj.SetActive(false);
+
                 if (i == SaveManager.instance.state.levelsCompleted)
                 {
                     img.color = currentLevelColor;
@@ -136,12 +140,14 @@ public class SceneMenu : MonoBehaviour
             }
             else
             {
+                GameObject tLevelText = t.GetChild(0).GetComponent<TextMeshProUGUI>().gameObject;
+                tLevelText.SetActive(false);
+
                 b.interactable = false;
                 img.color = Color.gray;
             }
 
             i++;
-
         }
     }
     public void ResetSave()
