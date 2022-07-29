@@ -254,10 +254,13 @@ MonoBehaviour:
   endScreen: {fileID: 0}
   rescuedEmoCountText: {fileID: 0}
   currentLevelText: {fileID: 0}
-  endButtonText: {fileID: 0}
-  endScreenTitle: {fileID: 0}
   coinText: {fileID: 0}
   stars: []
+  tutorialHolder: {fileID: 0}
+  NextLevelButton: {fileID: 0}
+  GlassesEmo: {fileID: 0}
+  RestartLevelButton: {fileID: 0}
+  SadEmo: {fileID: 0}
 --- !u!1 &2182747800424595478
 GameObject:
   m_ObjectHideFlags: 0
