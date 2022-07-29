@@ -2864,7 +2864,7 @@ MonoBehaviour:
   glassBreakParticles: {fileID: 7412145957398498349, guid: 20f885bb926d47e40af0cee3953b82da, type: 3}
   hitEffectParticles: {fileID: 19800004, guid: f95ff734540a0d749be6571b6cb5b37f, type: 3}
   brokenGlassMaterial: {fileID: 2100000, guid: a826363fb9c541c478c44e23961a3893, type: 2}
-  breakForce: 5
+  breakForce: 2
   normalEmoBreak: 1
 --- !u!65 &4402495678358634548
 BoxCollider:

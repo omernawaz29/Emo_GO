@@ -10,12 +10,21 @@ public class GlassBreakScript : MonoBehaviour
     [SerializeField] private Material brokenGlassMaterial;
     [SerializeField] private float breakForce = 1;
     [SerializeField] bool normalEmoBreak = false;
+    [SerializeField] bool trapsEmoji = false;
     // Start is called before the first frame update
 
     AudioManager _audioManager;
+    LevelManager _levelManager;
     void Start()
     {
+            
+
         _audioManager = FindObjectOfType<AudioManager>();
+        _levelManager = FindObjectOfType<LevelManager>();
+
+        if (trapsEmoji)
+            _levelManager.AddTrappingObject();
+
     }
 
     // Update is called once per frame
@@ -27,6 +36,7 @@ public class GlassBreakScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        //Debug.Log("Collision Detected| Velocity: " + collision.relativeVelocity.magnitude + "BreakForce: " + breakForce + "Tag: " + collision.gameObject.tag);
         if (collision.gameObject.tag == "AngryEmo" || (collision.gameObject.tag == "Emo" && normalEmoBreak) && collision.relativeVelocity.magnitude >= breakForce)
         {
             _audioManager.Play("GlassBreak");
@@ -36,6 +46,10 @@ public class GlassBreakScript : MonoBehaviour
             Handheld.Vibrate();
             Instantiate(glassBreakParticles, transform.position, Quaternion.identity);
             Instantiate(hitEffectParticles, transform.position, Quaternion.identity);
+            collision.gameObject.tag = "Emo";
+
+            if (trapsEmoji)
+                _levelManager.RemoveTrappingObject();
 
             Destroy(gameObject, 0.15f);
         }
