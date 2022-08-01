@@ -8,6 +8,7 @@ public class TestPlayerScript : MonoBehaviour
     public float maxAcceleration = 5.0f;
 
     public float groundHoverBuffer = 0.05f;
+    public float yCompensationFactor = 0.1f;
 
     public Vector2 playerInput;
 
@@ -27,8 +28,11 @@ public class TestPlayerScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        CheckGround();
+        UpdateVelocity();
+    }
 
+    private void UpdateVelocity()
+    {
         velocity = body.velocity;
         float maxSpeedChange = maxAcceleration * Time.deltaTime;
         velocity.x =
@@ -38,7 +42,20 @@ public class TestPlayerScript : MonoBehaviour
         body.velocity = velocity;
     }
 
-    private void CheckGround()
+    public void CompensateRapidMovement(float deltaValue)
+    {
+
+        float addYFactor = deltaValue * yCompensationFactor;
+        addYFactor = Mathf.Clamp(addYFactor, 0, 2.3f);
+        print("delta : " + deltaValue + " compensation: " + addYFactor);
+
+        Vector3 newPos = transform.position;
+        newPos.y += addYFactor;
+
+        transform.localPosition = newPos;
+    }
+
+    public void CheckGround()
     {
         RaycastHit hit;
 
@@ -51,6 +68,19 @@ public class TestPlayerScript : MonoBehaviour
             Collider collider = GetComponent<SphereCollider>();
             newPos.y += collider.bounds.size.x / 2 + groundHoverBuffer;
             transform.localPosition = newPos;
+        }
+        else
+        {
+            if (Physics.Raycast(transform.position, Vector3.up, out hit))
+            {
+                Debug.DrawLine(transform.position, hit.point, Color.cyan);
+                Vector3 newPos = transform.position;
+                newPos.y = hit.point.y;
+
+                Collider collider = GetComponent<SphereCollider>();
+                newPos.y += collider.bounds.size.x / 2 + hit.collider.bounds.size.y + groundHoverBuffer;
+                transform.localPosition = newPos;
+            }
         }
     }
 }

@@ -16,6 +16,7 @@ TagManager:
   - WaterChamber
   - EmojiShop
   - ColorShop
+  - FakeFloor
   layers:
   - Default
   - TransparentFX
