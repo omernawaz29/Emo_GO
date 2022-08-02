@@ -28,11 +28,13 @@ public class LevelManager : MonoBehaviour
     private void OnEnable()
     {
         PlatformController.OnFirstTouched += EnableFireZonesWrapper;
+        TestInputScript.OnFirstTouched += EnableFireZonesWrapper;
     }
 
     private void OnDisable()
     {
         PlatformController.OnFirstTouched -= EnableFireZonesWrapper;
+        TestInputScript.OnFirstTouched -= EnableFireZonesWrapper;
     }
 
     void Start()

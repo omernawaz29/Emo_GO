@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestInputScript : MonoBehaviour
+public class TouchInputScript : MonoBehaviour
 {
     public float rotationSpeed = 2.0f;
     public float maxRotationAngle = 10f;
-    public float movementMultiplier = 5f;
+    public float movementMultiplier = 2;
     public TestPlayerScript playerScript;
+    public GameObject debugPanel;
 
     private Touch _touch;
 
@@ -15,13 +16,10 @@ public class TestInputScript : MonoBehaviour
     public delegate void FirstTouchAction();
     public static event FirstTouchAction OnFirstTouched;
 
-    private float _xRotation;
-    private float _zRotation;
-
     void Start()
     {
-        _xRotation = 0;
-        _zRotation = 0;
+        if (debugPanel != null)
+            debugPanel.SetActive(false);
     }
 
     void Update()
@@ -36,33 +34,11 @@ public class TestInputScript : MonoBehaviour
 
             if (_touch.phase == TouchPhase.Moved)
             {
-                _xRotation = 
-                    Mathf.Lerp(_xRotation, _xRotation + _touch.deltaPosition.y, Time.deltaTime * movementMultiplier);
-                _zRotation = 
-                    Mathf.Lerp(_zRotation, _zRotation - _touch.deltaPosition.x, Time.deltaTime * movementMultiplier);
-
                 transform.Rotate(
-                    _touch.deltaPosition.y * Time.deltaTime * movementMultiplier, 0f, 
+                    _touch.deltaPosition.y * Time.deltaTime * movementMultiplier, 0f,
                     _touch.deltaPosition.x * Time.deltaTime * -movementMultiplier
                     );
             }
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.Rotate(0f, 0f, -rotationSpeed);
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            transform.Rotate(0f, 0f, rotationSpeed);
-        } 
-        else if (Input.GetKey(KeyCode.W))
-        {
-            transform.Rotate(rotationSpeed, 0f, 0f);
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            transform.Rotate(-rotationSpeed, 0f, 0f);
         }
 
         LimitRot();
@@ -89,5 +65,10 @@ public class TestInputScript : MonoBehaviour
     {
         playerScript.playerInput.y = x / maxRotationAngle;
         playerScript.playerInput.x = -z / maxRotationAngle;
+    }
+
+    public void EnableDebugPanel()
+    {
+        debugPanel.SetActive(!debugPanel.activeSelf);
     }
 }

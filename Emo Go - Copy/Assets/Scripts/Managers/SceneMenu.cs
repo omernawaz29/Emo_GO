@@ -448,4 +448,9 @@ public class SceneMenu : MonoBehaviour
             }
         }
     }
+
+    public void GotoDebuggerScene()
+    {
+        SceneManager.LoadScene("DebuggerImplemented");
+    }
 }
