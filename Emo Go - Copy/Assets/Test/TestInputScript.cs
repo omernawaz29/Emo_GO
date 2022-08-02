@@ -7,7 +7,7 @@ public class TestInputScript : MonoBehaviour
     public float rotationSpeed = 2.0f;
     public float maxRotationAngle = 10f;
     public float movementMultiplier = 5f;
-    public TestPlayerScript playerScript;
+    public TestPlayerScript[] playerScripts;
 
     private Touch _touch;
 
@@ -87,7 +87,10 @@ public class TestInputScript : MonoBehaviour
 
     private void SetPlayerInput(float x, float z)
     {
-        playerScript.playerInput.y = x / maxRotationAngle;
-        playerScript.playerInput.x = -z / maxRotationAngle;
+        foreach (TestPlayerScript playerScript in playerScripts)
+        {
+            playerScript.playerInput.y = x / maxRotationAngle;
+            playerScript.playerInput.x = -z / maxRotationAngle;
+        }
     }
 }
