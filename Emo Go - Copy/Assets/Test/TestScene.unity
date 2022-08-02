@@ -732,7 +732,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 1
   maxRotationAngle: 10
-  movementMultiplier: 1
+  movementMultiplier: 2
   playerScript: {fileID: 436090750}
 --- !u!1 &1285440883
 GameObject:

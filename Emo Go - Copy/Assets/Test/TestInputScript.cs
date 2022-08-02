@@ -33,17 +33,10 @@ public class TestInputScript : MonoBehaviour
                 _zRotation = 
                     Mathf.Lerp(_zRotation, _zRotation - _touch.deltaPosition.x, Time.deltaTime * movementMultiplier);
 
-                // transform.Rotate(_xRotation, 0f, _zRotation);
-                // playerScript.CompensateRapidMovement(
-                //     Mathf.Max(Mathf.Abs(_touch.deltaPosition.x), Mathf.Abs(_touch.deltaPosition.y))
-                //     );
-
                 transform.Rotate(
                     _touch.deltaPosition.y * Time.deltaTime * movementMultiplier, 0f, 
                     _touch.deltaPosition.x * Time.deltaTime * -movementMultiplier
                     );
-
-                // playerScript.CheckGround();
             }
         }
 
@@ -70,7 +63,6 @@ public class TestInputScript : MonoBehaviour
     private void LimitRot()
     {
         Vector3 playerEulerAngles = transform.rotation.eulerAngles;
-        // Vector3 playerEulerAngles = transform.localRotation.eulerAngles;
 
         playerEulerAngles.x = (playerEulerAngles.x > 180) ? playerEulerAngles.x - 360 : playerEulerAngles.x;
         playerEulerAngles.x = Mathf.Clamp(playerEulerAngles.x, -maxRotationAngle, maxRotationAngle);

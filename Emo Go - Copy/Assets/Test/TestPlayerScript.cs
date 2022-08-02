@@ -8,7 +8,6 @@ public class TestPlayerScript : MonoBehaviour
     public float maxAcceleration = 5.0f;
 
     public float groundHoverBuffer = 0.05f;
-    public float yCompensationFactor = 0.1f;
 
     public Vector2 playerInput;
 
@@ -41,20 +40,6 @@ public class TestPlayerScript : MonoBehaviour
             Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
         body.velocity = velocity;
     }
-
-    public void CompensateRapidMovement(float deltaValue)
-    {
-
-        float addYFactor = deltaValue * yCompensationFactor;
-        addYFactor = Mathf.Clamp(addYFactor, 0, 2.3f);
-        print("delta : " + deltaValue + " compensation: " + addYFactor);
-
-        Vector3 newPos = transform.position;
-        newPos.y += addYFactor;
-
-        transform.localPosition = newPos;
-    }
-
     public void CheckGround()
     {
         RaycastHit hit;
