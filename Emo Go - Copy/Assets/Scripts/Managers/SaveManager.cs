@@ -6,17 +6,29 @@ public class SaveManager : MonoBehaviour
 {
     public static SaveManager instance;
     public SaveState state;
+    public PlayerSettings settings;
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
-        instance = this;
+        if (instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
         Load();
+        PlayerPrefs.DeleteKey("settings");
     }
 
     public void Save()
     {
         PlayerPrefs.SetString("save", SerializerScript.Serialize<SaveState>(state));
+        PlayerPrefs.SetString("settings", SerializerScript.Serialize<PlayerSettings>(settings));
+
     }
 
     public void Load()
@@ -30,6 +42,17 @@ public class SaveManager : MonoBehaviour
             state = new SaveState();
             Save();
             Debug.Log("No Save Found, Created New One");
+        }
+
+        if (PlayerPrefs.HasKey("settings"))
+        {
+            settings = SerializerScript.Deserialize<PlayerSettings>(PlayerPrefs.GetString("settings"));
+        }
+        else
+        {
+            settings = new PlayerSettings();
+            Save();
+            Debug.Log("No Settings Found, Created New One");
         }
     }
 

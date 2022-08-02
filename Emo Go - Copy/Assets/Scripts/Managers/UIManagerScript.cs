@@ -83,6 +83,8 @@ public class UIManagerScript : MonoBehaviour
         int coins = Mathf.CeilToInt(endPercentage * 10);
 
         coinText.text = "$" + coins.ToString();
+
+       
         SaveManager.instance.state.coins += coins;
 
         int starsShowCount = 0;
