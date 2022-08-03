@@ -28,11 +28,13 @@ public class LevelManager : MonoBehaviour
     private void OnEnable()
     {
         PlatformController.OnFirstTouched += EnableFireZonesWrapper;
+        TestInputScript.OnFirstTouched += EnableFireZonesWrapper;
     }
 
     private void OnDisable()
     {
         PlatformController.OnFirstTouched -= EnableFireZonesWrapper;
+        TestInputScript.OnFirstTouched -= EnableFireZonesWrapper;
     }
 
     void Start()
@@ -74,12 +76,13 @@ public class LevelManager : MonoBehaviour
         {
             fireZoneDelay = 0;
             _uiManager.Invoke("Win", 2f);
-            GameManagerScript.instance.currentLevel++;
             if (SaveManager.instance.state.levelsCompleted < GameManagerScript.instance.currentLevel)
             {
                 SaveManager.instance.state.levelsCompleted = GameManagerScript.instance.currentLevel;
-                SaveManager.instance.Save();
+                SaveManager.instance.SaveGame();
             }
+            GameManagerScript.instance.currentLevel++;
+
         }
     }
 
@@ -94,13 +97,14 @@ public class LevelManager : MonoBehaviour
         {
             fireZoneDelay = 0;
             _uiManager.Invoke("Win", 2f);
-            GameManagerScript.instance.currentLevel++;
             if (SaveManager.instance.state.levelsCompleted < GameManagerScript.instance.currentLevel)
             {
                 Handheld.Vibrate();
                 SaveManager.instance.state.levelsCompleted = GameManagerScript.instance.currentLevel;
-                SaveManager.instance.Save();
+                SaveManager.instance.SaveGame();
             }
+            GameManagerScript.instance.currentLevel++;
+
         }
     }
     public void UnRescueEmo()

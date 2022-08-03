@@ -475,8 +475,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anchorPoint: {fileID: 9006768891831392834}
   downPoint: {fileID: 9006768891775796486}
-  moveSpeed: 0.5
-  emojisRequired: 2
+  moveSpeed: 1.25
+  emojisRequired: 1
   Lights:
   - {fileID: 5283594522143655769}
   - {fileID: 2402888834927834983}
