@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class TestPlayerScript : MonoBehaviour
 {
-    public float maxSpeed = 5.0f;
-    public float maxAcceleration = 5.0f;
+    public FloatBox maxSpeed = new FloatBox(5f);
+    public FloatBox maxAcceleration = new FloatBox(5f);
 
     public float groundHoverBuffer = 0.05f;
 
@@ -19,10 +19,16 @@ public class TestPlayerScript : MonoBehaviour
         body = GetComponent<Rigidbody>();
     }
 
+    private void Start()
+    {
+        maxSpeed = SaveManager.instance.settings.playerMaxSpeed;
+        maxAcceleration = SaveManager.instance.settings.playerMaxAcceleration;
+    }
+
     private void Update()
     {
         desiredVelocity =
-            new Vector3(playerInput.x, 0f, playerInput.y) * maxSpeed;
+            new Vector3(playerInput.x, 0f, playerInput.y) * maxSpeed.Value;
     }
 
     private void FixedUpdate()
@@ -33,7 +39,7 @@ public class TestPlayerScript : MonoBehaviour
     private void UpdateVelocity()
     {
         velocity = body.velocity;
-        float maxSpeedChange = maxAcceleration * Time.deltaTime;
+        float maxSpeedChange = maxAcceleration.Value * Time.deltaTime;
         velocity.x =
             Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
         velocity.z =

@@ -124,8 +124,9 @@ public class UIManagerScript : MonoBehaviour
 
         var newSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
 
-        if (newSceneIndex > SceneManager.sceneCountInBuildSettings)
+        if (newSceneIndex >= SceneManager.sceneCountInBuildSettings)
         {
+            Time.timeScale = 1;
             GameManagerScript.instance.menuFocus = 2;
             SceneManager.LoadScene("MainMenu");
         }
@@ -142,8 +143,8 @@ public class UIManagerScript : MonoBehaviour
     public void ClickHomeButton()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene("MainMenu");
         GameManagerScript.instance.menuFocus = 0;
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void SetTotalEmos(int count)

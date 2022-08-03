@@ -73,8 +73,8 @@ public class SceneMenu : MonoBehaviour
 
         InitLevel();
         InitShop();
-
-        GameManagerScript.instance.currentLevel = SaveManager.instance.state.levelsCompleted;
+        GameManagerScript.instance.currentLevel = SaveManager.instance.state.levelsCompleted + 1;
+        
     }
 
     void Update()
@@ -309,17 +309,17 @@ public class SceneMenu : MonoBehaviour
        // if (SaveManager.instance.state.levelsCompleted >= 10)
          //   ResetSave();
 
-        GameManagerScript.instance.currentLevel = currentIndex;
+        GameManagerScript.instance.currentLevel = currentIndex + 1;
         SceneManager.LoadScene(currentIndex + 2);
 
-        Debug.Log("Select Level: " + currentIndex);
+        Debug.Log("Select Level: " + currentIndex + 1);
     }
 
 
     public void OnPlayClick()
     {
-        var newSceneIndex = GameManagerScript.instance.currentLevel + 2;
-
+        var newSceneIndex = GameManagerScript.instance.currentLevel + 1;
+        Debug.Log("Level: " + newSceneIndex);
         if (newSceneIndex >= SceneManager.sceneCountInBuildSettings)
         {
             Navigate(2);

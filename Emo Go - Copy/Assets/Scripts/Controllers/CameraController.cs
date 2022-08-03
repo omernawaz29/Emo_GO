@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour
     Quaternion _camNormalRotation;
     Quaternion _camUpRotation;
 
-    PlatformController platformController;
+    //PlatformController platformController;
 
     private void OnLevelWasLoaded(int level)
     {
@@ -28,12 +28,12 @@ public class CameraController : MonoBehaviour
         _camNormalRotation = _cam.transform.rotation;
         _camUpRotation = Quaternion.Euler(76, 0, 0);
 
-        platformController = FindObjectOfType<PlatformController>();
+        //platformController = FindObjectOfType<PlatformController>();
 
-        if (platformController == null)
-        {
-            Debug.LogWarning("PlatForm Controller not Found!");
-        }
+        //if (platformController == null)
+        //{
+        //    Debug.LogWarning("PlatForm Controller not Found!");
+        //}
     }
 
     private void Start()
@@ -52,19 +52,19 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        if (!platformController)
-            return;
+        //if (!platformController)
+        //    return;
 
-        if (platformController.rotateX >= 20)
-        {
-            _cam.transform.position = Vector3.Lerp(_cam.transform.position, _camUpPos, camSpeed * Time.deltaTime);
-            _cam.transform.rotation = Quaternion.Slerp(_cam.transform.rotation, _camUpRotation, camSpeed * Time.deltaTime);
-        }
-        else
-        {
-            _cam.transform.position = Vector3.Lerp(_cam.transform.position, _camNormalPos, camSpeed * Time.deltaTime);
-            _cam.transform.rotation = Quaternion.Slerp(_cam.transform.rotation, _camNormalRotation, camSpeed * Time.deltaTime);
-        }
+        //if (platformController.rotateX >= 20)
+        //{
+        //    _cam.transform.position = Vector3.Lerp(_cam.transform.position, _camUpPos, camSpeed * Time.deltaTime);
+        //    _cam.transform.rotation = Quaternion.Slerp(_cam.transform.rotation, _camUpRotation, camSpeed * Time.deltaTime);
+        //}
+        //else
+        //{
+        //    _cam.transform.position = Vector3.Lerp(_cam.transform.position, _camNormalPos, camSpeed * Time.deltaTime);
+        //    _cam.transform.rotation = Quaternion.Slerp(_cam.transform.rotation, _camNormalRotation, camSpeed * Time.deltaTime);
+        //}
     }
 
 

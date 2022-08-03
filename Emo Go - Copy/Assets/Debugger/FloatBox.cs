@@ -1,7 +1,16 @@
+using UnityEngine;
+[System.Serializable]
 public class FloatBox
 {
-    private float myValue;
-    public string myName;
+    [SerializeField ] private float myValue;
+    [HideInInspector] public string myName;
+
+    public FloatBox()
+    {
+        myValue = 0;
+        myName = "float";
+    }
+
     public FloatBox(float v, string name = "float")
     {
         myValue = v;

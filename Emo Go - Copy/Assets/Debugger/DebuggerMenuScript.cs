@@ -9,14 +9,22 @@ public class DebuggerMenuScript : MonoBehaviour
 
     [SerializeField] Transform slidersPanel;
     [SerializeField] Transform slidersTitlePanel;
+    [SerializeField] GameObject DebugContainer;
     TextMeshProUGUI[] sliderTitles = new TextMeshProUGUI[10];
+    [SerializeField] PhysicMaterial playerPhysicsMaterial;
     Slider[] sliders = new Slider[10];
     FloatBox[] variables = new FloatBox[8];
+
+
+    int buttonPresses = 0;
 
     private void Start()
     {
         InitVariables();
         InitSliders();
+
+        buttonPresses = 0;
+
     }
 
     void InitVariables()
@@ -27,6 +35,7 @@ public class DebuggerMenuScript : MonoBehaviour
 
         variables[3] = SaveManager.instance.settings.playerMaxSpeed;
         variables[4] = SaveManager.instance.settings.playerMaxAcceleration;
+
         variables[5] = SaveManager.instance.settings.playerBounciness;
         variables[6] = SaveManager.instance.settings.playerDynamicFriction;
         variables[7] = SaveManager.instance.settings.playerStaticFriction;
@@ -34,7 +43,9 @@ public class DebuggerMenuScript : MonoBehaviour
     void InitSliders()
     {
         if (slidersPanel == null)
-            Debug.Log("Did not assign color/emoji panel in the inspector");
+            Debug.LogWarning("Did not assign sliders panel in the inspector");
+        if (slidersTitlePanel == null)
+            Debug.LogWarning("Did not assign slider titles panel in the inspector");
 
         int i = 0;
         foreach(Transform t in slidersPanel)
@@ -43,14 +54,19 @@ public class DebuggerMenuScript : MonoBehaviour
 
             Slider slider = t.GetComponent<Slider>();
 
-            Debug.Log(slider.gameObject.name);
+            if (current < variables.Length)
+                slider.value = variables[current].Value;
 
             slider.onValueChanged.AddListener(delegate { SliderChanged(current); });
+
             sliders[current] = slider;
+            
 
             i++;
         }
+
         i = 0;
+
         foreach(Transform t in slidersTitlePanel)
         {
             int current = i;
@@ -68,6 +84,25 @@ public class DebuggerMenuScript : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (!playerPhysicsMaterial)
+            return;
+
+        if (playerPhysicsMaterial.bounciness != variables[5].Value)
+        {
+            playerPhysicsMaterial.bounciness = variables[5].Value;
+        }
+        if (playerPhysicsMaterial.dynamicFriction != variables[6].Value)
+        {
+            playerPhysicsMaterial.dynamicFriction = variables[6].Value;
+        }
+        if (playerPhysicsMaterial.staticFriction != variables[7].Value)
+        {
+            playerPhysicsMaterial.staticFriction = variables[7].Value;
+        }
+    }
+
 
     void SliderChanged(int sliderIndex)
     {
@@ -79,5 +114,28 @@ public class DebuggerMenuScript : MonoBehaviour
             sliderTitles[sliderIndex].text = variables[sliderIndex].Name + ": " + variables[sliderIndex].Value.ToString();
         }
     }
+    public void ButtonPress()
+    {
+        buttonPresses++;
+        Debug.Log("Button Pressed");
+        StartCoroutine(ResetButtonPress());
+        if(buttonPresses >= 3)
+        {
+            DebugContainer.SetActive(true);
+        }
+    }
+    public void CloseDebugger()
+    {
+        DebugContainer.SetActive(false);
+    }
+
+
+    IEnumerator ResetButtonPress()
+    {
+        yield return new WaitForSeconds(0.75f);
+        Debug.Log("Button Reset");
+        buttonPresses = 0;
+    }
+
 
 }
