@@ -74,8 +74,8 @@ public class SceneMenu : MonoBehaviour
 
         InitLevel();
         InitShop();
-
-        GameManagerScript.instance.currentLevel = SaveManager.instance.state.levelsCompleted;
+        GameManagerScript.instance.currentLevel = SaveManager.instance.state.levelsCompleted + 1;
+        
     }
 
     void Update()
@@ -125,9 +125,13 @@ public class SceneMenu : MonoBehaviour
             b.onClick.AddListener(() => OnLevelSelect(currentIndex));
 
             Image img = t.GetComponent<Image>();
+            // getting the lock image in UI
+            GameObject lockImgObj = t.GetChild(1).GetComponent<Image>().gameObject;
 
             if (i <= SaveManager.instance.state.levelsCompleted)
             {
+                lockImgObj.SetActive(false);
+
                 if (i == SaveManager.instance.state.levelsCompleted)
                 {
                     img.color = currentLevelColor;
@@ -137,12 +141,14 @@ public class SceneMenu : MonoBehaviour
             }
             else
             {
+                GameObject tLevelText = t.GetChild(0).GetComponent<TextMeshProUGUI>().gameObject;
+                tLevelText.SetActive(false);
+
                 b.interactable = false;
                 img.color = Color.gray;
             }
 
             i++;
-
         }
     }
     public void ResetSave()
@@ -305,17 +311,17 @@ public class SceneMenu : MonoBehaviour
        // if (SaveManager.instance.state.levelsCompleted >= 10)
          //   ResetSave();
 
-        GameManagerScript.instance.currentLevel = currentIndex;
+        GameManagerScript.instance.currentLevel = currentIndex + 1;
         SceneManager.LoadScene(currentIndex + 2);
 
-        Debug.Log("Select Level: " + currentIndex);
+        Debug.Log("Select Level: " + currentIndex + 1);
     }
 
 
     public void OnPlayClick()
     {
-        var newSceneIndex = GameManagerScript.instance.currentLevel + 2;
-
+        var newSceneIndex = GameManagerScript.instance.currentLevel + 1;
+        Debug.Log("Level: " + newSceneIndex);
         if (newSceneIndex >= SceneManager.sceneCountInBuildSettings)
         {
             Navigate(2);
@@ -443,5 +449,10 @@ public class SceneMenu : MonoBehaviour
                 Debug.Log("No Money");
             }
         }
+    }
+
+    public void GotoDebuggerScene()
+    {
+        SceneManager.LoadScene("DebuggerImplemented");
     }
 }
