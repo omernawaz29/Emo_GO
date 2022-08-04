@@ -681,27 +681,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6814010271287117003, guid: 859f586d245e91544b83245dacf8949b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 17.05
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6814010271287117003, guid: 859f586d245e91544b83245dacf8949b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.21
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6814010271287117003, guid: 859f586d245e91544b83245dacf8949b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8507175
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6814010271287117003, guid: 859f586d245e91544b83245dacf8949b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.5256232
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6814010271287117003, guid: 859f586d245e91544b83245dacf8949b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6814010271287117003, guid: 859f586d245e91544b83245dacf8949b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6814010271287117003, guid: 859f586d245e91544b83245dacf8949b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1428,14 +1428,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9006768891997965606, guid: 753c4e6d2f3b41b4c9f64984ca45b0a7, type: 3}
-      propertyPath: moveSpeed
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 9006768891997965606, guid: 753c4e6d2f3b41b4c9f64984ca45b0a7, type: 3}
-      propertyPath: emojisRequired
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9006768891997965607, guid: 753c4e6d2f3b41b4c9f64984ca45b0a7, type: 3}
       propertyPath: m_Size.y
       value: 4.79
@@ -1956,6 +1948,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2151799663478677716}
   - component: {fileID: 2151799663478677717}
+  - component: {fileID: 2151799663478677718}
   m_Layer: 0
   m_Name: PlateFormHolder
   m_TagString: Untagged
@@ -1995,11 +1988,34 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2151799663478677715}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 276b446fa293638479bc4cff3a1f4800, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2151799663478677718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2151799663478677715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68caed233f4a50a4f9fd008cc527d23f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed:
+    myValue: 2
+    myName: float
+  maxRotationAngle:
+    myValue: 10
+    myName: float
+  movementMultiplier:
+    myValue: 5
+    myName: float
+  playerScripts:
+  - {fileID: 2151799664104414617}
 --- !u!1001 &2151799664029736054
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2138,6 +2154,17 @@ PrefabInstance:
       objectReference: {fileID: 13400000, guid: 76299630896016a4cad103ff2a208bfd, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0215b5739b5469a45976d00f214d397d, type: 3}
+--- !u!114 &2151799664104414617 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7377166277319329669, guid: 0215b5739b5469a45976d00f214d397d, type: 3}
+  m_PrefabInstance: {fileID: 2151799664104414616}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f992f18e27a5e2449d49ebd3780ea17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2151799664594796853
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2468,7 +2495,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9006768891997965606, guid: 753c4e6d2f3b41b4c9f64984ca45b0a7, type: 3}
       propertyPath: moveSpeed
-      value: 0.75
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 9006768891997965606, guid: 753c4e6d2f3b41b4c9f64984ca45b0a7, type: 3}
       propertyPath: emojisRequired

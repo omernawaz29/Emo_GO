@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class ScenePreloader : MonoBehaviour
 {
     [SerializeField] private bool debugMode = false;
+    [SerializeField] private bool unlockLevels = false; 
 
     CanvasGroup fade;
     float loadTime;
@@ -15,6 +16,12 @@ public class ScenePreloader : MonoBehaviour
     {
         if (debugMode)
             SceneManager.LoadScene("MainMenu");
+        if (unlockLevels)
+        {
+            SaveManager.instance.state.levelsCompleted = 18;
+            SaveManager.instance.SaveGame();
+        }
+
 
         fade = FindObjectOfType<CanvasGroup>();
         fade.alpha = 1.0f;
@@ -48,8 +55,8 @@ public class ScenePreloader : MonoBehaviour
                 }
                 else
                 {
-                    SceneManager.LoadScene(newSceneIndex);
                     AudioManager.instance.Play("menu");
+                    SceneManager.LoadScene(newSceneIndex);
                 }
             }
         }

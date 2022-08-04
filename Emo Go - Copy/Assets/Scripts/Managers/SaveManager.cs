@@ -6,17 +6,35 @@ public class SaveManager : MonoBehaviour
 {
     public static SaveManager instance;
     public SaveState state;
+    public PlayerSettings settings;
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
-        instance = this;
+        if (instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
+        
+        
+
         Load();
+
     }
 
-    public void Save()
+    public void SaveGame()
     {
         PlayerPrefs.SetString("save", SerializerScript.Serialize<SaveState>(state));
+    }
+
+    public void SaveSettings()
+    {
+        PlayerPrefs.SetString("settings", SerializerScript.Serialize<PlayerSettings>(settings));
     }
 
     public void Load()
@@ -28,8 +46,19 @@ public class SaveManager : MonoBehaviour
         else
         {
             state = new SaveState();
-            Save();
+            SaveGame();
             Debug.Log("No Save Found, Created New One");
+        }
+
+        if (PlayerPrefs.HasKey("settings"))
+        {
+            settings = SerializerScript.Deserialize<PlayerSettings>(PlayerPrefs.GetString("settings"));
+        }
+        else
+        {
+            settings = new PlayerSettings();
+            SaveSettings();
+            Debug.Log("No Settings Found, Created New One");
         }
     }
 
@@ -37,7 +66,7 @@ public class SaveManager : MonoBehaviour
     {
         PlayerPrefs.DeleteKey("save");
         Load();
-        Save();
+        SaveGame();
     }
 
     public bool IsColorOwned(int index)
@@ -66,7 +95,7 @@ public class SaveManager : MonoBehaviour
         {
             state.coins -= cost;
             UnlockColor(index);
-            Save();
+            SaveGame();
             return true;
         }
         else
@@ -81,7 +110,7 @@ public class SaveManager : MonoBehaviour
         {
             state.coins -= cost;
             UnlockEmoji(index);
-            Save();
+            SaveGame();
             return true;
         }
         else

@@ -56,11 +56,11 @@ MonoBehaviour:
     mixerGroup: {fileID: 0}
     source: {fileID: 0}
   - name: EmojiYay
-    clip: {fileID: 8300000, guid: 086e32eeba081df4c9b77c0dfcbb1c04, type: 3}
-    volume: 1
-    volumeVariance: 0.176
+    clip: {fileID: 8300000, guid: efad1816a1dc01e468cb1cb46dfe90ff, type: 3}
+    volume: 0.389
+    volumeVariance: 0
     pitch: 1
-    pitchVariance: 1
+    pitchVariance: 0
     loop: 0
     mixerGroup: {fileID: 0}
     source: {fileID: 0}
@@ -111,7 +111,25 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: menu
     clip: {fileID: 8300000, guid: 04dd3982ef5eafd4886717d06094a10e, type: 3}
-    volume: 0.082
+    volume: 0.1
+    volumeVariance: 0
+    pitch: 1.02
+    pitchVariance: 0
+    loop: 1
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Elevator
+    clip: {fileID: 8300000, guid: 0094ce287af8f9943aa9b42f6c850961, type: 3}
+    volume: 0.1
+    volumeVariance: 0
+    pitch: 1.02
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: ChaChing
+    clip: {fileID: 8300000, guid: fbcccbadfd95fd143b1a7c4c420f56e6, type: 3}
+    volume: 0.5
     volumeVariance: 0
     pitch: 1.02
     pitchVariance: 0
