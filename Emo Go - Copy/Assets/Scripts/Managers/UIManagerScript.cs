@@ -19,6 +19,7 @@ public class UIManagerScript : MonoBehaviour
     //[SerializeField] private TextMeshProUGUI endScreenTitle;
     [SerializeField] private TextMeshProUGUI coinText;
     [SerializeField] private GameObject[] stars;
+    [SerializeField] private GameObject EndCoinAnimationHolder;
 
     // Tutorial Text
     [SerializeField] private GameObject tutorialHolder;
@@ -78,9 +79,30 @@ public class UIManagerScript : MonoBehaviour
 
         int coins = Mathf.CeilToInt(endPercentage * 10);
 
+<<<<<<< Updated upstream
         coinText.text = "$" + coins.ToString();
         SaveManager.instance.state.coins += coins;
 
+=======
+        //coinText.text = coins.ToString();
+        StartCoroutine(SetEndCoinsJuice(coins));
+       
+        SaveManager.instance.state.coins += coins;
+
+        int starsShowCount = 0;
+        if (endPercentage == 100)
+            starsShowCount = 3;
+        else if (endPercentage >= 66)
+            starsShowCount = 2;
+        else if (endPercentage >= 33)
+            starsShowCount = 1;
+
+        StartCoroutine(SetEndStarsJuice(starsShowCount));
+
+
+
+        /*
+>>>>>>> Stashed changes
         if (endPercentage >= 33)
             stars[0].SetActive(true);
         if (endPercentage >= 66)
@@ -91,6 +113,21 @@ public class UIManagerScript : MonoBehaviour
 
     
 
+    IEnumerator SetEndCoinsJuice(int finalCoins)
+    {
+        EndCoinAnimationHolder.SetActive(true);
+        int coins = 0;
+        while (coins < finalCoins)
+        {
+            coins += 15;
+
+            if (coins > finalCoins)
+                coins = finalCoins;
+
+            coinText.text = coins.ToString();
+            yield return null;
+        }
+    }
     public void ClickNextButton()
     {
         Time.timeScale = 1;

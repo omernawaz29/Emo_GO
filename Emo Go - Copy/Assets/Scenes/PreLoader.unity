@@ -1036,7 +1036,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 205ea0e6b5462d4419e2e9265802d00c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   debugMode: 0
+=======
+  debugMode: 1
+  unlockLevels: 0
+>>>>>>> Stashed changes
 --- !u!114 &2981705865037314772
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -91,7 +91,11 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
+<<<<<<< Updated upstream
   field of view: 90
+=======
+  field of view: 50
+>>>>>>> Stashed changes
   orthographic: 0
   orthographic size: 13.49
   m_Depth: -1
