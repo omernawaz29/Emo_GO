@@ -12,8 +12,10 @@ public class DebuggerMenuScript : MonoBehaviour
     [SerializeField] GameObject DebugContainer;
     TextMeshProUGUI[] sliderTitles = new TextMeshProUGUI[10];
     [SerializeField] PhysicMaterial playerPhysicsMaterial;
+    [SerializeField] PhysicMaterial wallsPhysicsMaterial;
+
     Slider[] sliders = new Slider[10];
-    FloatBox[] variables = new FloatBox[8];
+    FloatBox[] variables = new FloatBox[9];
 
 
     int buttonPresses = 0;
@@ -24,7 +26,6 @@ public class DebuggerMenuScript : MonoBehaviour
         InitSliders();
 
         buttonPresses = 0;
-
     }
 
     void InitVariables()
@@ -39,6 +40,8 @@ public class DebuggerMenuScript : MonoBehaviour
         variables[5] = SaveManager.instance.settings.playerBounciness;
         variables[6] = SaveManager.instance.settings.playerDynamicFriction;
         variables[7] = SaveManager.instance.settings.playerStaticFriction;
+
+        variables[8] = SaveManager.instance.settings.wallsBounciness;
     }
     void InitSliders()
     {
@@ -101,6 +104,10 @@ public class DebuggerMenuScript : MonoBehaviour
         {
             playerPhysicsMaterial.staticFriction = variables[7].Value;
         }
+        if (wallsPhysicsMaterial.bounciness != variables[8].Value)
+        {
+            wallsPhysicsMaterial.bounciness = variables[8].Value;
+        }
     }
 
 
@@ -122,10 +129,12 @@ public class DebuggerMenuScript : MonoBehaviour
         if(buttonPresses >= 3)
         {
             DebugContainer.SetActive(true);
+            Time.timeScale = 0;
         }
     }
     public void CloseDebugger()
     {
+        Time.timeScale = 1;
         DebugContainer.SetActive(false);
     }
 

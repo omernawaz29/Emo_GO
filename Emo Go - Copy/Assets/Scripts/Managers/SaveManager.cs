@@ -87,6 +87,7 @@ public class SaveManager : MonoBehaviour
     public void UnlockEmoji(int index)
     {
         state.emojiOwned |= 1 << index;
+
     }
 
     public bool BuyColor(int index, int cost)

@@ -22,6 +22,7 @@ public class UIManagerScript : MonoBehaviour
 
     // Tutorial Text
     [SerializeField] private GameObject tutorialHolder;
+    [SerializeField] private GameObject coinAnimationHolder;
 
     //Win Screen Objects
     [SerializeField] private GameObject NextLevelButton;
@@ -82,9 +83,13 @@ public class UIManagerScript : MonoBehaviour
 
         int coins = Mathf.CeilToInt(endPercentage * 10);
 
-        coinText.text = "$" + coins.ToString();
+        coinText.text = "0";
 
-       
+        if(coins != 0)
+            StartCoroutine(SetEndCoinsJuice(coins));
+
+
+
         SaveManager.instance.state.coins += coins;
 
         int starsShowCount = 0;
@@ -96,6 +101,7 @@ public class UIManagerScript : MonoBehaviour
             starsShowCount = 1;
 
         StartCoroutine(SetEndStarsJuice(starsShowCount));
+
         /*
         if (endPercentage >= 33)
             stars[0].SetActive(true);
@@ -116,6 +122,25 @@ public class UIManagerScript : MonoBehaviour
 
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length - starsDelayOffset);
         }
+    }
+
+    IEnumerator SetEndCoinsJuice(int finalCoins)
+    {
+        
+
+        coinAnimationHolder.SetActive(true);
+        int coins = 0;
+        while (coins < finalCoins)
+        {
+            coins += 15;
+
+            if (coins > finalCoins)
+                coins = finalCoins;
+
+            coinText.text = coins.ToString();
+            yield return null;
+        }
+
     }
 
     public void ClickNextButton()

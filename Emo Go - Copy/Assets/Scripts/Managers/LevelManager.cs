@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
@@ -16,7 +17,6 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject[] FireZones;
     [SerializeField] private float fireZoneDelay = 1.5f;
     [SerializeField] private float firstFireZoneDelay = 0f;
-    [SerializeField] private float minAliveEmo = 1;
 
 
     // 
@@ -66,14 +66,17 @@ public class LevelManager : MonoBehaviour
         _audioManager.Play("EmojiPop");
         _uiManager.SetTotalEmos(_totalEmos);
 
-
-        if (_emosAlive < minAliveEmo || (_emosAlive == 1 && _trappingObjects > 0) )
+        if (_emosAlive == _trappingObjects)
         {
             Handheld.Vibrate();
             _uiManager.Invoke("Lose", 2f);
         }
-        else if (_emosRescued == _emosAlive)
+        else if (_emosRescued == _emosAlive - _trappingObjects)
         {
+            foreach(var f in FireZones)
+            {
+                f.GetComponent<FirezoneScript>().smokeTime = 0f;
+            }
             fireZoneDelay = 0;
             _uiManager.Invoke("Win", 2f);
             if (SaveManager.instance.state.levelsCompleted < GameManagerScript.instance.currentLevel)
@@ -93,7 +96,7 @@ public class LevelManager : MonoBehaviour
         _audioManager.Play("EmojiYay");
         _uiManager.SetTotalEmos(_totalEmos);
 
-        if (_emosRescued == _emosAlive)
+        if (_emosRescued == _emosAlive - _trappingObjects)
         {
             fireZoneDelay = 0;
             _uiManager.Invoke("Win", 2f);
