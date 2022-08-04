@@ -20,11 +20,11 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 1, g: 1, b: 1, a: 1}
+  m_AmbientSkyColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
   m_AmbientEquatorColor: {r: 0, g: 0, b: 0, a: 1}
   m_AmbientGroundColor: {r: 1, g: 1, b: 1, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 1
+  m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: a7df773919c36e74ca3003648b593290, type: 2}
   m_HaloStrength: 0.5
@@ -921,27 +921,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6814010271287117003, guid: 859f586d245e91544b83245dacf8949b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 17.05
       objectReference: {fileID: 0}
     - target: {fileID: 6814010271287117003, guid: 859f586d245e91544b83245dacf8949b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -8.21
       objectReference: {fileID: 0}
     - target: {fileID: 6814010271287117003, guid: 859f586d245e91544b83245dacf8949b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.8507175
       objectReference: {fileID: 0}
     - target: {fileID: 6814010271287117003, guid: 859f586d245e91544b83245dacf8949b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.5256232
       objectReference: {fileID: 0}
     - target: {fileID: 6814010271287117003, guid: 859f586d245e91544b83245dacf8949b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6814010271287117003, guid: 859f586d245e91544b83245dacf8949b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6814010271287117003, guid: 859f586d245e91544b83245dacf8949b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -954,6 +954,14 @@ PrefabInstance:
     - target: {fileID: 6814010271287117003, guid: 859f586d245e91544b83245dacf8949b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814010271577330945, guid: 859f586d245e91544b83245dacf8949b, type: 3}
+      propertyPath: field of view
+<<<<<<< Updated upstream
+      value: 100
+=======
+      value: 55
+>>>>>>> Stashed changes
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 859f586d245e91544b83245dacf8949b, type: 3}
@@ -1756,17 +1764,6 @@ PrefabInstance:
       objectReference: {fileID: 13400000, guid: 76299630896016a4cad103ff2a208bfd, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0215b5739b5469a45976d00f214d397d, type: 3}
---- !u!114 &978118414956159351 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7377166277319329669, guid: 0215b5739b5469a45976d00f214d397d, type: 3}
-  m_PrefabInstance: {fileID: 978118414956159350}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f992f18e27a5e2449d49ebd3780ea17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &978118415138305265
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2103,7 +2100,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 978118416444873789}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 276b446fa293638479bc4cff3a1f4800, type: 3}
   m_Name: 
@@ -2118,7 +2115,6 @@ GameObject:
   m_Component:
   - component: {fileID: 978118416444873786}
   - component: {fileID: 978118416444873787}
-  - component: {fileID: 978118416444873790}
   m_Layer: 0
   m_Name: PlateFormHolder
   m_TagString: Untagged
@@ -2126,6 +2122,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< Updated upstream
+=======
 --- !u!114 &978118416444873790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2138,11 +2136,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68caed233f4a50a4f9fd008cc527d23f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 2
-  maxRotationAngle: 10
-  movementMultiplier: 5
+  rotationSpeed:
+    myValue: 2
+    myName: float
+  maxRotationAngle:
+    myValue: 10
+    myName: float
+  movementMultiplier:
+    myValue: 5
+    myName: float
   playerScripts:
   - {fileID: 978118414956159351}
+>>>>>>> Stashed changes
 --- !u!1001 &8676166168224951614
 PrefabInstance:
   m_ObjectHideFlags: 0

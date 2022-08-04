@@ -7,8 +7,14 @@ PhysicMaterial:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Bouncy_Walls
+<<<<<<< Updated upstream
+  dynamicFriction: 0.4
+  staticFriction: 0.4
+  bounciness: 0.2
+=======
   dynamicFriction: 0.6
   staticFriction: 0.6
-  bounciness: 0.75
+  bounciness: 0.605
+>>>>>>> Stashed changes
   frictionCombine: 0
-  bounceCombine: 0
+  bounceCombine: 1

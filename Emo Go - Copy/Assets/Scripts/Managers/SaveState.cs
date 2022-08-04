@@ -8,4 +8,5 @@ public class SaveState
     public int emojiOwned = 0;
 
     public int activeEmo = 0;
+    public int activeColor = 0;
 }
