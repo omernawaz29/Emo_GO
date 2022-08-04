@@ -970,7 +970,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7439228951247486254, guid: c32a82b4afe64cb49b817cbf240b298d, type: 3}
       propertyPath: bounceForce
-      value: 10
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 7439228951247486254, guid: c32a82b4afe64cb49b817cbf240b298d, type: 3}
       propertyPath: randomDirection
@@ -1059,7 +1059,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7439228951247486254, guid: c32a82b4afe64cb49b817cbf240b298d, type: 3}
       propertyPath: bounceForce
-      value: 10
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 7439228951247486254, guid: c32a82b4afe64cb49b817cbf240b298d, type: 3}
       propertyPath: randomDirection
@@ -1274,6 +1274,10 @@ PrefabInstance:
     - target: {fileID: 9006768891969113562, guid: 753c4e6d2f3b41b4c9f64984ca45b0a7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9006768891997965607, guid: 753c4e6d2f3b41b4c9f64984ca45b0a7, type: 3}
+      propertyPath: m_Center.y
+      value: 2.68
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 753c4e6d2f3b41b4c9f64984ca45b0a7, type: 3}
@@ -2724,7 +2728,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7439228951247486254, guid: c32a82b4afe64cb49b817cbf240b298d, type: 3}
       propertyPath: bounceForce
-      value: 10
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 7439228951247486254, guid: c32a82b4afe64cb49b817cbf240b298d, type: 3}
       propertyPath: randomDirection
@@ -2805,7 +2809,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7439228951247486254, guid: c32a82b4afe64cb49b817cbf240b298d, type: 3}
       propertyPath: bounceForce
-      value: 10
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 7439228951247486254, guid: c32a82b4afe64cb49b817cbf240b298d, type: 3}
       propertyPath: randomDirection
@@ -3028,7 +3032,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7439228951247486254, guid: c32a82b4afe64cb49b817cbf240b298d, type: 3}
       propertyPath: bounceForce
-      value: 10
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 7439228951247486254, guid: c32a82b4afe64cb49b817cbf240b298d, type: 3}
       propertyPath: randomDirection
@@ -3723,9 +3727,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68caed233f4a50a4f9fd008cc527d23f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 2
-  maxRotationAngle: 10
-  movementMultiplier: 5
+  rotationSpeed:
+    myValue: 2
+    myName: float
+  maxRotationAngle:
+    myValue: 10
+    myName: float
+  movementMultiplier:
+    myValue: 5
+    myName: float
   playerScripts:
   - {fileID: 915706909445797458}
   - {fileID: 915706909762433161}

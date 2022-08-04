@@ -80,7 +80,7 @@ public class SceneMenu : MonoBehaviour
     void Update()
     {
         fade.alpha = 1 - Time.timeSinceLevelLoad * fadeSpeed;
-        menuContainer.anchoredPosition3D = Vector3.Lerp(menuContainer.anchoredPosition3D, desiredMenuPos, 0.1f);
+        menuContainer.anchoredPosition3D = Vector3.Lerp(menuContainer.anchoredPosition3D, desiredMenuPos, 0.5f);
     }
 
     private void SetCameraTo(int menuIndex)

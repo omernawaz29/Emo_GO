@@ -1606,7 +1606,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9006768891997965606, guid: 753c4e6d2f3b41b4c9f64984ca45b0a7, type: 3}
       propertyPath: moveSpeed
-      value: 1.25
+      value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: 9006768891997965607, guid: 753c4e6d2f3b41b4c9f64984ca45b0a7, type: 3}
       propertyPath: m_Size.y
@@ -2494,7 +2494,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9006768891997965606, guid: 753c4e6d2f3b41b4c9f64984ca45b0a7, type: 3}
       propertyPath: moveSpeed
-      value: 1.25
+      value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: 9006768891997965606, guid: 753c4e6d2f3b41b4c9f64984ca45b0a7, type: 3}
       propertyPath: emojisRequired

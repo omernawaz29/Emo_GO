@@ -973,7 +973,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugMode: 1
-  unlockLevels: 0
+  unlockLevels: 1
 --- !u!114 &2981705865037314772
 MonoBehaviour:
   m_ObjectHideFlags: 0
