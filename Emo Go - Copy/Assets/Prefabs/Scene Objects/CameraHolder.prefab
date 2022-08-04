@@ -23,15 +23,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6814010271287117002}
-  m_LocalRotation: {x: 0.52562016, y: 0, z: 0, w: 0.8507194}
-  m_LocalPosition: {x: 0, y: 17.05, z: -8.21}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6814010270363741859}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 63.42, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6814010271577330950
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,14 +58,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6814010271577330950}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.60876137, y: 0, z: 0, w: 0.7933534}
+  m_LocalPosition: {x: 0, y: 35, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6814010271287117003}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 63.42, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 75, y: 0, z: 0}
 --- !u!20 &6814010271577330945
 Camera:
   m_ObjectHideFlags: 0
@@ -91,11 +91,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-<<<<<<< Updated upstream
-  field of view: 90
-=======
-  field of view: 50
->>>>>>> Stashed changes
+  field of view: 60
   orthographic: 0
   orthographic size: 13.49
   m_Depth: -1

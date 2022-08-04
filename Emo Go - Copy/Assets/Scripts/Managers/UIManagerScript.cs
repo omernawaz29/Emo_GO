@@ -19,7 +19,6 @@ public class UIManagerScript : MonoBehaviour
     //[SerializeField] private TextMeshProUGUI endScreenTitle;
     [SerializeField] private TextMeshProUGUI coinText;
     [SerializeField] private GameObject[] stars;
-    [SerializeField] private GameObject EndCoinAnimationHolder;
 
     // Tutorial Text
     [SerializeField] private GameObject tutorialHolder;
@@ -32,6 +31,10 @@ public class UIManagerScript : MonoBehaviour
     //Lose Screen Objects
     [SerializeField] private GameObject RestartLevelButton;
     [SerializeField] private GameObject SadEmo;
+
+    [Space]
+    [SerializeField] private float starsAnimationSpeed = 2.0f;
+    [SerializeField] private float starsDelayOffset = 0.1f;
 
 
     private float _totalEmos = 0;
@@ -79,13 +82,8 @@ public class UIManagerScript : MonoBehaviour
 
         int coins = Mathf.CeilToInt(endPercentage * 10);
 
-<<<<<<< Updated upstream
         coinText.text = "$" + coins.ToString();
-        SaveManager.instance.state.coins += coins;
 
-=======
-        //coinText.text = coins.ToString();
-        StartCoroutine(SetEndCoinsJuice(coins));
        
         SaveManager.instance.state.coins += coins;
 
@@ -98,44 +96,37 @@ public class UIManagerScript : MonoBehaviour
             starsShowCount = 1;
 
         StartCoroutine(SetEndStarsJuice(starsShowCount));
-
-
-
         /*
->>>>>>> Stashed changes
         if (endPercentage >= 33)
             stars[0].SetActive(true);
         if (endPercentage >= 66)
             stars[1].SetActive(true);
         if (endPercentage == 100)
             stars[2].SetActive(true);
+        */
     }
 
-    
-
-    IEnumerator SetEndCoinsJuice(int finalCoins)
+    IEnumerator SetEndStarsJuice(int count)
     {
-        EndCoinAnimationHolder.SetActive(true);
-        int coins = 0;
-        while (coins < finalCoins)
+        for (int i = 0; i < count; i++)
         {
-            coins += 15;
+            stars[i].SetActive(true);
+            Animator animator = stars[i].GetComponent<Animator>();
+            animator.speed = starsAnimationSpeed;
 
-            if (coins > finalCoins)
-                coins = finalCoins;
-
-            coinText.text = coins.ToString();
-            yield return null;
+            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length - starsDelayOffset);
         }
     }
+
     public void ClickNextButton()
     {
         Time.timeScale = 1;
 
         var newSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
 
-        if (newSceneIndex > SceneManager.sceneCountInBuildSettings)
+        if (newSceneIndex >= SceneManager.sceneCountInBuildSettings)
         {
+            Time.timeScale = 1;
             GameManagerScript.instance.menuFocus = 2;
             SceneManager.LoadScene("MainMenu");
         }
@@ -152,8 +143,8 @@ public class UIManagerScript : MonoBehaviour
     public void ClickHomeButton()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene("MainMenu");
         GameManagerScript.instance.menuFocus = 0;
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void SetTotalEmos(int count)
