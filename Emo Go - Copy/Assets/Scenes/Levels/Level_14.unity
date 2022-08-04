@@ -831,7 +831,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3578650023259264067, guid: b674194c5756a5145a0374b2d915542e, type: 3}
       propertyPath: minAliveEmo
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3578650023259264067, guid: b674194c5756a5145a0374b2d915542e, type: 3}
       propertyPath: FireZones.Array.size

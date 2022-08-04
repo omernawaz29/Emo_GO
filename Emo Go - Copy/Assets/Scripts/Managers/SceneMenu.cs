@@ -62,7 +62,7 @@ public class SceneMenu : MonoBehaviour
 
         UpdateCoinText();
         UpdateFaces();
-
+        SetColor(SaveManager.instance.state.activeColor);
         fade = FindObjectOfType<CanvasGroup>();
         fade.alpha = 1.0f;
 
@@ -214,6 +214,7 @@ public class SceneMenu : MonoBehaviour
     void SetColor(int index)
     {
         activeColorIndex = index;
+        SaveManager.instance.state.activeColor = index;
         playerMat.color = colors[index];
         colorBuySetText.text = "Current";
     }
@@ -258,9 +259,9 @@ public class SceneMenu : MonoBehaviour
                 i++;
             }
             buyButton.SetActive(true);
-            buySetText.text = "$" + colorCost[current].ToString();
+            buySetText.text = colorCost[current].ToString();
 
-            colorBuySetText.text = "$" + colorCost[current].ToString();
+            colorBuySetText.text = colorCost[current].ToString();
         }
     }
 
@@ -298,9 +299,9 @@ public class SceneMenu : MonoBehaviour
             }
 
             buyButton.SetActive(true);
-            buySetText.text = "$" + emojiCost[current].ToString();
+            buySetText.text = emojiCost[current].ToString();
 
-            emojiBuySetText.text = "$" + emojiCost[current].ToString();
+            emojiBuySetText.text = emojiCost[current].ToString();
         }
     }
 
@@ -390,7 +391,7 @@ public class SceneMenu : MonoBehaviour
 
     private void UpdateCoinText()
     {
-        coinsText.text = "$" + SaveManager.instance.state.coins.ToString();
+        coinsText.text = SaveManager.instance.state.coins.ToString();
     }
 
     void UpdateFaces()

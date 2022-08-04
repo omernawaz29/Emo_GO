@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FirezoneScript : MonoBehaviour
 {
+    [HideInInspector] public float smokeTime = 1.5f;
     Collider fireZoneCollider;
     [SerializeField] GameObject actualFire;
     [SerializeField] GameObject prefireSmoke;
@@ -20,7 +21,7 @@ public class FirezoneScript : MonoBehaviour
 
     IEnumerator SmoketoFire()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(smokeTime);
         actualFire.SetActive(true);
         fireZoneCollider.enabled = true;
 
