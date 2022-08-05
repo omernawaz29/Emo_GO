@@ -1130,6 +1130,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6814010271577330945, guid: 859f586d245e91544b83245dacf8949b, type: 3}
+      propertyPath: field of view
+      value: 48.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 859f586d245e91544b83245dacf8949b, type: 3}
 --- !u!4 &1672050064 stripped
@@ -1818,9 +1822,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68caed233f4a50a4f9fd008cc527d23f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 2
-  maxRotationAngle: 10
-  movementMultiplier: 5
+  rotationSpeed:
+    myValue: 2
+    myName: float
+  maxRotationAngle:
+    myValue: 10
+    myName: float
+  movementMultiplier:
+    myValue: 5
+    myName: float
   playerScripts:
   - {fileID: 6647818023143228308}
   - {fileID: 6647818022554027339}
