@@ -157,7 +157,12 @@ public class LevelManager : MonoBehaviour
     private void LogAnalyticData()
     {
         string currentLevel = (SceneManager.GetActiveScene().buildIndex - 1).ToString();
-        Analytics.CustomEvent("LevelComplete " + currentLevel, new Dictionary<string, object> { { "EmosRescued/TotalEmos", _emosRescued.ToString() + "/" + _totalEmos } });
+
+        AnalyticsResult resultLog = 
+            Analytics.CustomEvent("levelComplete", 
+                new Dictionary<string, object> { { "CurrentLevel_EmosRescued_TotalEmos",  currentLevel + "_" + _emosRescued.ToString() + "_" + _totalEmos } });
+
+        Debug.Log(resultLog);
 
     }
 }

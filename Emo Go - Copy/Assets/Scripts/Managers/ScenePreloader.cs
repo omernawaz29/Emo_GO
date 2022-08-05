@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Services.Core;
+using Unity.Services.Analytics;
 using UnityEngine.SceneManagement;
 
 public class ScenePreloader : MonoBehaviour
@@ -25,7 +27,6 @@ public class ScenePreloader : MonoBehaviour
 
         fade = FindObjectOfType<CanvasGroup>();
         fade.alpha = 1.0f;
-
 
         //We can do all kinds of loading at this point
 
