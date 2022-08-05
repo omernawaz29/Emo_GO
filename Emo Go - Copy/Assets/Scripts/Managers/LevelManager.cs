@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -70,6 +72,8 @@ public class LevelManager : MonoBehaviour
         {
             Handheld.Vibrate();
             _uiManager.Invoke("Lose", 2f);
+            LogAnalyticData();
+
         }
         else if (_emosRescued == _emosAlive - _trappingObjects)
         {
@@ -79,6 +83,8 @@ public class LevelManager : MonoBehaviour
             }
             fireZoneDelay = 0;
             _uiManager.Invoke("Win", 2f);
+            LogAnalyticData();
+
             if (SaveManager.instance.state.levelsCompleted < GameManagerScript.instance.currentLevel)
             {
                 SaveManager.instance.state.levelsCompleted = GameManagerScript.instance.currentLevel;
@@ -100,6 +106,7 @@ public class LevelManager : MonoBehaviour
         {
             fireZoneDelay = 0;
             _uiManager.Invoke("Win", 2f);
+            LogAnalyticData();
             if (SaveManager.instance.state.levelsCompleted < GameManagerScript.instance.currentLevel)
             {
                 Handheld.Vibrate();
@@ -145,5 +152,12 @@ public class LevelManager : MonoBehaviour
     public void RemoveTrappingObject()
     {
         _trappingObjects--;
+    }
+
+    private void LogAnalyticData()
+    {
+        string currentLevel = (SceneManager.GetActiveScene().buildIndex - 1).ToString();
+        Analytics.CustomEvent("LevelComplete " + currentLevel, new Dictionary<string, object> { { "EmosRescued/TotalEmos", _emosRescued.ToString() + "/" + _totalEmos } });
+
     }
 }
