@@ -475,7 +475,7 @@ MonoBehaviour:
   brokenGlassMaterial: {fileID: 2100000, guid: a826363fb9c541c478c44e23961a3893, type: 2}
   breakForce: 0
   normalEmoBreak: 0
-  trapsEmoji: 0
+  trapsEmoji: 1
 --- !u!65 &970769204
 BoxCollider:
   m_ObjectHideFlags: 0

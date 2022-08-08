@@ -6,7 +6,7 @@ public class SaveManager : MonoBehaviour
 {
     public static SaveManager instance;
     public SaveState state;
-    public PlayerSettings settings;
+    public CustomPlayerSettings settings;
 
     private void Awake()
     {
@@ -34,7 +34,7 @@ public class SaveManager : MonoBehaviour
 
     public void SaveSettings()
     {
-        PlayerPrefs.SetString("settings", SerializerScript.Serialize<PlayerSettings>(settings));
+        PlayerPrefs.SetString("settings", SerializerScript.Serialize<CustomPlayerSettings>(settings));
     }
 
     public void Load()
@@ -52,11 +52,11 @@ public class SaveManager : MonoBehaviour
 
         if (PlayerPrefs.HasKey("settings"))
         {
-            settings = SerializerScript.Deserialize<PlayerSettings>(PlayerPrefs.GetString("settings"));
+            settings = SerializerScript.Deserialize<CustomPlayerSettings>(PlayerPrefs.GetString("settings"));
         }
         else
         {
-            settings = new PlayerSettings();
+            settings = new CustomPlayerSettings();
             SaveSettings();
             Debug.Log("No Settings Found, Created New One");
         }

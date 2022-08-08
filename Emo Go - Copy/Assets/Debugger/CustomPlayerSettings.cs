@@ -1,5 +1,5 @@
 
-public class PlayerSettings
+public class CustomPlayerSettings
 {
 
     public FloatBox levelRotationSpeed = new FloatBox(1f, "levelRotationSpeed");
