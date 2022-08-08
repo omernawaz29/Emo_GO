@@ -20,7 +20,7 @@ public class ScenePreloader : MonoBehaviour
             SceneManager.LoadScene("MainMenu");
         if (unlockLevels)
         {
-            SaveManager.instance.state.levelsCompleted = 18;
+            SaveManager.instance.state.levelsCompleted = 20;
             SaveManager.instance.SaveGame();
         }
 

@@ -97,10 +97,5 @@ public class EmoScript : MonoBehaviour
 
             Destroy(other.gameObject);
         }
-        if(other.tag == "WaterChamber")
-        {
-            var rb = GetComponent<Rigidbody>();
-            rb.drag = 7.5f;
-        }
     }
 }
