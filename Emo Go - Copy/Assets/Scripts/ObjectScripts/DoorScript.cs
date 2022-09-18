@@ -4,12 +4,21 @@ using UnityEngine;
 
 public class DoorScript : MonoBehaviour
 {
-    Animator _animator;
     [SerializeField] ParticleSystem poofEffect;
+    [SerializeField] bool trapsEmoji = false;
+
+    Animator _animator;
+    LevelManager _levelManager;
 
     private void Start()
     {
+
+
         _animator = GetComponent<Animator>();
+        _levelManager = FindObjectOfType<LevelManager>();
+
+        if (trapsEmoji)
+            _levelManager.AddTrappingObject();
     }
     public void OpenDoor()
     {
@@ -25,6 +34,8 @@ public class DoorScript : MonoBehaviour
 
     public void DestroyMe()
     {
+        if (trapsEmoji)
+            _levelManager.RemoveTrappingObject();
         Instantiate(poofEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }

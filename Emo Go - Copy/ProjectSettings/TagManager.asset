@@ -14,6 +14,9 @@ TagManager:
   - Water
   - ReflectionStatic
   - WaterChamber
+  - EmojiShop
+  - ColorShop
+  - FakeFloor
   layers:
   - Default
   - TransparentFX

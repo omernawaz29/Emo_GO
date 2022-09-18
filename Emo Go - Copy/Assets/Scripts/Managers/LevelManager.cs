@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Analytics;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -16,21 +19,33 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject[] FireZones;
     [SerializeField] private float fireZoneDelay = 1.5f;
     [SerializeField] private float firstFireZoneDelay = 0f;
-    [SerializeField] private float minAliveEmo = 1;
 
 
+    // 
+    private int _trappingObjects = 0;
 
     private int nextFireZoneIndex = 0;
     // Start is called before the first frame update
 
+    private void OnEnable()
+    {
+        PlatformController.OnFirstTouched += EnableFireZonesWrapper;
+        TestInputScript.OnFirstTouched += EnableFireZonesWrapper;
+    }
+
+    private void OnDisable()
+    {
+        PlatformController.OnFirstTouched -= EnableFireZonesWrapper;
+        TestInputScript.OnFirstTouched -= EnableFireZonesWrapper;
+    }
 
     void Start()
     {
-
         _uiManager = FindObjectOfType<UIManagerScript>();
         _audioManager = FindObjectOfType<AudioManager>();
         nextFireZoneIndex = 0;
-        StartCoroutine(EnableFireZones());
+        _trappingObjects = 0;
+        // StartCoroutine(EnableFireZones());
 
     }
 
@@ -52,20 +67,31 @@ public class LevelManager : MonoBehaviour
         _emosAlive--;
         _audioManager.Play("EmojiPop");
         _uiManager.SetTotalEmos(_totalEmos);
-        if (_emosAlive < minAliveEmo)
+
+        if (_emosAlive == _trappingObjects)
         {
             Handheld.Vibrate();
             _uiManager.Invoke("Lose", 2f);
+            LogAnalyticData();
+
         }
-        else if (_emosRescued == _emosAlive)
+        else if (_emosRescued == _emosAlive - _trappingObjects)
         {
+            foreach(var f in FireZones)
+            {
+                f.GetComponent<FirezoneScript>().smokeTime = 0f;
+            }
+            fireZoneDelay = 0;
             _uiManager.Invoke("Win", 2f);
-            GameManagerScript.instance.currentLevel++;
+            LogAnalyticData();
+
             if (SaveManager.instance.state.levelsCompleted < GameManagerScript.instance.currentLevel)
             {
                 SaveManager.instance.state.levelsCompleted = GameManagerScript.instance.currentLevel;
-                SaveManager.instance.Save();
+                SaveManager.instance.SaveGame();
             }
+            GameManagerScript.instance.currentLevel++;
+
         }
     }
 
@@ -75,24 +101,34 @@ public class LevelManager : MonoBehaviour
         _uiManager.SetRescuedEmoCount(_emosRescued);
         _audioManager.Play("EmojiYay");
         _uiManager.SetTotalEmos(_totalEmos);
-        if (_emosRescued == _emosAlive)
+
+        if (_emosRescued == _emosAlive - _trappingObjects)
         {
+            fireZoneDelay = 0;
             _uiManager.Invoke("Win", 2f);
-            GameManagerScript.instance.currentLevel++;
+            LogAnalyticData();
             if (SaveManager.instance.state.levelsCompleted < GameManagerScript.instance.currentLevel)
             {
                 Handheld.Vibrate();
                 SaveManager.instance.state.levelsCompleted = GameManagerScript.instance.currentLevel;
-                SaveManager.instance.Save();
+                SaveManager.instance.SaveGame();
             }
+            GameManagerScript.instance.currentLevel++;
+
         }
     }
-
     public void UnRescueEmo()
     {
         _emosRescued--;
         _uiManager.SetRescuedEmoCount(_emosRescued);
 
+    }
+    void EnableFireZonesWrapper()
+    {
+        Debug.Log("Enabling firezones");
+        _uiManager.DisableTutorial();
+
+        StartCoroutine(EnableFireZones());
     }
 
     IEnumerator EnableFireZones()
@@ -106,5 +142,27 @@ public class LevelManager : MonoBehaviour
             if (++nextFireZoneIndex >= FireZones.Length)
                 break;
         }
+    }
+
+    public void AddTrappingObject()
+    {
+        _trappingObjects++;
+    }
+
+    public void RemoveTrappingObject()
+    {
+        _trappingObjects--;
+    }
+
+    private void LogAnalyticData()
+    {
+        string currentLevel = (SceneManager.GetActiveScene().buildIndex - 1).ToString();
+
+        AnalyticsResult resultLog = 
+            Analytics.CustomEvent("levelComplete", 
+                new Dictionary<string, object> { { "CurrentLevel_EmosRescued_TotalEmos",  currentLevel + "_" + _emosRescued.ToString() + "_" + _totalEmos } });
+
+        Debug.Log(resultLog);
+
     }
 }

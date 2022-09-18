@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1186293571765857541}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.495, y: 1.495, z: 1.495}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8517755416844577483}
@@ -125,8 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3518acf54ae16e044807a7ce49aa8680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Door: {fileID: 0}
-  poofEffect: {fileID: 19800018, guid: a40b64bf23366dc42a892af2c6ff6140, type: 3}
+  doorScript: {fileID: 0}
 --- !u!1001 &8519231203482654781
 PrefabInstance:
   m_ObjectHideFlags: 0

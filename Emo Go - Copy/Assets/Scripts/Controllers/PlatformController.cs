@@ -11,6 +11,10 @@ public class PlatformController : MonoBehaviour
 
     private Touch _touch;
 
+    private bool _firstTouch = false;
+    public delegate void FirstTouchAction();
+    public static event FirstTouchAction OnFirstTouched;
+
     public float rotateX { get { return _xRotation; } } 
 
     void Start()
@@ -24,6 +28,10 @@ public class PlatformController : MonoBehaviour
 
         if(Input.touchCount > 0)
         {
+            if (_firstTouch == false)
+                OnFirstTouched();
+            _firstTouch = true;
+
             _touch = Input.GetTouch(0);
 
             if(_touch.phase == TouchPhase.Moved)

@@ -27,6 +27,11 @@ public class SceneMenu : MonoBehaviour
     [SerializeField] TextMeshProUGUI emojiBuySetText;
     [SerializeField] TextMeshProUGUI coinsText;
 
+    [Space]
+    [SerializeField] GameObject buyButton;
+    [SerializeField] TextMeshProUGUI buySetText;
+
+    [Space]
     [SerializeField] GameObject showCaseEmoji;
 
     private int[] colorCost = new int[] { 0, 500, 500, 500, 1000, 1000, 1000, 1500, 1500 };
@@ -45,12 +50,19 @@ public class SceneMenu : MonoBehaviour
 
     Vector3 desiredMenuPos;
     int currentMenu;
+
+    private Outline previousOutline;
+
+    private AudioManager _audioManager;
+
     void Start()
     {
-        
+        buyButton.SetActive(false);
+        _audioManager = FindObjectOfType<AudioManager>();
+
         UpdateCoinText();
         UpdateFaces();
-
+        SetColor(SaveManager.instance.state.activeColor);
         fade = FindObjectOfType<CanvasGroup>();
         fade.alpha = 1.0f;
 
@@ -61,14 +73,14 @@ public class SceneMenu : MonoBehaviour
 
         InitLevel();
         InitShop();
-
-        GameManagerScript.instance.currentLevel = SaveManager.instance.state.levelsCompleted;
+        GameManagerScript.instance.currentLevel = SaveManager.instance.state.levelsCompleted + 1;
+        
     }
 
     void Update()
     {
         fade.alpha = 1 - Time.timeSinceLevelLoad * fadeSpeed;
-        menuContainer.anchoredPosition3D = Vector3.Lerp(menuContainer.anchoredPosition3D, desiredMenuPos, 0.1f);
+        menuContainer.anchoredPosition3D = Vector3.Lerp(menuContainer.anchoredPosition3D, desiredMenuPos, 0.5f);
     }
 
     private void SetCameraTo(int menuIndex)
@@ -112,9 +124,13 @@ public class SceneMenu : MonoBehaviour
             b.onClick.AddListener(() => OnLevelSelect(currentIndex));
 
             Image img = t.GetComponent<Image>();
+            // getting the lock image in UI
+            GameObject lockImgObj = t.GetChild(1).GetComponent<Image>().gameObject;
 
             if (i <= SaveManager.instance.state.levelsCompleted)
             {
+                lockImgObj.SetActive(false);
+
                 if (i == SaveManager.instance.state.levelsCompleted)
                 {
                     img.color = currentLevelColor;
@@ -124,12 +140,14 @@ public class SceneMenu : MonoBehaviour
             }
             else
             {
+                GameObject tLevelText = t.GetChild(0).GetComponent<TextMeshProUGUI>().gameObject;
+                tLevelText.SetActive(false);
+
                 b.interactable = false;
                 img.color = Color.gray;
             }
 
             i++;
-
         }
     }
     public void ResetSave()
@@ -138,6 +156,7 @@ public class SceneMenu : MonoBehaviour
         //GameManagerScript.instance.menuFocus = 1;
         //SceneManager.LoadScene("Menu");
     }
+
     void InitShop()
     {
         if (colorPanel == null || emojiPanel == null)
@@ -154,6 +173,19 @@ public class SceneMenu : MonoBehaviour
             Button b = t.GetComponent<Button>();
 
             b.onClick.AddListener(() => OnColorSelect(current));
+
+            // getting the lock image in UI
+            Image lockImg = t.GetChild(0).GetComponent<Image>();
+            if (SaveManager.instance.IsColorOwned(i))
+            {
+                // if (SaveManager.instance.state.activeEmo == i)
+                //     t.GetComponent<Outline>().enabled = true;
+
+                Color c = lockImg.color;
+                c.a = 0;
+                lockImg.color = c;
+            }
+
             i++;
         }
 
@@ -164,6 +196,16 @@ public class SceneMenu : MonoBehaviour
             int current = i;
             Button b = t.GetComponent<Button>();
             b.onClick.AddListener(() => OnEmojiSelect(current));
+
+            // getting the lock image in UI
+            Image lockImg = t.GetChild(0).GetComponent<Image>();
+            if (SaveManager.instance.IsEmojiOwned(i))
+            {
+                Color c = lockImg.color;
+                c.a = 0;
+                lockImg.color = c;
+            }
+
             i++;
         }
     }
@@ -171,8 +213,8 @@ public class SceneMenu : MonoBehaviour
 
     void SetColor(int index)
     {
-
         activeColorIndex = index;
+        SaveManager.instance.state.activeColor = index;
         playerMat.color = colors[index];
         colorBuySetText.text = "Current";
     }
@@ -192,11 +234,34 @@ public class SceneMenu : MonoBehaviour
 
         if (SaveManager.instance.IsColorOwned(current))
         {
+            if (previousOutline != null)
+                previousOutline.enabled = false;
+            previousOutline = null;
+            buyButton.SetActive(false);
+
+            SetColor(selectedColorIndex);
             colorBuySetText.text = "Select";
         }
         else
         {
-            colorBuySetText.text = "$" + colorCost[current].ToString();
+            int i = 0;
+            foreach (Transform t in colorPanel)
+            {
+                if (i == selectedColorIndex)
+                {
+                    if (previousOutline != null)
+                        previousOutline.enabled = false;
+                    previousOutline = t.GetComponent<Outline>();
+                    previousOutline.enabled = true;
+                    break;
+                }
+
+                i++;
+            }
+            buyButton.SetActive(true);
+            buySetText.text = colorCost[current].ToString();
+
+            colorBuySetText.text = colorCost[current].ToString();
         }
     }
 
@@ -206,11 +271,37 @@ public class SceneMenu : MonoBehaviour
 
         if (SaveManager.instance.IsEmojiOwned(current))
         {
+            if (previousOutline != null)
+                previousOutline.enabled = false;
+            previousOutline = null;
+            buyButton.SetActive(false);
+
+            SetEmoji(selectedEmojiIndex);
+            UpdateFaces();
+
             emojiBuySetText.text = "Select";
         }
         else
         {
-            emojiBuySetText.text = "$" + emojiCost[current].ToString();
+            int i = 0;
+            foreach (Transform t in emojiPanel)
+            {
+                if (i == selectedEmojiIndex)
+                {
+                    if (previousOutline != null)
+                        previousOutline.enabled = false;
+                    previousOutline = t.GetComponent<Outline>();
+                    previousOutline.enabled = true;
+                    break;
+                }
+
+                i++;
+            }
+
+            buyButton.SetActive(true);
+            buySetText.text = emojiCost[current].ToString();
+
+            emojiBuySetText.text = emojiCost[current].ToString();
         }
     }
 
@@ -219,17 +310,17 @@ public class SceneMenu : MonoBehaviour
        // if (SaveManager.instance.state.levelsCompleted >= 10)
          //   ResetSave();
 
-        GameManagerScript.instance.currentLevel = currentIndex;
+        GameManagerScript.instance.currentLevel = currentIndex + 1;
         SceneManager.LoadScene(currentIndex + 2);
 
-        Debug.Log("Select Level: " + currentIndex);
+        Debug.Log("Select Level: " + currentIndex + 1);
     }
 
 
     public void OnPlayClick()
     {
-        var newSceneIndex = GameManagerScript.instance.currentLevel + 2;
-
+        var newSceneIndex = GameManagerScript.instance.currentLevel + 1;
+        Debug.Log("Level: " + newSceneIndex);
         if (newSceneIndex >= SceneManager.sceneCountInBuildSettings)
         {
             Navigate(2);
@@ -300,7 +391,7 @@ public class SceneMenu : MonoBehaviour
 
     private void UpdateCoinText()
     {
-        coinsText.text = "$" + SaveManager.instance.state.coins.ToString();
+        coinsText.text = SaveManager.instance.state.coins.ToString();
     }
 
     void UpdateFaces()
@@ -310,5 +401,57 @@ public class SceneMenu : MonoBehaviour
             t.SetActive(false);
         }
         Faces[SaveManager.instance.state.activeEmo].SetActive(true);
+    }
+
+    public void OnBuyButtonClick()
+    {
+        if (previousOutline.tag == "ColorShop")
+        {
+            // Debug.Log("BUYING color");
+            if (SaveManager.instance.BuyColor(selectedColorIndex, colorCost[selectedColorIndex]))
+            {
+                _audioManager.Play("ChaChing");
+                previousOutline.gameObject.GetComponentInChildren<Animator>().enabled = true;
+
+                if (previousOutline != null)
+                    previousOutline.enabled = false;
+                previousOutline = null;
+                buyButton.SetActive(false);
+
+                SetColor(selectedColorIndex);
+                UpdateCoinText();
+            }
+            else
+            {
+                Debug.Log("No Money");
+            }
+        }
+        else if (previousOutline.tag == "EmojiShop")
+        {
+            // Debug.Log("BUYING EMO");
+            if (SaveManager.instance.BuyEmoji(selectedEmojiIndex, emojiCost[selectedEmojiIndex]))
+            {
+                _audioManager.Play("ChaChing");
+                previousOutline.gameObject.GetComponentInChildren<Animator>().enabled = true;
+
+                if (previousOutline != null)
+                    previousOutline.enabled = false;
+                previousOutline = null;
+                buyButton.SetActive(false);
+
+                SetEmoji(selectedEmojiIndex);
+                UpdateFaces();
+                UpdateCoinText();
+            }
+            else
+            {
+                Debug.Log("No Money");
+            }
+        }
+    }
+
+    public void GotoDebuggerScene()
+    {
+        SceneManager.LoadScene("DebuggerImplemented");
     }
 }

@@ -21,7 +21,7 @@ public class ElevatorScript : MonoBehaviour
         Lights[1].color = Color.red;
 
         if (emojisRequired == 1)
-            Lights[1].color = Color.green;
+            Lights[1].color = Color.white;
     }
 
     // Update is called once per frame
@@ -42,7 +42,7 @@ public class ElevatorScript : MonoBehaviour
         if (other.tag == "Emo" || other.tag == "AngryEmo")
         {
             _emojisOn++;
-            Lights[_emojisOn - 1].color = Color.green;
+            Lights[_emojisOn - 1].color = Color.white;
             Invoke("StartMoving", 0.75f);
         }
     }

@@ -9,7 +9,6 @@ public class EmoScript : MonoBehaviour
     [SerializeField] private GameObject NormalEmo;
     [SerializeField] private ParticleSystem emoPoofEffect;
     [SerializeField] private GameObject angryEmoEffect;
-    [SerializeField] private float angryUses = 1;
 
     [SerializeField] GameObject[] Faces;
     public float maxHitForce;
@@ -60,21 +59,14 @@ public class EmoScript : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        if(collision.gameObject.tag == "Glass")
+        else if(collision.gameObject.tag == "Glass")
         {
             if(gameObject.tag == "AngryEmo")
             {
-                _audioManager.Play("GlassBreak");
-                Handheld.Vibrate();
-
-                if(--angryUses == 0)
-                {
-                    Instantiate(emoPoofEffect, gameObject.transform.position, Quaternion.identity);
-
-                    angryEmoEffect.SetActive(false);
-                    AngryEmo.SetActive(false);
-                    NormalEmo.SetActive(true);
-                }
+                Instantiate(emoPoofEffect, gameObject.transform.position, Quaternion.identity);
+                angryEmoEffect.SetActive(false);
+                AngryEmo.SetActive(false);
+                NormalEmo.SetActive(true);
             }
         }
     }
@@ -104,11 +96,6 @@ public class EmoScript : MonoBehaviour
             NormalEmo.SetActive(false);
 
             Destroy(other.gameObject);
-        }
-        if(other.tag == "WaterChamber")
-        {
-            var rb = GetComponent<Rigidbody>();
-            rb.drag = 7.5f;
         }
     }
 }

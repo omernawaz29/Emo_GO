@@ -5,11 +5,13 @@ using UnityEngine;
 public class GameManagerScript : MonoBehaviour
 {
     public static GameManagerScript instance;
-    [HideInInspector] public int currentLevel;
+    [HideInInspector] public int currentLevel = 1;
     [HideInInspector] public int menuFocus;
 
     void Start()
     {
+        menuFocus = 0;
+        currentLevel = 1;
         if (instance != null)
         {
             Destroy(gameObject);
@@ -19,7 +21,7 @@ public class GameManagerScript : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        menuFocus = 0;
+        
     }
 
     // Update is called once per frame
