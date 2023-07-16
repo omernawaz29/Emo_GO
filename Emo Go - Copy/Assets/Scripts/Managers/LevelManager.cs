@@ -140,7 +140,23 @@ public class LevelManager : MonoBehaviour
             yield return new WaitForSeconds(fireZoneDelay);
 
             if (++nextFireZoneIndex >= FireZones.Length)
+            {
+               
+                // Ahmed Malik Added this line of code so that game ends if
+                // player manages to not winning while also not touching fire
+                _emosAlive = 0;
+                _audioManager.Play("EmojiPop");
+                _uiManager.SetTotalEmos(_totalEmos);
+
+                if (_emosAlive == _trappingObjects)
+                {
+                    Handheld.Vibrate();
+                    _uiManager.Invoke("Lose", 2f);
+                    LogAnalyticData();
+
+                }
                 break;
+            }
         }
     }
 

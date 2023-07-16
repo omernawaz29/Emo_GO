@@ -511,6 +511,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Win Area
       objectReference: {fileID: 0}
+    - target: {fileID: 1973050103310023412, guid: a9adffcd039969b48aabadc213177994, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8206198955697398487, guid: a9adffcd039969b48aabadc213177994, type: 3}
       propertyPath: m_RootOrder
       value: 6
