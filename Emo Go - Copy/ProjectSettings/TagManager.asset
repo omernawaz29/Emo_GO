@@ -17,6 +17,7 @@ TagManager:
   - EmojiShop
   - ColorShop
   - FakeFloor
+  - Star
   layers:
   - Default
   - TransparentFX

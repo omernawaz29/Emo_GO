@@ -4,9 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using DG.Tweening;
+using Unity.VisualScripting;
 
 public class UIManagerScript : MonoBehaviour
 {
+    public static UIManagerScript instance;
+
+    // Level Number
+    [SerializeField] private TextMeshProUGUI Level_Number_Text;
+
+    // Camera Effect
+    [HideInInspector] public DOTweenAnimation CamShake;
+
     // UI Screens
 
     [SerializeField] private GameObject endScreen;
@@ -37,41 +47,115 @@ public class UIManagerScript : MonoBehaviour
     [SerializeField] private float starsAnimationSpeed = 2.0f;
     [SerializeField] private float starsDelayOffset = 0.1f;
 
+    [Space]
+    [Header("Ahmed's Stars Work")]
+    [SerializeField] private GameObject[] StarsBG;
+    [SerializeField] private float Star_End_Screen_Delay = 0.2f;
+    [Space]
+    [SerializeField] private GameObject[] Stars;
+    [SerializeField] private ParticleSystem Star_Puff;
+    int star_Active_Number;
+
 
     private float _totalEmos = 0;
     private float _rescuedEmos = 0;
-    // Start is called before the first frame update
+
+    //for debugging
+    public TextMeshProUGUI Debug_Emo_Counts;
+
     void Start()
     {
+        instance = this;
+
+        CamShake = Camera.main.GetComponent<DOTweenAnimation>();
+
         rescuedEmoCountText.text = "0";
         currentLevelText.text = (SceneManager.GetActiveScene().buildIndex - 1).ToString();
 
         tutorialHolder.SetActive(true);
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
+        if(!PlayerPrefs.HasKey("CurrentLevelNumber"))
+        {
+            PlayerPrefs.SetInt("CurrentLevelNumber", 1);
+        }
 
+        Level_Number_Text.text = PlayerPrefs.GetInt("CurrentLevelNumber").ToString();
+    }
     
-    void Win()
+    public void Win()
     {
+        PlayerPrefs.SetInt("CurrentLevelNumber", PlayerPrefs.GetInt("CurrentLevelNumber") + 1);
+        PlayerPrefs.SetInt("CurrentLevel", PlayerPrefs.GetInt("CurrentLevel") + 1);
+
         Time.timeScale = 0.5f;
         endScreen.SetActive(true);
         NextLevelButton.SetActive(true);
         GlassesEmo.SetActive(true);
-        SetEndStars();
+        // SetEndStars();
+
+        // Coin Animation
+        float endPercentage = (_rescuedEmos * 100) / _totalEmos;
+
+        if (endPercentage < 66 && endPercentage > 0)
+        {
+            endPercentage += 20f;
+        }
+
+        int coins = Mathf.CeilToInt(endPercentage * 10);
+
+        coinText.text = "0";
+
+        if (coins != 0)
+        {
+            StartCoroutine(SetEndCoinsJuice(coins));
+        }
+
+        SaveManager.instance.state.coins += coins;
+        PlayerPrefs.Save();
+
+        StartCoroutine(UIStarUpdate());
 
     }
-    void Lose()
+    public void Lose()
     {
         Time.timeScale = 0.5f;
+        coinText.text = "0";
         endScreen.SetActive(true);
         RestartLevelButton.SetActive(true);
         SadEmo.SetActive(true);
-        SetEndStars();
+        // SetEndStars();
 
+        StartCoroutine(UIStarUpdate());
+
+    }
+
+    // Ahmed's Star Work
+    public void UpdateStars(Transform Star_Transform)
+    {
+        if (Stars != null && star_Active_Number <= Stars.Length)
+        {
+            if(Star_Puff != null)
+            {
+                Star_Puff.transform.position = Star_Transform.position;
+                Star_Puff.Play();
+            }
+            LevelManager.instance._audioManager.Play("StarCollected");
+
+            Stars[star_Active_Number].GetComponent<DOTweenAnimation>().DOPlay();
+            star_Active_Number++;
+        }
+
+    }
+    public IEnumerator UIStarUpdate()
+    {
+        if (StarsBG != null)
+        {
+            for (int i = 0; i < StarsBG.Length; i++)
+            {
+                StarsBG[i].GetComponent<DOTweenAnimation>().DOPlay();
+                yield return new WaitForSecondsRealtime(Star_End_Screen_Delay);
+            }
+        }
     }
 
     private void SetEndStars()
@@ -126,9 +210,10 @@ public class UIManagerScript : MonoBehaviour
 
     IEnumerator SetEndCoinsJuice(int finalCoins)
     {
-        
+
 
         coinAnimationHolder.SetActive(true);
+        yield return new WaitForSecondsRealtime(1f);
         int coins = 0;
         while (coins < finalCoins)
         {
@@ -152,11 +237,14 @@ public class UIManagerScript : MonoBehaviour
         if (newSceneIndex >= SceneManager.sceneCountInBuildSettings)
         {
             Time.timeScale = 1;
-            GameManagerScript.instance.menuFocus = 2;
-            SceneManager.LoadScene("MainMenu");
+            //---> GameManagerScript.instance.menuFocus = 2;
+            //---> SceneManager.LoadScene("MainMenu");
+            //---> newSceneIndex = SceneManager.GetActiveScene().buildIndex - 10;
+            PlayerPrefs.SetInt("CurrentLevel", PlayerPrefs.GetInt("CurrentLevel") - 10);
+
         }
-        else
-            SceneManager.LoadScene(newSceneIndex);
+        //---> SceneManager.LoadScene(newSceneIndex);
+        SceneManager.LoadScene(PlayerPrefs.GetInt("CurrentLevel"));
     }
 
     public void ClickRedoButton()

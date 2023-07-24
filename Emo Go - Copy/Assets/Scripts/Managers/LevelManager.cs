@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
+    public static LevelManager instance;
+
     public static int finalScore = 0;
 
 
@@ -14,7 +16,9 @@ public class LevelManager : MonoBehaviour
     private int _emosRescued = 0;
     private int _totalEmos = 0;
     private UIManagerScript _uiManager;
-    private AudioManager _audioManager;
+    [HideInInspector] public AudioManager _audioManager;
+
+    [SerializeField] private float delay_Win_Lose_Screen = 1;
 
     [SerializeField] private GameObject[] FireZones;
     [SerializeField] private float fireZoneDelay = 1.5f;
@@ -41,8 +45,11 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
+        instance = this;
+
         _uiManager = FindObjectOfType<UIManagerScript>();
         _audioManager = FindObjectOfType<AudioManager>();
+        Debug.Log(_audioManager);
         nextFireZoneIndex = 0;
         _trappingObjects = 0;
         // StartCoroutine(EnableFireZones());
@@ -64,14 +71,22 @@ public class LevelManager : MonoBehaviour
 
     public void KillEmo()
     {
+
+        Debug.Log("_emosAlive : " + _emosAlive + "_emosRescued : " + _emosRescued + "_totalEmos : " + _totalEmos + "_trappingObjects : " + _trappingObjects);
+
         _emosAlive--;
         _audioManager.Play("EmojiPop");
         _uiManager.SetTotalEmos(_totalEmos);
 
+        //For Debugging
+        UIManagerScript.instance.Debug_Emo_Counts.text = "_emosAlive : " + _emosAlive + "_emosRescued : " + _emosRescued + "_totalEmos : " + _totalEmos + "_trappingObjects : " + _trappingObjects;
+
+
         if (_emosAlive == _trappingObjects)
         {
             Handheld.Vibrate();
-            _uiManager.Invoke("Lose", 2f);
+            //---> _uiManager.Invoke("Lose", delay_Win_Lose_Screen);
+            StartCoroutine(Lose());
             LogAnalyticData();
 
         }
@@ -82,31 +97,12 @@ public class LevelManager : MonoBehaviour
                 f.GetComponent<FirezoneScript>().smokeTime = 0f;
             }
             fireZoneDelay = 0;
-            _uiManager.Invoke("Win", 2f);
+            //---> _uiManager.Invoke("Win", delay_Win_Lose_Screen);
+            StartCoroutine(Won());
             LogAnalyticData();
 
-            if (SaveManager.instance.state.levelsCompleted < GameManagerScript.instance.currentLevel)
-            {
-                SaveManager.instance.state.levelsCompleted = GameManagerScript.instance.currentLevel;
-                SaveManager.instance.SaveGame();
-            }
-            GameManagerScript.instance.currentLevel++;
-
-        }
-    }
-
-    public void RescueEmo()
-    {
-        _emosRescued++;
-        _uiManager.SetRescuedEmoCount(_emosRescued);
-        _audioManager.Play("EmojiYay");
-        _uiManager.SetTotalEmos(_totalEmos);
-
-        if (_emosRescued == _emosAlive - _trappingObjects)
-        {
-            fireZoneDelay = 0;
-            _uiManager.Invoke("Win", 2f);
-            LogAnalyticData();
+            // This Code is acting weird and saving and playing levels weirdly on some occutions So now it's updating in Win Function in UIManagerScript
+            /*
             if (SaveManager.instance.state.levelsCompleted < GameManagerScript.instance.currentLevel)
             {
                 Handheld.Vibrate();
@@ -114,6 +110,51 @@ public class LevelManager : MonoBehaviour
                 SaveManager.instance.SaveGame();
             }
             GameManagerScript.instance.currentLevel++;
+            */
+
+        }
+    }
+    IEnumerator Won()
+    {
+        yield return new WaitForSeconds(delay_Win_Lose_Screen);
+        UIManagerScript.instance.Win();
+    }
+    IEnumerator Lose()
+    {
+        yield return new WaitForSeconds(delay_Win_Lose_Screen);
+        UIManagerScript.instance.Lose();
+    }
+
+    public void RescueEmo()
+    {
+        Debug.Log("_emosAlive : " + _emosAlive + "_emosRescued : " + _emosRescued + "_totalEmos : " + _totalEmos + "_trappingObjects : " + _trappingObjects);
+
+        _emosRescued++;
+        _uiManager.SetRescuedEmoCount(_emosRescued);
+        _audioManager.Play("EmojiYay");
+        _uiManager.SetTotalEmos(_totalEmos);
+
+        //For Debugging
+        UIManagerScript.instance.Debug_Emo_Counts.text = "_emosAlive : " + _emosAlive + "_emosRescued : " + _emosRescued + "_totalEmos : " + _totalEmos + "_trappingObjects : " + _trappingObjects;
+
+
+        if (_emosRescued == _emosAlive - _trappingObjects)
+        {
+            fireZoneDelay = 0;
+            //---> _uiManager.Invoke("Win", delay_Win_Lose_Screen);
+            StartCoroutine(Won());
+            LogAnalyticData();
+            
+            // This Code is acting weird and saving and playing levels weirdly on some occutions So now it's updating in Win Function in UIManagerScript
+            /*
+            if (SaveManager.instance.state.levelsCompleted < GameManagerScript.instance.currentLevel)
+            {
+                Handheld.Vibrate();
+                SaveManager.instance.state.levelsCompleted = GameManagerScript.instance.currentLevel;
+                SaveManager.instance.SaveGame();
+            }
+            GameManagerScript.instance.currentLevel++;
+            */
 
         }
     }
@@ -142,16 +183,13 @@ public class LevelManager : MonoBehaviour
             if (++nextFireZoneIndex >= FireZones.Length)
             {
                
-                // Ahmed Malik Added this line of code so that game ends if
-                // player manages to not winning while also not touching fire
-                _emosAlive = 0;
-                _audioManager.Play("EmojiPop");
                 _uiManager.SetTotalEmos(_totalEmos);
 
                 if (_emosAlive == _trappingObjects)
                 {
                     Handheld.Vibrate();
-                    _uiManager.Invoke("Lose", 2f);
+                    //---> _uiManager.Invoke("Lose", 2f);
+                    StartCoroutine(Lose());
                     LogAnalyticData();
 
                 }
@@ -179,6 +217,11 @@ public class LevelManager : MonoBehaviour
                 new Dictionary<string, object> { { "CurrentLevel_EmosRescued_TotalEmos",  currentLevel + "_" + _emosRescued.ToString() + "_" + _totalEmos } });
 
         Debug.Log(resultLog);
+
+    }
+
+    public void StarSound()
+    {
 
     }
 }

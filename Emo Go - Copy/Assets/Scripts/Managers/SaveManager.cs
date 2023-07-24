@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SaveManager : MonoBehaviour
 {
@@ -48,6 +49,15 @@ public class SaveManager : MonoBehaviour
             state = new SaveState();
             SaveGame();
             Debug.Log("No Save Found, Created New One");
+        }
+
+        if (PlayerPrefs.HasKey("CurrentLevel"))
+        {
+            SceneManager.LoadScene(PlayerPrefs.GetInt("CurrentLevel"));
+        }
+        else
+        {
+            PlayerPrefs.SetInt("CurrentLevel", 2);
         }
 
         if (PlayerPrefs.HasKey("settings"))

@@ -319,14 +319,17 @@ public class SceneMenu : MonoBehaviour
 
     public void OnPlayClick()
     {
-        var newSceneIndex = GameManagerScript.instance.currentLevel + 1;
+        // This Code is commented because it was giving errors sometimes
+        /*
+        var newSceneIndex = GameManagerScript.instance.currentLevel;
         Debug.Log("Level: " + newSceneIndex);
         if (newSceneIndex >= SceneManager.sceneCountInBuildSettings)
         {
-            Navigate(2);
+            //Navigate(2);
+            newSceneIndex = GameManagerScript.instance.currentLevel - 10;
         }
-        else
-            SceneManager.LoadScene(newSceneIndex);
+        */
+        SceneManager.LoadScene(PlayerPrefs.GetInt("CurrentLevel"));
     }
 
     public void OnLevelClick()

@@ -42,14 +42,17 @@ public class GlassBreakScript : MonoBehaviour
             _audioManager.Play("GlassBreak");
             gameObject.GetComponent<MeshRenderer>().material = brokenGlassMaterial;
 
-            CameraController.instance.StartShake(0.2f, 0.35f);
+            //---> CameraController.instance.StartShake(0.3f, 0.25f);
+            UIManagerScript.instance.CamShake.RecreateTweenAndPlay();
             Handheld.Vibrate();
             Instantiate(glassBreakParticles, transform.position, Quaternion.identity);
             Instantiate(hitEffectParticles, transform.position, Quaternion.identity);
             collision.gameObject.tag = "Emo";
 
             if (trapsEmoji)
+            {
                 _levelManager.RemoveTrappingObject();
+            }
 
             Destroy(gameObject, 0.15f);
         }

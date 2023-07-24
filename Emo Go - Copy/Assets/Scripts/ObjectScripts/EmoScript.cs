@@ -20,10 +20,10 @@ public class EmoScript : MonoBehaviour
     {
         _levelManager = FindObjectOfType<LevelManager>();
         _audioManager = FindObjectOfType<AudioManager>();
-        _levelManager.AddEmo();
     }
     void Start()
     {
+        _levelManager.AddEmo();
         UpdateFaces();
     }
 
@@ -53,7 +53,8 @@ public class EmoScript : MonoBehaviour
             if (collision.relativeVelocity.magnitude >= maxHitForce)
             {
                 Handheld.Vibrate();
-                CameraController.instance.StartShake(0.3f, 0.25f);
+                //---> CameraController.instance.StartShake(0.3f, 0.25f);
+                UIManagerScript.instance.CamShake.RecreateTweenAndPlay();
                 Instantiate(emoDieEffect, gameObject.transform.position, Quaternion.identity);
                 _levelManager.KillEmo();
                 Destroy(gameObject);
@@ -79,7 +80,8 @@ public class EmoScript : MonoBehaviour
 
             Handheld.Vibrate();
             _levelManager.KillEmo();
-            CameraController.instance.StartShake(0.3f, 0.25f);
+            //---> CameraController.instance.StartShake(0.3f, 0.25f);
+            UIManagerScript.instance.CamShake.RecreateTweenAndPlay();
             Destroy(gameObject);
         }
         if(other.tag == "Burger")
@@ -95,6 +97,11 @@ public class EmoScript : MonoBehaviour
             AngryEmo.SetActive(true);
             NormalEmo.SetActive(false);
 
+            Destroy(other.gameObject);
+        }
+        if(other.tag == "Star")
+        {
+            UIManagerScript.instance.UpdateStars(other.transform);
             Destroy(other.gameObject);
         }
     }
