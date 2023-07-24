@@ -284,6 +284,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasWorkingUI
       objectReference: {fileID: 0}
+    - target: {fileID: 7211943355015298268, guid: 9a667956f57d6054d842d648242254de, type: 3}
+      propertyPath: Star_Puff
+      value: 
+      objectReference: {fileID: 1946616058}
     - target: {fileID: 7211943355015298269, guid: 9a667956f57d6054d842d648242254de, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1181,6 +1185,11 @@ GameObject:
 --- !u!4 &1936451360 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7664151374768007564, guid: 669ee3ddacd249f49b0050f4a4d8c0e3, type: 3}
+  m_PrefabInstance: {fileID: 8174663484039472931}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1946616058 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3720491030824459773, guid: 669ee3ddacd249f49b0050f4a4d8c0e3, type: 3}
   m_PrefabInstance: {fileID: 8174663484039472931}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1988928412

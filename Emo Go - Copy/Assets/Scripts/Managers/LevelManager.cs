@@ -26,7 +26,7 @@ public class LevelManager : MonoBehaviour
 
 
     // 
-    private int _trappingObjects = 0;
+    [SerializeField] private int _trappingObjects = 0;
 
     private int nextFireZoneIndex = 0;
     // Start is called before the first frame update
@@ -51,7 +51,7 @@ public class LevelManager : MonoBehaviour
         _audioManager = FindObjectOfType<AudioManager>();
         Debug.Log(_audioManager);
         nextFireZoneIndex = 0;
-        _trappingObjects = 0;
+
         // StartCoroutine(EnableFireZones());
 
     }
@@ -72,16 +72,9 @@ public class LevelManager : MonoBehaviour
     public void KillEmo()
     {
 
-        Debug.Log("_emosAlive : " + _emosAlive + "_emosRescued : " + _emosRescued + "_totalEmos : " + _totalEmos + "_trappingObjects : " + _trappingObjects);
-
         _emosAlive--;
         _audioManager.Play("EmojiPop");
         _uiManager.SetTotalEmos(_totalEmos);
-
-        //For Debugging
-        UIManagerScript.instance.Debug_Emo_Counts.text = "_emosAlive : " + _emosAlive + "_emosRescued : " + _emosRescued + "_totalEmos : " + _totalEmos + "_trappingObjects : " + _trappingObjects;
-
-
         if (_emosAlive == _trappingObjects)
         {
             Handheld.Vibrate();
@@ -127,17 +120,11 @@ public class LevelManager : MonoBehaviour
 
     public void RescueEmo()
     {
-        Debug.Log("_emosAlive : " + _emosAlive + "_emosRescued : " + _emosRescued + "_totalEmos : " + _totalEmos + "_trappingObjects : " + _trappingObjects);
 
         _emosRescued++;
         _uiManager.SetRescuedEmoCount(_emosRescued);
         _audioManager.Play("EmojiYay");
         _uiManager.SetTotalEmos(_totalEmos);
-
-        //For Debugging
-        UIManagerScript.instance.Debug_Emo_Counts.text = "_emosAlive : " + _emosAlive + "_emosRescued : " + _emosRescued + "_totalEmos : " + _totalEmos + "_trappingObjects : " + _trappingObjects;
-
-
         if (_emosRescued == _emosAlive - _trappingObjects)
         {
             fireZoneDelay = 0;

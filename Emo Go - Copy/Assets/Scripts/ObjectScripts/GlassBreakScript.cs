@@ -22,8 +22,11 @@ public class GlassBreakScript : MonoBehaviour
         _audioManager = FindObjectOfType<AudioManager>();
         _levelManager = FindObjectOfType<LevelManager>();
 
-        if (trapsEmoji)
-            _levelManager.AddTrappingObject();
+        // For some reason on mobile it was not updating so the value is assigned manually on LevelManager
+        /*if (trapsEmoji)
+        {
+            LevelManager.instance.AddTrappingObject();
+        }*/
 
     }
 
@@ -51,7 +54,7 @@ public class GlassBreakScript : MonoBehaviour
 
             if (trapsEmoji)
             {
-                _levelManager.RemoveTrappingObject();
+                LevelManager.instance.RemoveTrappingObject();
             }
 
             Destroy(gameObject, 0.15f);

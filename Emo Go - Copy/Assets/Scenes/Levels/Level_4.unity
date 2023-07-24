@@ -575,6 +575,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: feb6b67dd410c7a40a6aa1d65cb31f16, type: 3}
+--- !u!198 &1121808195 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3720491030824459773, guid: 669ee3ddacd249f49b0050f4a4d8c0e3, type: 3}
+  m_PrefabInstance: {fileID: 978118414942231872}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1292191615
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -675,6 +680,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasWorkingUI
       objectReference: {fileID: 0}
+    - target: {fileID: 7211943355015298268, guid: 9a667956f57d6054d842d648242254de, type: 3}
+      propertyPath: Star_Puff
+      value: 
+      objectReference: {fileID: 1121808195}
     - target: {fileID: 7211943355015298269, guid: 9a667956f57d6054d842d648242254de, type: 3}
       propertyPath: m_Pivot.x
       value: 0

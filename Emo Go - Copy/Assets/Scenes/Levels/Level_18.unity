@@ -1169,6 +1169,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7211943355015298268, guid: 9a667956f57d6054d842d648242254de, type: 3}
+      propertyPath: Star_Puff
+      value: 
+      objectReference: {fileID: 1449581430}
+    - target: {fileID: 7211943355015298268, guid: 9a667956f57d6054d842d648242254de, type: 3}
       propertyPath: tutorialHolder
       value: 
       objectReference: {fileID: 507711209}
@@ -1529,6 +1533,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f992f18e27a5e2449d49ebd3780ea17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!198 &1449581430 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3720491030824459773, guid: 669ee3ddacd249f49b0050f4a4d8c0e3, type: 3}
+  m_PrefabInstance: {fileID: 5253683839902752944}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1609947924
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2970,6 +2979,14 @@ PrefabInstance:
     - target: {fileID: 8699397307416486847, guid: 669ee3ddacd249f49b0050f4a4d8c0e3, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.000000059605
+      objectReference: {fileID: 0}
+    - target: {fileID: 8906051282576507285, guid: 669ee3ddacd249f49b0050f4a4d8c0e3, type: 3}
+      propertyPath: endValueV3.x
+      value: -0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8906051282576507285, guid: 669ee3ddacd249f49b0050f4a4d8c0e3, type: 3}
+      propertyPath: endValueV3.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9195319626777823027, guid: 669ee3ddacd249f49b0050f4a4d8c0e3, type: 3}
       propertyPath: m_RootOrder

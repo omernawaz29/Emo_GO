@@ -17,8 +17,11 @@ public class DoorScript : MonoBehaviour
         _animator = GetComponent<Animator>();
         _levelManager = FindObjectOfType<LevelManager>();
 
-        if (trapsEmoji)
-            _levelManager.AddTrappingObject();
+        // For some reason on mobile it was not updating so the value is assigned manually on LevelManager
+        /*if (trapsEmoji)
+        {
+            LevelManager.instance.AddTrappingObject();
+        }*/
     }
     public void OpenDoor()
     {
@@ -35,7 +38,9 @@ public class DoorScript : MonoBehaviour
     public void DestroyMe()
     {
         if (trapsEmoji)
-            _levelManager.RemoveTrappingObject();
+        {
+            LevelManager.instance.RemoveTrappingObject();
+        }
         Instantiate(poofEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }

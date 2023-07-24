@@ -11,9 +11,6 @@ public class UIManagerScript : MonoBehaviour
 {
     public static UIManagerScript instance;
 
-    // Level Number
-    [SerializeField] private TextMeshProUGUI Level_Number_Text;
-
     // Camera Effect
     [HideInInspector] public DOTweenAnimation CamShake;
 
@@ -56,12 +53,12 @@ public class UIManagerScript : MonoBehaviour
     [SerializeField] private ParticleSystem Star_Puff;
     int star_Active_Number;
 
+    [Space]
+    [SerializeField] private GameObject Retry_Button;
+
 
     private float _totalEmos = 0;
     private float _rescuedEmos = 0;
-
-    //for debugging
-    public TextMeshProUGUI Debug_Emo_Counts;
 
     void Start()
     {
@@ -70,16 +67,19 @@ public class UIManagerScript : MonoBehaviour
         CamShake = Camera.main.GetComponent<DOTweenAnimation>();
 
         rescuedEmoCountText.text = "0";
-        currentLevelText.text = (SceneManager.GetActiveScene().buildIndex - 1).ToString();
+        //---> currentLevelText.text = (SceneManager.GetActiveScene().buildIndex - 1).ToString();
 
         tutorialHolder.SetActive(true);
 
-        if(!PlayerPrefs.HasKey("CurrentLevelNumber"))
+        if (PlayerPrefs.HasKey("CurrentLevelNumber"))
+        {
+            currentLevelText.text = PlayerPrefs.GetInt("CurrentLevelNumber").ToString();
+        }
+        else
         {
             PlayerPrefs.SetInt("CurrentLevelNumber", 1);
         }
 
-        Level_Number_Text.text = PlayerPrefs.GetInt("CurrentLevelNumber").ToString();
     }
     
     public void Win()
@@ -91,6 +91,7 @@ public class UIManagerScript : MonoBehaviour
         endScreen.SetActive(true);
         NextLevelButton.SetActive(true);
         GlassesEmo.SetActive(true);
+        Retry_Button.SetActive(false);
         // SetEndStars();
 
         // Coin Animation
@@ -123,6 +124,7 @@ public class UIManagerScript : MonoBehaviour
         endScreen.SetActive(true);
         RestartLevelButton.SetActive(true);
         SadEmo.SetActive(true);
+        Retry_Button.SetActive(false);
         // SetEndStars();
 
         StartCoroutine(UIStarUpdate());
@@ -213,7 +215,7 @@ public class UIManagerScript : MonoBehaviour
 
 
         coinAnimationHolder.SetActive(true);
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(0.2f);
         int coins = 0;
         while (coins < finalCoins)
         {
@@ -240,7 +242,7 @@ public class UIManagerScript : MonoBehaviour
             //---> GameManagerScript.instance.menuFocus = 2;
             //---> SceneManager.LoadScene("MainMenu");
             //---> newSceneIndex = SceneManager.GetActiveScene().buildIndex - 10;
-            PlayerPrefs.SetInt("CurrentLevel", PlayerPrefs.GetInt("CurrentLevel") - 10);
+            PlayerPrefs.SetInt("CurrentLevel", PlayerPrefs.GetInt("CurrentLevel") - 11);
 
         }
         //---> SceneManager.LoadScene(newSceneIndex);
