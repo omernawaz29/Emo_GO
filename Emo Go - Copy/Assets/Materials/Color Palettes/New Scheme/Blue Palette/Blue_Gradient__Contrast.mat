@@ -123,9 +123,9 @@ Material:
     - _pwer: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Bottom: {r: 0.6509434, g: 0.3157485, b: 0.24870951, a: 0}
+    - _Bottom: {r: 0.6698113, g: 0.31563842, b: 0.2432805, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _Top: {r: 0.8490566, g: 0.6255016, b: 0.46858314, a: 0}
+    - _Top: {r: 0.8396226, g: 0.71753466, b: 0.629717, a: 0}
   m_BuildTextureStacks: []
