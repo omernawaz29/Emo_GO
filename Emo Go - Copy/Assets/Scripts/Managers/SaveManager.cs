@@ -8,6 +8,9 @@ public class SaveManager : MonoBehaviour
     public static SaveManager instance;
     public SaveState state;
     public CustomPlayerSettings settings;
+    [Header("For Testing Levels")]
+    [SerializeField] bool testingLevels;
+    [SerializeField] int startLevel;
 
     private void Awake()
     {
@@ -19,6 +22,12 @@ public class SaveManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+        }
+
+        if (testingLevels)
+        {
+            PlayerPrefs.SetInt("CurrentLevel", startLevel + 1);
+            PlayerPrefs.SetInt("CurrentLevelNumber", startLevel);
         }
 
         

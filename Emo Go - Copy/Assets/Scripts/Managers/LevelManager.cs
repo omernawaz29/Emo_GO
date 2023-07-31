@@ -29,7 +29,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private int _trappingObjects = 0;
 
     private int nextFireZoneIndex = 0;
-    // Start is called before the first frame update
+
+    [Tooltip("It's by default is false and only gets true if emo wins while, It is to prevent coins going 0 when emo who is left dies")]
+    private bool EmoLeftBehind = false;
 
     private void OnEnable()
     {
@@ -52,13 +54,9 @@ public class LevelManager : MonoBehaviour
         Debug.Log(_audioManager);
         nextFireZoneIndex = 0;
 
+        EmoLeftBehind = false;
+
         // StartCoroutine(EnableFireZones());
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
 
     }
 
@@ -92,6 +90,7 @@ public class LevelManager : MonoBehaviour
             fireZoneDelay = 0;
             //---> _uiManager.Invoke("Win", delay_Win_Lose_Screen);
             StartCoroutine(Won());
+            EmoLeftBehind = true;
             LogAnalyticData();
 
             // This Code is acting weird and saving and playing levels weirdly on some occutions So now it's updating in Win Function in UIManagerScript
@@ -115,7 +114,7 @@ public class LevelManager : MonoBehaviour
     IEnumerator Lose()
     {
         yield return new WaitForSeconds(delay_Win_Lose_Screen);
-        UIManagerScript.instance.Lose();
+        UIManagerScript.instance.Lose(EmoLeftBehind);
     }
 
     public void RescueEmo()

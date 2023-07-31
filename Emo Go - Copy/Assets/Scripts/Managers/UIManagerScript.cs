@@ -14,6 +14,9 @@ public class UIManagerScript : MonoBehaviour
     // Camera Effect
     [HideInInspector] public DOTweenAnimation CamShake;
 
+    //Save And Level Stuff
+    [SerializeField] private int TotalLevels;
+
     // UI Screens
 
     [SerializeField] private GameObject endScreen;
@@ -117,10 +120,13 @@ public class UIManagerScript : MonoBehaviour
         StartCoroutine(UIStarUpdate());
 
     }
-    public void Lose()
+    public void Lose(bool EmoLeftBehind)
     {
         Time.timeScale = 0.5f;
-        coinText.text = "0";
+        if(EmoLeftBehind)
+        {
+            coinText.text = "0";
+        }
         endScreen.SetActive(true);
         RestartLevelButton.SetActive(true);
         SadEmo.SetActive(true);
@@ -234,25 +240,33 @@ public class UIManagerScript : MonoBehaviour
     {
         Time.timeScale = 1;
 
-        var newSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        /*var newSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
 
         if (newSceneIndex >= SceneManager.sceneCountInBuildSettings)
         {
             Time.timeScale = 1;
-            //---> GameManagerScript.instance.menuFocus = 2;
-            //---> SceneManager.LoadScene("MainMenu");
-            //---> newSceneIndex = SceneManager.GetActiveScene().buildIndex - 10;
-            PlayerPrefs.SetInt("CurrentLevel", PlayerPrefs.GetInt("CurrentLevel") - 11);
+            GameManagerScript.instance.menuFocus = 2;
+            SceneManager.LoadScene("MainMenu");
+            newSceneIndex = SceneManager.GetActiveScene().buildIndex - 10;
 
+        }*/
+        if (PlayerPrefs.GetInt("CurrentLevel") >= TotalLevels + 2)
+        {
+            Time.timeScale = 1;
+            PlayerPrefs.SetInt("CurrentLevel", PlayerPrefs.GetInt("CurrentLevel") - 11);
+        }
+        else
+        {
+            SceneManager.LoadScene(PlayerPrefs.GetInt("CurrentLevel"));
         }
         //---> SceneManager.LoadScene(newSceneIndex);
-        SceneManager.LoadScene(PlayerPrefs.GetInt("CurrentLevel"));
     }
 
     public void ClickRedoButton()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //---> SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(PlayerPrefs.GetInt("CurrentLevel"));
     }
 
     public void ClickHomeButton()
