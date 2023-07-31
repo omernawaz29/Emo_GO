@@ -640,7 +640,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testingLevels: 0
-  startLevel: 20
+  startLevel: 13
 --- !u!4 &1347722218
 Transform:
   m_ObjectHideFlags: 0
