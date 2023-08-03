@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "776820228177",
+    "project_id": "emo-go",
+    "storage_bucket": "emo-go.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:776820228177:android:1f26789946b25f257c3870",
+        "android_client_info": {
+          "package_name": "com.ahmad.emogotest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "776820228177-q4jihai864jfdl9uquke6l4utmhar98e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuWEcJtiqmuMC0fjFM6cKSvUcqxpQ9Sqc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "776820228177-q4jihai864jfdl9uquke6l4utmhar98e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
