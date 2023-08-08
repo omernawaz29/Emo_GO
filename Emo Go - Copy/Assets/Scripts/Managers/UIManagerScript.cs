@@ -285,7 +285,14 @@ public class UIManagerScript : MonoBehaviour
             Debug.Log("Level Looped After 20th Level");
             FirebaseManager.instance.LogEvent("Level Looped After 20th Level");
         }
-        SceneManager.LoadScene(PlayerPrefs.GetInt("CurrentLevel"));
+        if(PlayerPrefs.GetInt("CurrentLevel") % 2 ==0 )
+        {
+            InterstitialAds.instance.ShowInterstitialAd();
+        }
+        else
+        {
+            SceneManager.LoadScene(PlayerPrefs.GetInt("CurrentLevel"));
+        }
 
         //---> SceneManager.LoadScene(newSceneIndex);
     }
