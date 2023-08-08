@@ -25,6 +25,12 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private float firstFireZoneDelay = 0f;
 
 
+    // Timer to see player gameplay time in each level
+    float Timer = 0;
+    bool TimerIsRunning = true;
+    int Minutes = 0;
+    int Seconds = 0;
+
     // 
     [SerializeField] private int _trappingObjects = 0;
 
@@ -49,9 +55,11 @@ public class LevelManager : MonoBehaviour
     {
         instance = this;
 
+        TimerIsRunning = true;
+
         _uiManager = FindObjectOfType<UIManagerScript>();
         _audioManager = FindObjectOfType<AudioManager>();
-        Debug.Log(_audioManager);
+        //Debug.Log(_audioManager);
         nextFireZoneIndex = 0;
 
         EmoLeftBehind = false;
@@ -60,6 +68,24 @@ public class LevelManager : MonoBehaviour
 
     }
 
+    // Ahmed's Timer Stuff for Firebase
+    private void Update()
+    {
+        if (TimerIsRunning)
+        {
+            Timer += Time.deltaTime;
+        }
+    }
+
+    void DisplayTime(float timeToDisplay)
+    {
+        TimerIsRunning = false;
+
+        Minutes = Mathf.FloorToInt(timeToDisplay / 60);
+        Seconds = Mathf.FloorToInt(timeToDisplay % 60);
+
+        Timer = 0;
+    }
 
     public void AddEmo()
     {
@@ -83,7 +109,7 @@ public class LevelManager : MonoBehaviour
         }
         else if (_emosRescued == _emosAlive - _trappingObjects)
         {
-            foreach(var f in FireZones)
+            foreach (var f in FireZones)
             {
                 f.GetComponent<FirezoneScript>().smokeTime = 0f;
             }
@@ -108,11 +134,28 @@ public class LevelManager : MonoBehaviour
     }
     IEnumerator Won()
     {
+        DisplayTime(Timer);
+
+        Debug.Log("Level Completed : " + (PlayerPrefs.GetInt("CurrentLevel") - 1));
+        Debug.Log("Level Win Time : " + "Minutes : " + Minutes + " Seconds : " + Seconds + " In Level :  " + (PlayerPrefs.GetInt("CurrentLevel") - 1));
+        Debug.Log("Emojis Alive : " + _emosRescued + ". In Level : " + (PlayerPrefs.GetInt("CurrentLevel") - 1));
+        FirebaseManager.instance.LogLevelCompleteEvent(PlayerPrefs.GetInt("CurrentLevel") - 1);
+        FirebaseManager.instance.LogEvent("Time Played : ", "Minutes : " + Minutes + " Seconds : " + Seconds + ". Won in Level : ", +PlayerPrefs.GetInt("CurrentLevel") - 1);
+        FirebaseManager.instance.LogEvent("Emojis Alive : ", _emosRescued + ". In Level : ", PlayerPrefs.GetInt("CurrentLevel") - 1);
+
         yield return new WaitForSeconds(delay_Win_Lose_Screen);
         UIManagerScript.instance.Win();
     }
     IEnumerator Lose()
     {
+        DisplayTime(Timer);
+
+        Debug.Log("Level Lose : " + (PlayerPrefs.GetInt("CurrentLevel") - 1));
+        FirebaseManager.instance.LogLevelFailedEvent(PlayerPrefs.GetInt("CurrentLevel") - 1);
+
+        Debug.Log("Level Lose Time : " + "Minutes : " + Minutes + " Seconds : " + Seconds + " In Level :  " + (PlayerPrefs.GetInt("CurrentLevel") - 1));
+        FirebaseManager.instance.LogEvent("Time Played : ", "Minutes : " + Minutes + " Seconds : " + Seconds + " . Failed in Level : ", +PlayerPrefs.GetInt("CurrentLevel") - 1);
+
         yield return new WaitForSeconds(delay_Win_Lose_Screen);
         UIManagerScript.instance.Lose(EmoLeftBehind);
     }
@@ -130,7 +173,7 @@ public class LevelManager : MonoBehaviour
             //---> _uiManager.Invoke("Win", delay_Win_Lose_Screen);
             StartCoroutine(Won());
             LogAnalyticData();
-            
+
             // This Code is acting weird and saving and playing levels weirdly on some occutions So now it's updating in Win Function in UIManagerScript
             /*
             if (SaveManager.instance.state.levelsCompleted < GameManagerScript.instance.currentLevel)
@@ -152,7 +195,7 @@ public class LevelManager : MonoBehaviour
     }
     void EnableFireZonesWrapper()
     {
-        Debug.Log("Enabling firezones");
+        //Debug.Log("Enabling firezones");
         _uiManager.DisableTutorial();
 
         StartCoroutine(EnableFireZones());
@@ -161,14 +204,14 @@ public class LevelManager : MonoBehaviour
     IEnumerator EnableFireZones()
     {
         yield return new WaitForSeconds(firstFireZoneDelay);
-        while(true && FireZones.Length != 0)
+        while (true && FireZones.Length != 0)
         {
             FireZones[nextFireZoneIndex].SetActive(true);
             yield return new WaitForSeconds(fireZoneDelay);
 
             if (++nextFireZoneIndex >= FireZones.Length)
             {
-               
+
                 _uiManager.SetTotalEmos(_totalEmos);
 
                 if (_emosAlive == _trappingObjects)
@@ -198,11 +241,11 @@ public class LevelManager : MonoBehaviour
     {
         string currentLevel = (SceneManager.GetActiveScene().buildIndex - 1).ToString();
 
-        AnalyticsResult resultLog = 
-            Analytics.CustomEvent("levelComplete", 
-                new Dictionary<string, object> { { "CurrentLevel_EmosRescued_TotalEmos",  currentLevel + "_" + _emosRescued.ToString() + "_" + _totalEmos } });
+        AnalyticsResult resultLog =
+            Analytics.CustomEvent("levelComplete",
+                new Dictionary<string, object> { { "CurrentLevel_EmosRescued_TotalEmos", currentLevel + "_" + _emosRescued.ToString() + "_" + _totalEmos } });
 
-        Debug.Log(resultLog);
+        //Debug.Log(resultLog);
 
     }
 

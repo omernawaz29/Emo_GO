@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using DG.Tweening;
 using Unity.VisualScripting;
+using System;
 
 public class UIManagerScript : MonoBehaviour
 {
@@ -42,6 +43,7 @@ public class UIManagerScript : MonoBehaviour
     //Lose Screen Objects
     [SerializeField] private GameObject RestartLevelButton;
     [SerializeField] private GameObject SadEmo;
+    private bool wonCheck = false;
 
     [Space]
     [SerializeField] private float starsAnimationSpeed = 2.0f;
@@ -57,6 +59,10 @@ public class UIManagerScript : MonoBehaviour
     int star_Active_Number;
 
     [Space]
+    [Tooltip("For Testing events or stuff")]
+    public TextMeshProUGUI debugText;
+
+    [Space]
     [SerializeField] private GameObject Retry_Button;
 
 
@@ -65,7 +71,11 @@ public class UIManagerScript : MonoBehaviour
 
     void Start()
     {
+
         instance = this;
+
+        Debug.Log("Level intial load. Level : " + (PlayerPrefs.GetInt("CurrentLevel") - 1));
+        FirebaseManager.instance.LogEvent("Game Started", "Level Initial Load. Level : ", PlayerPrefs.GetInt("CurrentLevel") - 1);
 
         CamShake = Camera.main.GetComponent<DOTweenAnimation>();
 
@@ -84,13 +94,17 @@ public class UIManagerScript : MonoBehaviour
         }
 
     }
-    
+
     public void Win()
     {
+        Debug.Log("Stars Collected : " + star_Active_Number + ". Won in Level : " + (PlayerPrefs.GetInt("CurrentLevel") - 1));
+        FirebaseManager.instance.LogEvent("Stars Collected : ", star_Active_Number + ". Won in Level : ", PlayerPrefs.GetInt("CurrentLevel") - 1);
+
         PlayerPrefs.SetInt("CurrentLevelNumber", PlayerPrefs.GetInt("CurrentLevelNumber") + 1);
         PlayerPrefs.SetInt("CurrentLevel", PlayerPrefs.GetInt("CurrentLevel") + 1);
 
         Time.timeScale = 0.5f;
+        wonCheck = true;
         endScreen.SetActive(true);
         NextLevelButton.SetActive(true);
         GlassesEmo.SetActive(true);
@@ -122,8 +136,17 @@ public class UIManagerScript : MonoBehaviour
     }
     public void Lose(bool EmoLeftBehind)
     {
+        Debug.Log("Stars Collected : " + star_Active_Number + ". in Failed Level : " + (PlayerPrefs.GetInt("CurrentLevel") - 1));
+        FirebaseManager.instance.LogEvent("Stars Collected : ", star_Active_Number + ". Failed in Level : ", PlayerPrefs.GetInt("CurrentLevel") - 1);
+
+        if (wonCheck)
+        {
+            Debug.Log("Lost After Winning the Level, in Level : " + (PlayerPrefs.GetInt("CurrentLevel") - 1));
+            FirebaseManager.instance.LogEvent("Lost After Winning the Level ", " in Level : ", PlayerPrefs.GetInt("CurrentLevel") - 1);
+        }
+
         Time.timeScale = 0.5f;
-        if(EmoLeftBehind)
+        if (EmoLeftBehind)
         {
             coinText.text = "0";
         }
@@ -135,6 +158,8 @@ public class UIManagerScript : MonoBehaviour
 
         StartCoroutine(UIStarUpdate());
 
+        wonCheck = false;
+
     }
 
     // Ahmed's Star Work
@@ -142,7 +167,7 @@ public class UIManagerScript : MonoBehaviour
     {
         if (Stars != null && star_Active_Number <= Stars.Length)
         {
-            if(Star_Puff != null)
+            if (Star_Puff != null)
             {
                 Star_Puff.transform.position = Star_Transform.position;
                 Star_Puff.Play();
@@ -170,14 +195,14 @@ public class UIManagerScript : MonoBehaviour
     {
         float endPercentage = (_rescuedEmos * 100) / _totalEmos;
 
-        if(endPercentage < 66 && endPercentage > 0)
+        if (endPercentage < 66 && endPercentage > 0)
             endPercentage += 20f;
 
         int coins = Mathf.CeilToInt(endPercentage * 10);
 
         coinText.text = "0";
 
-        if(coins != 0)
+        if (coins != 0)
             StartCoroutine(SetEndCoinsJuice(coins));
 
 
@@ -238,6 +263,8 @@ public class UIManagerScript : MonoBehaviour
 
     public void ClickNextButton()
     {
+        Debug.Log("Next Button Pressed After Completing Level : " + (PlayerPrefs.GetInt("CurrentLevel") - 2));
+        FirebaseManager.instance.LogEvent("Next", "Button Pressed After Completing Level : ", PlayerPrefs.GetInt("CurrentLevel") - 2);
         Time.timeScale = 1;
 
         /*var newSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
@@ -254,16 +281,30 @@ public class UIManagerScript : MonoBehaviour
         {
             Time.timeScale = 1;
             PlayerPrefs.SetInt("CurrentLevel", PlayerPrefs.GetInt("CurrentLevel") - 11);
+
+            Debug.Log("Level Looped After 20th Level");
+            FirebaseManager.instance.LogEvent("Level Looped After 20th Level");
         }
-        else
-        {
-            SceneManager.LoadScene(PlayerPrefs.GetInt("CurrentLevel"));
-        }
+        SceneManager.LoadScene(PlayerPrefs.GetInt("CurrentLevel"));
+
         //---> SceneManager.LoadScene(newSceneIndex);
     }
 
     public void ClickRedoButton()
     {
+        Debug.Log("Retry Button Pressed After Failing : " + (PlayerPrefs.GetInt("CurrentLevel") - 1));
+        FirebaseManager.instance.LogEvent("Retry", "Button Pressed After Failing Level : ", PlayerPrefs.GetInt("CurrentLevel") - 1);
+
+        Time.timeScale = 1;
+        //---> SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(PlayerPrefs.GetInt("CurrentLevel"));
+    }
+
+    public void ClickRedoInGameplayButton()
+    {
+        Debug.Log("Retry Gameplay Button Pressed in Level : " + (PlayerPrefs.GetInt("CurrentLevel") - 1));
+        FirebaseManager.instance.LogEvent("Retry Gameplay", "Button Pressed in Level : ", PlayerPrefs.GetInt("CurrentLevel") - 1);
+
         Time.timeScale = 1;
         //---> SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         SceneManager.LoadScene(PlayerPrefs.GetInt("CurrentLevel"));
@@ -278,7 +319,7 @@ public class UIManagerScript : MonoBehaviour
 
     public void SetTotalEmos(int count)
     {
-        _totalEmos = count; 
+        _totalEmos = count;
     }
 
 
@@ -290,6 +331,9 @@ public class UIManagerScript : MonoBehaviour
 
     public void DisableTutorial()
     {
+        Debug.Log("Level Started : " + (PlayerPrefs.GetInt("CurrentLevel") - 1));
+        FirebaseManager.instance.LogLevelStartedEvent(PlayerPrefs.GetInt("CurrentLevel") - 1);
+
         tutorialHolder.SetActive(false);
 
     }
