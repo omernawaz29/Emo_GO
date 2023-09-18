@@ -136,12 +136,12 @@ public class LevelManager : MonoBehaviour
     {
         DisplayTime(Timer);
 
-        Debug.Log("Level Completed : " + (PlayerPrefs.GetInt("CurrentLevel") - 1));
-        Debug.Log("Level Win Time : " + "Minutes : " + Minutes + " Seconds : " + Seconds + " In Level :  " + (PlayerPrefs.GetInt("CurrentLevel") - 1));
-        Debug.Log("Emojis Alive : " + _emosRescued + ". In Level : " + (PlayerPrefs.GetInt("CurrentLevel") - 1));
+        Debug.Log("Level_Completed_" + (PlayerPrefs.GetInt("CurrentLevel") - 1));
+        Debug.Log("Level_Win_Time_" + "Minutes_" + Minutes + "_Seconds_" + Seconds + "._In_Level_" + (PlayerPrefs.GetInt("CurrentLevel") - 1));
+        Debug.Log("Emojis_Alive_" + _emosRescued + "._In_Level_" + (PlayerPrefs.GetInt("CurrentLevel") - 1));
         FirebaseManager.instance.LogLevelCompleteEvent(PlayerPrefs.GetInt("CurrentLevel") - 1);
-        FirebaseManager.instance.LogEvent("Time Played : ", "Minutes : " + Minutes + " Seconds : " + Seconds + ". Won in Level : ", +PlayerPrefs.GetInt("CurrentLevel") - 1);
-        FirebaseManager.instance.LogEvent("Emojis Alive : ", _emosRescued + ". In Level : ", PlayerPrefs.GetInt("CurrentLevel") - 1);
+        FirebaseManager.instance.LogEvent("Time_Played_Won", "Minutes_" + Minutes + "_Seconds_" + Seconds, +PlayerPrefs.GetInt("CurrentLevel") - 1);
+        FirebaseManager.instance.LogEvent("Emojis_Alive", "Alive_" + _emosRescued, PlayerPrefs.GetInt("CurrentLevel") - 1);
 
         yield return new WaitForSeconds(delay_Win_Lose_Screen);
         UIManagerScript.instance.Win();
@@ -150,11 +150,11 @@ public class LevelManager : MonoBehaviour
     {
         DisplayTime(Timer);
 
-        Debug.Log("Level Lose : " + (PlayerPrefs.GetInt("CurrentLevel") - 1));
+        Debug.Log("Level_Lose_" + (PlayerPrefs.GetInt("CurrentLevel") - 1));
         FirebaseManager.instance.LogLevelFailedEvent(PlayerPrefs.GetInt("CurrentLevel") - 1);
 
-        Debug.Log("Level Lose Time : " + "Minutes : " + Minutes + " Seconds : " + Seconds + " In Level :  " + (PlayerPrefs.GetInt("CurrentLevel") - 1));
-        FirebaseManager.instance.LogEvent("Time Played : ", "Minutes : " + Minutes + " Seconds : " + Seconds + " . Failed in Level : ", +PlayerPrefs.GetInt("CurrentLevel") - 1);
+        Debug.Log("Level_Lose_Time_" + "Minutes_" + Minutes + "_Seconds_" + Seconds + "_In_Level_" + (PlayerPrefs.GetInt("CurrentLevel") - 1));
+        FirebaseManager.instance.LogEvent("Time_Played_Lost", "Minutes_" + Minutes + "_Seconds_" + Seconds, +PlayerPrefs.GetInt("CurrentLevel") - 1);
 
         yield return new WaitForSeconds(delay_Win_Lose_Screen);
         UIManagerScript.instance.Lose(EmoLeftBehind);

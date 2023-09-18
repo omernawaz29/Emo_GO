@@ -75,7 +75,7 @@ public class UIManagerScript : MonoBehaviour
         instance = this;
 
         Debug.Log("Level intial load. Level : " + (PlayerPrefs.GetInt("CurrentLevel") - 1));
-        FirebaseManager.instance.LogEvent("Game Started", "Level Initial Load. Level : ", PlayerPrefs.GetInt("CurrentLevel") - 1);
+        FirebaseManager.instance.LogEvent("Game_Started", "Initial_Level_Load_", PlayerPrefs.GetInt("CurrentLevel") - 1);
 
         CamShake = Camera.main.GetComponent<DOTweenAnimation>();
 
@@ -98,7 +98,7 @@ public class UIManagerScript : MonoBehaviour
     public void Win()
     {
         Debug.Log("Stars Collected : " + star_Active_Number + ". Won in Level : " + (PlayerPrefs.GetInt("CurrentLevel") - 1));
-        FirebaseManager.instance.LogEvent("Stars Collected : ", star_Active_Number + ". Won in Level : ", PlayerPrefs.GetInt("CurrentLevel") - 1);
+        FirebaseManager.instance.LogEvent("Stars_Collected", "Won_" + star_Active_Number, PlayerPrefs.GetInt("CurrentLevel") - 1);
 
         PlayerPrefs.SetInt("CurrentLevelNumber", PlayerPrefs.GetInt("CurrentLevelNumber") + 1);
         PlayerPrefs.SetInt("CurrentLevel", PlayerPrefs.GetInt("CurrentLevel") + 1);
@@ -137,12 +137,12 @@ public class UIManagerScript : MonoBehaviour
     public void Lose(bool EmoLeftBehind)
     {
         Debug.Log("Stars Collected : " + star_Active_Number + ". in Failed Level : " + (PlayerPrefs.GetInt("CurrentLevel") - 1));
-        FirebaseManager.instance.LogEvent("Stars Collected : ", star_Active_Number + ". Failed in Level : ", PlayerPrefs.GetInt("CurrentLevel") - 1);
+        FirebaseManager.instance.LogEvent("Stars_Collected", "Lost_" + star_Active_Number, PlayerPrefs.GetInt("CurrentLevel") - 1);
 
         if (wonCheck)
         {
             Debug.Log("Lost After Winning the Level, in Level : " + (PlayerPrefs.GetInt("CurrentLevel") - 1));
-            FirebaseManager.instance.LogEvent("Lost After Winning the Level ", " in Level : ", PlayerPrefs.GetInt("CurrentLevel") - 1);
+            FirebaseManager.instance.LogEvent("Lost", "After_Level_Won", PlayerPrefs.GetInt("CurrentLevel") - 1);
         }
 
         Time.timeScale = 0.5f;
@@ -264,7 +264,7 @@ public class UIManagerScript : MonoBehaviour
     public void ClickNextButton()
     {
         Debug.Log("Next Button Pressed After Completing Level : " + (PlayerPrefs.GetInt("CurrentLevel") - 2));
-        FirebaseManager.instance.LogEvent("Next", "Button Pressed After Completing Level : ", PlayerPrefs.GetInt("CurrentLevel") - 2);
+        FirebaseManager.instance.LogEvent("Next", "Button_Pressed_After_Completing_Level_", PlayerPrefs.GetInt("CurrentLevel") - 2);
         Time.timeScale = 1;
 
         /*var newSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
@@ -283,7 +283,7 @@ public class UIManagerScript : MonoBehaviour
             PlayerPrefs.SetInt("CurrentLevel", PlayerPrefs.GetInt("CurrentLevel") - 11);
 
             Debug.Log("Level Looped After 20th Level");
-            FirebaseManager.instance.LogEvent("Level Looped After 20th Level");
+            FirebaseManager.instance.LogEvent("Level_Looped_After_20th_Level");
         }
         if(PlayerPrefs.GetInt("CurrentLevel") % 2 ==0 )
         {
@@ -300,7 +300,7 @@ public class UIManagerScript : MonoBehaviour
     public void ClickRedoButton()
     {
         Debug.Log("Retry Button Pressed After Failing : " + (PlayerPrefs.GetInt("CurrentLevel") - 1));
-        FirebaseManager.instance.LogEvent("Retry", "Button Pressed After Failing Level : ", PlayerPrefs.GetInt("CurrentLevel") - 1);
+        FirebaseManager.instance.LogEvent("Retry", "Button_Pressed_After_Failing_Level_", PlayerPrefs.GetInt("CurrentLevel") - 1);
 
         Time.timeScale = 1;
         //---> SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -310,7 +310,7 @@ public class UIManagerScript : MonoBehaviour
     public void ClickRedoInGameplayButton()
     {
         Debug.Log("Retry Gameplay Button Pressed in Level : " + (PlayerPrefs.GetInt("CurrentLevel") - 1));
-        FirebaseManager.instance.LogEvent("Retry Gameplay", "Button Pressed in Level : ", PlayerPrefs.GetInt("CurrentLevel") - 1);
+        FirebaseManager.instance.LogEvent("Retry_Gameplay", "Button_Pressed_in_Level_", PlayerPrefs.GetInt("CurrentLevel") - 1);
 
         Time.timeScale = 1;
         //---> SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

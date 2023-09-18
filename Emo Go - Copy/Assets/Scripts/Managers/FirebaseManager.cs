@@ -72,7 +72,7 @@ public class FirebaseManager : MonoBehaviour
             Parameter myparams = new Parameter(paramName, paramValue);
             FirebaseAnalytics.LogEvent(eventName, myparams);
 
-            UIManagerScript.instance.debugText.text = eventName + " " + paramName + " " + paramValue;
+            UIManagerScript.instance.debugText.text = eventName + " " + myparams;
         }
         else
         {
